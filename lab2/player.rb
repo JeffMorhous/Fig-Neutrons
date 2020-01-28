@@ -9,8 +9,12 @@ class Player
   end
 
   #function to switch which player
-  def switch_player
-
+  def switch_player(players, active)
+    if (active.name == players[0].name)
+      return 1
+    else
+      return 0
+    end
   end
 
   # functions that alter the players score

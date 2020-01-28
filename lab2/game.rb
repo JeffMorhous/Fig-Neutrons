@@ -128,6 +128,11 @@ class Game < Array
     @active_player.decrease_points(1)
     puts 'Wrong! Lost your turn!'
     puts "#{@active_player.name}: your score is now #{@active_player.score}!"
+    if (@active_player == @players[0])
+      @active_player = @players[1]
+    else
+      @active_player = @players[0]
+    end
     next_move
   end
 
