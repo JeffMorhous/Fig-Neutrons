@@ -5,7 +5,12 @@ class Player
   # create the player
   def initialize(name)
     @name = name
-    @score = score
+    @score = 0
+  end
+
+  #function to switch which player
+  def switch_player
+
   end
 
   # functions that alter the players score

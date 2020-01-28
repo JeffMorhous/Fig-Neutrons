@@ -6,7 +6,6 @@ class Game < Array
     @deck = Deck.new
     @draw_pile = @deck.cards
     @board = @draw_pile.shift(12)
-    @score = 0
     @active_player = nil
     @players = []
     @quit = false
@@ -24,6 +23,8 @@ class Game < Array
 
     @players << create_player("Player1")
     @players << create_player("Player2")
+    @active_player = @players[rand(0..1)]
+    puts "Looks like #{@active_player.name} will be going first!"
 
     print_cards @board
     next_move
@@ -33,6 +34,7 @@ class Game < Array
     puts 'Enter the name for ' + player + ':'
     Player.new(gets.chomp)
   end
+
   # makes sure that there is at least one match on the board.
   def check_matches
     return unless find_matches.empty?
@@ -67,7 +69,8 @@ class Game < Array
 
   # separating the text to make the next_move method shorter
   def ask_question
-    puts 'What would you like to do?'
+    print "#{@active_player.name}, what would you like to do?"
+    puts ' '
     puts '1. Pick a set.'
     puts '2. Get a hint: How many matches are there?'
     puts '3. Shuffle the board.'
@@ -115,23 +118,23 @@ class Game < Array
 
   # response after selecting a correct set
   def up_score
-    @score += 2
+    @active_player.increase_points
     puts "\nGreat Job!"
-    puts "Your Score is now #{@score}, and there are #{@draw_pile.length} cards left in the draw pile."
+    puts "#{@active_player.name}: your score is now #{@active_player.score}, and there are #{@draw_pile.length} cards left in the draw pile."
   end
 
   # response after selecting an incorrect set
   def try_again
-    @score -= 1
-    puts 'Wrong! Try again!'
-    puts "Your Score is now #{@score}!"
+    @active_player.decrease_points(1)
+    puts 'Wrong! Lost your turn!'
+    puts "#{@active_player.name}: your score is now #{@active_player.score}!"
     next_move
   end
 
   # response after asking for a hint.  Gives the number of hints on the board.
   # Could be changed to give one card that is included in a set or something.
   def give_hint
-    @score -= 1
+    @active_player.decrease_points(1)
     matches = find_matches.length
     puts "\nThere #{matches == 1 ? 'is 1 match' : "are #{matches} matches"}."
     puts ''
@@ -141,7 +144,7 @@ class Game < Array
   # response when game is over, either because there are no more matches
   # or the player ends the game
   def game_over
-    puts "\nYour final score is #{@score}"
+    puts "\nYour final score is #{@active_player.score}"
     puts 'Thanks for playing!!'
     puts 'Goodbye!!'
     @quit = true
