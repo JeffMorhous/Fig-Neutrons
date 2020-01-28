@@ -1,4 +1,5 @@
 require_relative 'deck'
+require_relative 'player'
 
 class Game < Array
   def initialize
@@ -6,6 +7,8 @@ class Game < Array
     @draw_pile = @deck.cards
     @board = @draw_pile.shift(12)
     @score = 0
+    @active_player = nil
+    @players = []
     @quit = false
   end
 
@@ -19,10 +22,17 @@ class Game < Array
     check_matches
     return if @quit
 
+    @players << create_player("Player1")
+    @players << create_player("Player2")
+
     print_cards @board
     next_move
   end
 
+  def create_player(player)
+    puts 'Enter the name for ' + player + ':'
+    Player.new(gets.chomp)
+  end
   # makes sure that there is at least one match on the board.
   def check_matches
     return unless find_matches.empty?
