@@ -126,8 +126,8 @@ class Game < Array
     card = find_matches.first.first
     cardIndex =  @board.find_index(card) + 1
     puts "Hint Types:"
-    puts "1. Number of matching sets"
-    puts "2. One card in a set"
+    puts "1. Show number of matching sets"
+    puts "2. Show one card that belongs to a set"
     print "Choose what kind of hint you want: "
     answer = gets.to_i
     until answer.between?(1, 2)
