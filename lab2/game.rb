@@ -7,7 +7,7 @@ class Game < Array
     @draw_pile = @deck.cards
     @board = @draw_pile.shift(12)
     @active_player = nil
-    @players = []
+    @players = [Player.new, Player.new]
     @quit = false
   end
 
@@ -21,18 +21,13 @@ class Game < Array
     check_matches
     return if @quit
 
-    @players << create_player("Player1")
-    @players << create_player("Player2")
+    @players[0].create_player('Player1')
+    @players[1].create_player('Player2')
     @active_player = @players[rand(0..1)]
     puts "Looks like #{@active_player.name} will be going first!"
 
     print_cards @board
     next_move
-  end
-
-  def create_player(player)
-    puts 'Enter the name for ' + player + ':'
-    Player.new(gets.chomp)
   end
 
   # makes sure that there is at least one match on the board.
@@ -121,6 +116,7 @@ class Game < Array
     @active_player.increase_points
     puts "\nGreat Job!"
     puts "#{@active_player.name}: your score is now #{@active_player.score}, and there are #{@draw_pile.length} cards left in the draw pile."
+    @active_player = @players[@active_player.switch_player @players[0].name]
   end
 
   # response after selecting an incorrect set
@@ -128,11 +124,8 @@ class Game < Array
     @active_player.decrease_points(1)
     puts 'Wrong! Lost your turn!'
     puts "#{@active_player.name}: your score is now #{@active_player.score}!"
-    if (@active_player == @players[0])
-      @active_player = @players[1]
-    else
-      @active_player = @players[0]
-    end
+    puts ' '
+    @active_player = @players[@active_player.switch_player @players[0].name]
     next_move
   end
 
