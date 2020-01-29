@@ -18,8 +18,7 @@ class Game < Array
   def deal
     check_matches
     return if @quit
-
-    print_cards @board
+    @deck.print_cards @board
     next_move
   end
 
@@ -95,12 +94,21 @@ class Game < Array
 
   # determining if the three cards are a set
   def a_set?(three_cards)
-    three_cards.transpose.all? { |feature| feature.length == 3 && feature.uniq.length != 2 }
+    cardStrings = []
+    for i in 0..2 do
+      cardStrings[i] = (three_cards[i])[4..10]
+      three_cards[i] = (three_cards[i])[0..3]
+    end
+    bool = three_cards.transpose.all? { |feature| feature.length == 3 && feature.uniq.length != 2 }
+    for i in 0..2 do
+      (three_cards[i])[4..10] = cardStrings[i]
+    end
+    return bool
   end
 
   # drawing three cards from the draw pile and adding them to the board
   def three_more
-    3.times { @board << @draw_pile.shift(1).flatten }
+    3.times { @board << @draw_pile.shift(1).flatten}
   end
 
   # response after selecting a correct set
@@ -115,7 +123,6 @@ class Game < Array
     @score -= 1
     puts 'Wrong! Try again!'
     puts "Your Score is now #{@score}!"
-    next_move
   end
 
   # response after asking for a hint.  Gives the number of hints on the board.
@@ -123,6 +130,7 @@ class Game < Array
   def give_hint
     @score -= 1
     matches = find_matches.length
+    @deck.print_cards @board
     card = find_matches.first.first
     cardIndex =  @board.find_index(card) + 1
     puts "\nHint Types:"
@@ -136,9 +144,6 @@ class Game < Array
     end
     puts "\nHint: There #{matches == 1 ? 'is 1 match' : "are #{matches} matches"}. " if answer == 1
     puts "\nHint: Card #{cardIndex} belongs to a set. " if answer == 2
-
-
-    
     puts ''
     next_move
   end
@@ -164,60 +169,6 @@ class Game < Array
   # boolean keeping track of the player wanting to quit the game.
   def over?
     @quit
-  end
-
-  # printing the cards to the terminal.  Work in progress.
-  def print_cards(cards)
-    puts '  '
-    i = 0
-    rows = cards.size / 3
-    rows.times do
-      puts "  Card #{i + 1}:              Card #{i + 2}:              Card #{i + 3}:"
-      # puts '  |```````````|        |```````````|        |```````````|'
-      details = []
-      3.times do
-        details.push(print_card(cards[i]))
-        i += 1
-      end
-      puts '  ' + details.join('        ')
-      # puts '  |...........|        |...........|        |...........|'
-      puts ' '
-    end
-  end
-
-  # printing the specific card's details.  Work in progress
-  def print_card(card)
-    color = card[0]
-    number = card[3]
-    shapes = shape_string card[1], card[2], card[3]
-    "|#{shapes.center(12 - number)}|".colorize(:black).colorize(background: color.to_sym)
-  end
-
-  # printing the shapes.  Work in progress.
-  def shape_string(shape, fill, number)
-    shapes1 = { filled_circle: "\u25CF".encode('utf-8'),
-                half_circle: "\u25D0".encode('utf-8'),
-                open_circle: "\u25CB".encode('utf-8'),
-                filled_tri: "\u25B2".encode('utf-8'),
-                half_tri: "\u25ED".encode('utf-8'),
-                open_tri: "\u25B3".encode('utf-8'),
-                filled_square: "\u25A0".encode('utf-8'),
-                half_square: "\u25E7".encode('utf-8'),
-                open_square: "\u25A1".encode('utf-8') }
-    # shapes2 = { filled_circle: "\u25CD".encode('utf-8'),
-    #             half_circle: "\u25C9".encode('utf-8'),
-    #             open_circle: "\u274D".encode('utf-8'),
-    #             filled_tri: "\u25C6".encode('utf-8'),
-    #             half_tri: "\u25C8".encode('utf-8'),
-    #             open_tri: "\u25C7".encode('utf-8'),
-    #             filled_square: "\u25A9".encode('utf-8'),
-    #             half_square: "\u25A3".encode('utf-8'),
-    #             open_square: "\u2610".encode('utf-8') }
-    stripe = []
-    number.times do
-      stripe << shapes1["#{fill}_#{shape}".to_sym]
-    end
-    stripe.join(' ')
   end
 
   # option to shorten the game, using to test how the game ends.
