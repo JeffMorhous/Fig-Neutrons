@@ -1,5 +1,5 @@
 require_relative 'deck'
-require_relative 'player'
+require_relative 'multi_player'
 
 class Game < Array
   def initialize
@@ -7,7 +7,7 @@ class Game < Array
     @draw_pile = @deck.cards
     @board = @draw_pile.shift(12)
     @active_player = nil
-    @players = [Player.new, Player.new]
+    @players = MultiPlayer.new(2)
     @quit = false
   end
 
@@ -20,12 +20,8 @@ class Game < Array
   def deal
     check_matches
     return if @quit
-
-    @players[0].create_player('Player1')
-    @players[1].create_player('Player2')
-    @active_player = @players[rand(0..1)]
-    puts "Looks like #{@active_player.name} will be going first!"
-
+    @players.create_all_players
+    @active_player = @players.determine_starting_player
     print_cards @board
     next_move
   end
@@ -116,7 +112,7 @@ class Game < Array
     @active_player.increase_points
     puts "\nGreat Job!"
     puts "#{@active_player.name}: your score is now #{@active_player.score}, and there are #{@draw_pile.length} cards left in the draw pile."
-    @active_player = @players[@active_player.switch_player @players[0].name]
+    @active_player = @players.switch_players
   end
 
   # response after selecting an incorrect set
@@ -125,7 +121,7 @@ class Game < Array
     puts 'Wrong! Lost your turn!'
     puts "#{@active_player.name}: your score is now #{@active_player.score}!"
     puts ' '
-    @active_player = @players[@active_player.switch_player @players[0].name]
+    @active_player = @players.switch_players
     next_move
   end
 
@@ -147,9 +143,6 @@ class Game < Array
     end
     puts "\nHint: There #{matches == 1 ? 'is 1 match' : "are #{matches} matches"}. " if answer == 1
     puts "\nHint: Card #{cardIndex} belongs to a set. " if answer == 2
-
-
-    
     puts ''
     next_move
   end
@@ -157,8 +150,7 @@ class Game < Array
   # response when game is over, either because there are no more matches
   # or the player ends the game
   def game_over
-    puts "\nYour final score is #{@active_player.score}"
-    puts 'Thanks for playing!!'
+    @players.print_scores_and_determine_winner
     puts 'Goodbye!!'
     @quit = true
   end

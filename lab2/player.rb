@@ -14,15 +14,6 @@ class Player
     @name = gets.chomp
   end
 
-  # function to switch which player
-  def switch_player(player0_name)
-    if @name == player0_name
-      return 1
-    else
-      return 0
-    end
-  end
-
   # functions that alter the players score
   def increase_points
     @score += 2
