@@ -8,11 +8,11 @@ puts 'Rules:'
 rules = %(Pick three cards to make a set.  Cards are different in four ways:
 color, shape, number of shapes, and how the shapes are filled.
 To make a set, the details on the three cards must each be either
-all the same or all different. If you guess correctly, you get 2 points.
-If you guess incorrectly you lose a point. If you request a hint, you also
-lose 1 point.  There is no penalty if you need to shuffle the board to get a
-new perspective. You can continue to play until there are no matches left, or
-you can quit at the beginning of any round.  Have fun!)
+all the same or all different. If you guess correctly, you get 3 points.
+If you guess incorrectly you lose a point. If you request a hint, you will
+lose 1 or 2 points depending on the hint type.  There is no penalty if you 
+need to shuffle the board to get a new perspective. You can continue to play 
+until there are no matches left, or you can quit at the beginning of any round. Have fun!)
 puts rules
 
 

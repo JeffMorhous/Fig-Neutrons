@@ -1,12 +1,16 @@
 require_relative 'deck'
+require_relative 'multi_player'
 
 class Game < Array
   def initialize
     @deck = Deck.new
     @draw_pile = @deck.cards
     @board = @draw_pile.shift(12)
-    @score = 0
+    @active_player = nil
+    @players = MultiPlayer.new(2)
     @quit = false
+    @hintTypeOne = false
+    @hintTypeTwo = false
   end
 
   # returns the size of the board.  The board will only be less than 12 when the draw pile is empty.
@@ -18,6 +22,8 @@ class Game < Array
   def deal
     check_matches
     return if @quit
+    @players.create_all_players
+    @active_player = @players.determine_starting_player
     @deck.print_cards @board
     next_move
   end
@@ -56,7 +62,8 @@ class Game < Array
 
   # separating the text to make the next_move method shorter
   def ask_question
-    puts 'What would you like to do?'
+    print "\n#{@active_player.name}, what would you like to do?"
+    puts ' '
     puts '1. Pick a set.'
     puts '2. Get a hint.'
     puts '3. Shuffle the board.'
@@ -113,37 +120,64 @@ class Game < Array
 
   # response after selecting a correct set
   def up_score
-    @score += 2
+
+    # modify player score if a hint was used
+    @active_player.decrease_points(1) if @hintTypeOne
+    @active_player.decrease_points(2) if @hintTypeTwo
+
+    @active_player.increase_points
     puts "\nGreat Job!"
-    puts "Your Score is now #{@score}, and there are #{@draw_pile.length} cards left in the draw pile."
+    puts "#{@active_player.name}: your score is now #{@active_player.score}, and there are #{@draw_pile.length} cards left in the draw pile."
+    @active_player = @players.switch_players
+
+    @hintTypeOne = false;
+    @hintTypeTwo = false;
+    next_move
   end
 
   # response after selecting an incorrect set
   def try_again
-    @score -= 1
-    puts 'Wrong! Try again!'
-    puts "Your Score is now #{@score}!"
+    @active_player.decrease_points(1)
+    puts 'Wrong! Lost your turn!'
+    puts "#{@active_player.name}: your score is now #{@active_player.score}!"
+    puts ' '
+    @hintTypeOne = false;
+    @hintTypeTwo = false;
+    @active_player = @players.switch_players
+    next_move
   end
 
   # response after asking for a hint.  Gives the number of hints on the board.
   # Could be changed to give one card that is included in a set or something.
   def give_hint
-    @score -= 1
     matches = find_matches.length
     @deck.print_cards @board
     card = find_matches.first.first
     cardIndex =  @board.find_index(card) + 1
+
+    # Display the hint options
     puts "\nHint Types:"
-    puts "1. Show number of matching sets"
-    puts "2. Show one card that belongs to a set"
+    puts "1. Show number of matching sets (-1 point)"
+    puts "2. Show one card that belongs to a set (-2 points)"
+    puts "3. Go back"
     print "Choose what kind of hint you want: "
+
     answer = gets.to_i
-    until answer.between?(1, 2)
-      print 'Try again. Choose 1 or 2: '
+    until answer.between?(1, 3)
+      print 'Try again. Choose 1 or 2 for a hint or 3 to go back: '
       answer = gets.to_i
     end
-    puts "\nHint: There #{matches == 1 ? 'is 1 match' : "are #{matches} matches"}. " if answer == 1
-    puts "\nHint: Card #{cardIndex} belongs to a set. " if answer == 2
+    if answer == 1
+      puts "\nHint: There #{matches == 1 ? 'is 1 matching set' : "are #{matches} matching sets"}. " 
+      @hintTypeOne = true
+    elsif answer == 2
+      puts "\nHint: Card #{cardIndex} belongs to a set. " 
+      @hintTypeTwo = true
+    elsif answer == 3
+      # Go back to the main options menu if a user doesn't want a hint
+      next_move
+    end
+
     puts ''
     next_move
   end
@@ -151,8 +185,7 @@ class Game < Array
   # response when game is over, either because there are no more matches
   # or the player ends the game
   def game_over
-    puts "\nYour final score is #{@score}"
-    puts 'Thanks for playing!!'
+    @players.print_scores_and_determine_winner
     puts 'Goodbye!!'
     @quit = true
   end
