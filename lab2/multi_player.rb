@@ -27,12 +27,16 @@ class MultiPlayer < Player
   end
   
   def print_scores_and_determine_winner
-    puts '\nScores:'
+    tie = false;
+    puts "\nScores:"
     winner = @players[0]
     (0..num_players - 1).each do |i|
       puts "\n#{@players[i].name} : #{@players[i].score}"
+      tie = @players[i].score == winner.score ? true : false
       winner = @players[i] if @players[i].score > winner.score
     end
-    puts 'Congratulations ' + winner.name + "!! You win!!\n"
+    
+    puts "\nIt was tie!" if tie == true
+    puts "Congratulations "  + winner.name + "!! You win!!\n" if tie == false
   end
 end

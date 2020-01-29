@@ -16,7 +16,7 @@ class Player
 
   # functions that alter the players score
   def increase_points
-    @score += 2
+    @score += 3
   end
 
   def decrease_points (value)
