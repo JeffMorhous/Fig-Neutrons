@@ -132,6 +132,7 @@ class Game < Array
 
     @hintTypeOne = false;
     @hintTypeTwo = false;
+    next_move
   end
 
   # response after selecting an incorrect set
