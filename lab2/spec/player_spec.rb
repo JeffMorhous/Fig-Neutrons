@@ -18,16 +18,16 @@ describe Player do
     end
   end
 
-    describe "#name_player" do
-      it "changes player name" do
-        STDOUT.should_receive(:puts).with("Enter the name for Player1:") #absorb console output and check it
-        Player.any_instance.stub(gets: 'This name') #Fake user input
-        expect(@player.name_player("Player1")).to eq "This name"
-      end
+  describe "#name_player" do
+    it "changes player name" do
+      STDOUT.should_receive(:puts).with("Enter the name for Player1:") #absorb console output and check it
+      Player.any_instance.stub(gets: 'This name') #Fake user input
+      expect(@player.name_player("Player1")).to eq "This name"
     end
+  end
 
   # Todo: test increase_points
-  #
+
   # Todo: test decrease_points
 
   it 'should be a Class' do
