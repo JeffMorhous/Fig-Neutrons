@@ -33,7 +33,18 @@ describe Player do
       expect(@player.score - initScore).to eq 3
     end
   end
-  # Todo: test decrease_points
+
+  describe "#decrease_points" do
+    it "decreases the player's points by given value" do
+      initScore = @player.score
+      @player.decrease_points(4)
+      expect((@player.score - initScore).abs).to eq 4.abs
+
+      initScore = @player.score
+      @player.decrease_points(2)
+      expect((@player.score - initScore).abs).to eq 2
+    end
+  end
 
   it 'should be a Class' do
     expect(described_class.is_a? Class).to eq true
