@@ -9,7 +9,7 @@ class Player
   end
 
   # asks for and sets a name for a player
-  def create_player(player)
+  def name_player(player)
     puts 'Enter the name for ' + player + ':'
     @name = gets.chomp
   end
