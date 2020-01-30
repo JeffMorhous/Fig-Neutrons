@@ -26,8 +26,13 @@ describe Player do
     end
   end
 
-  # Todo: test increase_points
-
+  describe "#increase_points" do
+    it "increases the player's points by 3" do
+      initScore = @player.score
+      @player.increase_points
+      expect(@player.score - initScore).to eq 3
+    end
+  end
   # Todo: test decrease_points
 
   it 'should be a Class' do
