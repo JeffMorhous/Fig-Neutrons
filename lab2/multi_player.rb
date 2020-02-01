@@ -10,8 +10,8 @@ class MultiPlayer < Player
     (0..num_players - 1).each { |i| @players[i] = Player.new}
   end
 
-  def create_all_players
-    (0..num_players - 1).each { |i| @players[i].create_player('Player' + i.to_s)}
+  def name_all_players
+    (0..num_players - 1).each { |i| @players[i].name_player('Player' + i.to_s)}
   end
 
   def determine_starting_player

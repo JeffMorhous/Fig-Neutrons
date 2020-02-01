@@ -22,7 +22,7 @@ class Game < Array
   def deal
     check_matches
     return if @quit
-    @players.create_all_players
+    @players.name_all_players
     @active_player = @players.determine_starting_player
     @deck.print_cards @board
     next_move
