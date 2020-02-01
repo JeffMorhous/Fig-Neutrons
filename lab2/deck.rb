@@ -15,27 +15,27 @@ class Deck < Array
   #prints out the given cards (|cards| <= 12)
   def print_cards(cards) 
     puts '  '
-    cardNum = 0
+    card_num = 0
     #calculate how many rows are needed to display all the cards
     rows = 1
-    rows +=1 if cards.length() > 6
+    rows +=1 if cards.length > 6
 
     for row in 1..rows do
       #header for each card that displays card number
-      puts "  Card #{cardNum + 1}:      Card #{cardNum + 2}:      Card #{cardNum + 3}:      Card #{cardNum + 4}:      Card #{cardNum + 5}:      Card #{cardNum + 6}:"
+      puts "  Card #{card_num + 1}:      Card #{card_num + 2}:      Card #{card_num + 3}:      Card #{card_num + 4}:      Card #{card_num + 5}:      Card #{card_num + 6}:"
       
       #loop through each line of the cards to print them in one row
       for line in 0..6 do
         #keep track of which of the twelve cards are being printed
-        i = cardNum
+        i = card_num
         details = []
 
-        cardsToPrint = 6;
+        cards_to_print = 6;
         #calculates how many cards to print out on last row just incase six are not left
-        cardsToPrint = ((cards.length()-1)%6)+1 if (row == rows)  
+        cards_to_print = ((cards.length-1)%6)+1 if (row == rows)
         
         #push the current line of each card in the row to details
-        cardsToPrint.times do
+        cards_to_print.times do
           details.push((cards[i])[4+line])
           i+=1
         end
@@ -45,7 +45,7 @@ class Deck < Array
       end
 
       #increment card count
-      cardNum += 6
+      card_num += 6
     end
   end
 

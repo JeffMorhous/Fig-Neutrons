@@ -9,8 +9,9 @@ class Game < Array
     @active_player = nil
     @players = MultiPlayer.new(2)
     @quit = false
-    @hintTypeOne = false
-    @hintTypeTwo = false
+    @is_first_time = true
+    @hint_type_one = false
+    @hint_type_two = false
   end
 
   # returns the size of the board.  The board will only be less than 12 when the draw pile is empty.
@@ -22,8 +23,13 @@ class Game < Array
   def deal
     check_matches
     return if @quit
-    @players.name_all_players
-    @active_player = @players.determine_starting_player
+
+    if @is_first_time
+      @players.name_all_players
+      @active_player = @players.determine_starting_player
+      @is_first_time = false
+    end
+
     @deck.print_cards @board
     next_move
   end
@@ -101,16 +107,16 @@ class Game < Array
 
   # determining if the three cards are a set
   def a_set?(three_cards)
-    cardStrings = []
+    card_strings = []
     for i in 0..2 do
-      cardStrings[i] = (three_cards[i])[4..10]
+      card_strings[i] = (three_cards[i])[4..10]
       three_cards[i] = (three_cards[i])[0..3]
     end
     bool = three_cards.transpose.all? { |feature| feature.length == 3 && feature.uniq.length != 2 }
     for i in 0..2 do
-      (three_cards[i])[4..10] = cardStrings[i]
+      (three_cards[i])[4..10] = card_strings[i]
     end
-    return bool
+    bool
   end
 
   # drawing three cards from the draw pile and adding them to the board
@@ -122,16 +128,16 @@ class Game < Array
   def up_score
 
     # modify player score if a hint was used
-    @active_player.decrease_points(1) if @hintTypeOne
-    @active_player.decrease_points(2) if @hintTypeTwo
+    @active_player.decrease_points(1) if @hint_type_one
+    @active_player.decrease_points(2) if @hint_type_two
 
     @active_player.increase_points
     puts "\nGreat Job!"
     puts "#{@active_player.name}: your score is now #{@active_player.score}, and there are #{@draw_pile.length} cards left in the draw pile."
     @active_player = @players.switch_players
 
-    @hintTypeOne = false;
-    @hintTypeTwo = false;
+    @hint_type_one = false
+    @hint_type_two= false
     next_move
   end
 
@@ -141,8 +147,8 @@ class Game < Array
     puts 'Wrong! Lost your turn!'
     puts "#{@active_player.name}: your score is now #{@active_player.score}!"
     puts ' '
-    @hintTypeOne = false;
-    @hintTypeTwo = false;
+    @hint_type_one = false
+    @hint_type_two = false
     @active_player = @players.switch_players
     next_move
   end
@@ -153,7 +159,7 @@ class Game < Array
     matches = find_matches.length
     @deck.print_cards @board
     card = find_matches.first.first
-    cardIndex =  @board.find_index(card) + 1
+    card_index = @board.find_index(card) + 1
 
     # Display the hint options
     puts "\nHint Types:"
@@ -169,10 +175,10 @@ class Game < Array
     end
     if answer == 1
       puts "\nHint: There #{matches == 1 ? 'is 1 matching set' : "are #{matches} matching sets"}. " 
-      @hintTypeOne = true
+      @hint_type_one = true
     elsif answer == 2
-      puts "\nHint: Card #{cardIndex} belongs to a set. " 
-      @hintTypeTwo = true
+      puts "\nHint: Card #{card_index} belongs to a set. "
+      @hint_type_two = true
     elsif answer == 3
       # Go back to the main options menu if a user doesn't want a hint
       next_move
