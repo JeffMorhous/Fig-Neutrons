@@ -1,4 +1,5 @@
-# This contains the methods to initialize and create a player, as well as change their score
+
+# This class contains the methods to initialize and create a player, as well as change their score
 class Player
   # player information
   attr_reader :name, :score
@@ -11,7 +12,7 @@ class Player
 
   # asks for and sets a name for a player
   def name_player(player)
-    puts 'Enter the name for ' + player + ':'
+    print 'Enter the name for ' + player + ':'
     @name = gets.chomp
   end
 
@@ -21,7 +22,7 @@ class Player
   end
 
   # function that decreases the players score by whatever value is inputted
-  def decrease_points (value)
+  def decrease_points(value)
     @score -= value
   end
 end

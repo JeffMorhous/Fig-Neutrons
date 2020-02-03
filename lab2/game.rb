@@ -39,7 +39,7 @@ class Game < Array
     return unless find_matches.empty?
 
     all_cards_left = @board + @draw_pile
-    if find_matches(all_cards_left).length.zero?
+    if find_matches(all_cards_left).empty?
       puts 'There are no more matches in the whole deck!'
       game_over
     else
@@ -96,10 +96,10 @@ class Game < Array
   def pick_a_set
     cards = []
     (1..3).each do |i|
-      print "Choose card #{i}: "
+      print "Choose card #{i}:"
       answer = gets.to_i
       until answer.between?(1, @board.length) && !cards.include?(@board[answer - 1])
-        puts "Try again! Choose card #{i}: "
+        print "Try again! Choose card #{i}:"
         answer = gets.to_i
       end
       cards << @board[answer - 1]
@@ -112,12 +112,12 @@ class Game < Array
   # three_cards - an array that holds the cards selected by a player.
   def a_set?(three_cards)
     card_strings = []
-    for i in 0..2 do
+    (0..2).each do |i|
       card_strings[i] = (three_cards[i])[4..10]
       three_cards[i] = (three_cards[i])[0..3]
     end
     bool = three_cards.transpose.all? { |feature| feature.length == 3 && feature.uniq.length != 2 }
-    for i in 0..2 do
+    (0..2).each do |i|
       (three_cards[i])[4..10] = card_strings[i]
     end
     bool
@@ -141,8 +141,7 @@ class Game < Array
     @active_player = @players.switch_players
 
     @hint_type_one = false
-    @hint_type_two= false
-    next_move
+    @hint_type_two = false
   end
 
   # Decrease a player's score and show the appropriate message after selecting an incorrect set.
@@ -154,7 +153,6 @@ class Game < Array
     @hint_type_one = false
     @hint_type_two = false
     @active_player = @players.switch_players
-    next_move
   end
 
   # Present hint options to player and show appropriate hint message based on the player input. 
@@ -169,15 +167,15 @@ class Game < Array
     puts "1. Show number of matching sets (-1 point)"
     puts "2. Show one card that belongs to a set (-2 points)"
     puts "3. Go back"
-    print "Choose what kind of hint you want: "
+    print "Choose what kind of hint you want:"
 
     answer = gets.to_i
     until answer.between?(1, 3)
-      print 'Try again. Choose 1 or 2 for a hint or 3 to go back: '
+      print 'Try again. Choose 1 or 2 for a hint or 3 to go back:'
       answer = gets.to_i
     end
     if answer == 1
-      puts "\nHint: There #{matches == 1 ? 'is 1 matching set' : "are #{matches} matching sets"}. " 
+      puts "\nHint: There #{matches == 1 ? 'is 1 matching set' : "are #{matches} matching sets"}. "
       @hint_type_one = true
     elsif answer == 2
       puts "\nHint: Card #{card_index} belongs to a set. "
