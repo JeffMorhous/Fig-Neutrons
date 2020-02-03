@@ -14,12 +14,12 @@ class Game < Array
     @hint_type_two = false
   end
 
-  # returns the size of the board.  The board will only be less than 12 when the draw pile is empty.
+  # Return the size of the board. The board will only be less than 12 when the draw pile is empty.
   def cards_left
     @board.length
   end
 
-  # starts a round.
+  # Starts a round of the game.
   def deal
     check_matches
     return if @quit
@@ -34,7 +34,7 @@ class Game < Array
     next_move
   end
 
-  # makes sure that there is at least one match on the board.
+  # Check for matches on the board to ensure at least one set is on the board.
   def check_matches
     return unless find_matches.empty?
 
@@ -47,12 +47,14 @@ class Game < Array
     end
   end
 
-  # finds all of the matches on the board and returns an array of them.
+  # Finds all of the matches on the board and returns an array of them. 
+  # Params:
+  # cards - the set of cards to find matches in
   def find_matches(cards = @board)
     cards.combination(3).to_a.select { |group| a_set? group }
   end
 
-  # after printing the board, asks what the player would like to do.
+  # Determine a player's next move based on their input.
   def next_move
     ask_question
     answer = gets.to_i
@@ -66,7 +68,7 @@ class Game < Array
     game_over if answer == 4
   end
 
-  # separating the text to make the next_move method shorter
+  # Present the set of options to the user to determine what the next move is.
   def ask_question
     print "\n#{@active_player.name}, what would you like to do?"
     puts ' '
@@ -77,7 +79,7 @@ class Game < Array
     print 'Choose 1, 2, 3 or 4: '
   end
 
-  # steps for player to select three cards and check if it is a set
+  # Steps for player to select three cards and check if the chosen cards are a set.
   def find_a_set
     puts ''
     cards = pick_a_set
@@ -90,7 +92,7 @@ class Game < Array
     end
   end
 
-  # player picking three cards
+  # Prompt the player to enter the three cards that are part of a set.
   def pick_a_set
     cards = []
     (1..3).each do |i|
@@ -105,7 +107,9 @@ class Game < Array
     cards
   end
 
-  # determining if the three cards are a set
+  # Determine if the three cards are a set.
+  # Params:
+  # three_cards - an array that holds the cards selected by a player.
   def a_set?(three_cards)
     card_strings = []
     (0..2).each do |i|
@@ -119,12 +123,12 @@ class Game < Array
     bool
   end
 
-  # drawing three cards from the draw pile and adding them to the board
+  # Drawing three cards from the draw pile and adding them to the board.
   def three_more
     3.times { @board << @draw_pile.shift(1).flatten}
   end
 
-  # response after selecting a correct set
+  # Increase a player's score and show the appropriate message after selecting a correct set.
   def up_score
 
     # modify player score if a hint was used
@@ -140,7 +144,7 @@ class Game < Array
     @hint_type_two = false
   end
 
-  # response after selecting an incorrect set
+  # Decrease a player's score and show the appropriate message after selecting an incorrect set.
   def try_again
     @active_player.decrease_points(1)
     puts 'Wrong! Lost your turn!'
@@ -151,7 +155,7 @@ class Game < Array
     @active_player = @players.switch_players
   end
 
-  # response after asking for a hint
+  # Present hint options to player and show appropriate hint message based on the player input. 
   def give_hint
     matches = find_matches.length
     @deck.print_cards @board
@@ -185,7 +189,7 @@ class Game < Array
     next_move
   end
 
-  # response when game is over, either because there are no more matches
+  # Show the game over message, either because there are no more matches
   # or the player ends the game
   def game_over
     @players.print_scores_and_determine_winner
@@ -193,7 +197,7 @@ class Game < Array
     @quit = true
   end
 
-  # swapping the last three cards on the board for new cards from the draw pile
+  # Swapping the last three cards on the board for new cards from the draw pile
   # so that there is at least one match on the board
   def swap_three
     swap = @board.pop(3)
@@ -202,13 +206,13 @@ class Game < Array
     @draw_pile.shuffle!
   end
 
-  # boolean keeping track of the player wanting to quit the game.
+  # Keeping track of the player wanting to quit the game.
   def over?
     @quit
   end
 
-  # option to shorten the game, using to test how the game ends.
-  # Parameter is the number of cards to take out of the draw pile. 0-69
+  # Option to shorten the game, using to test how the game ends.
+  # Parameter is the number of cards to take out of the draw pile. (0-69)
   def shorten_game(number)
     @draw_pile.shift(number)
   end
