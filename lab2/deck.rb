@@ -5,6 +5,8 @@ class Deck < Array
   # allow @cards to be read
   attr_reader :cards
 
+  #Initializes a deck of cards with a "card" for each possible combination of colors, fills, shapes and 
+  #numbers that can be put on a card and its graphical output in form of an 11 element array 
   def initialize
     colors = %w[blue red green]
     shapes = %w[square tri circle]
@@ -16,7 +18,12 @@ class Deck < Array
     @cards.each { |card| shape_strings!(card) }
   end
 
-  # prints out the given cards (|cards| <= 12)
+  #Prints out the given cards (|cards| <= 12)
+  #
+  #Params: 
+  #cards - an array of 1 - 12 "cards" which are arrays holding color, shape, fill
+  #        and number along with 7 strings to represent the graphical output of the card
+
   def print_cards(cards)
     puts '  '
     card_num = 0
@@ -52,7 +59,12 @@ class Deck < Array
     end
   end
 
-
+  #Adds the graphical representation of a card via strings for each line of the card to the 
+  #end of the givecn card array
+  #
+  #Params: 
+  #card - card array with the first four elements representing the cards color, 
+  #       shape, fill, and number respectivly
   def shape_strings!(card)
     # store basic values from the card
     shape = card[1]
