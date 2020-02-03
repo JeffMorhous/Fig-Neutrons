@@ -1,6 +1,10 @@
 require 'colorize'
 
 class Deck < Array
+
+  # allow @cards to be read
+  attr_reader :cards
+
   def initialize
     colors = %w[blue red green]
     shapes = %w[square tri circle]
@@ -13,84 +17,78 @@ class Deck < Array
   end
 
   # prints out the given cards (|cards| <= 12)
-  def print_cards(cards) 
+  def print_cards(cards)
     puts '  '
     card_num = 0
     # calculate how many rows are needed to display all the cards
     rows = 1
-    rows +=1 if cards.length > 6
+    rows += 1 if cards.length > 6
 
-    for row in 1..rows do
-      #header for each card that displays card number
+    (1..rows).each do |row|
+      # header for each card that displays card number
       puts "  Card #{card_num + 1}:      Card #{card_num + 2}:      Card #{card_num + 3}:      Card #{card_num + 4}:      Card #{card_num + 5}:      Card #{card_num + 6}:"
-      
-      #loop through each line of the cards to print them in one row
-      for line in 0..6 do
-        #keep track of which of the twelve cards are being printed
+
+      # loop through each line of the cards to print them in one row
+      (0..6).each do |line|
+        # keep track of which of the twelve cards are being printed
         i = card_num
         details = []
 
-        cards_to_print = 6;
-        #calculates how many cards to print out on last row just incase six are not left
-        cards_to_print = ((cards.length-1)%6)+1 if (row == rows)
-        
-        #push the current line of each card in the row to details
+        # calculates how many cards to print out on last row just in case six are not left
+        cards_to_print = row == rows ? ((cards.length-1) % 6) + 1 : 6
+
+        # push the current line of each card in the row to details
         cards_to_print.times do
-          details.push((cards[i])[4+line])
-          i+=1
+          details.push((cards[i])[4 + line])
+          i += 1
         end
 
-        #print out the current line of all cards in the row
+        # print out the current line of all cards in the row
         puts '  ' + details.join('      ') + '  '
       end
 
-      #increment card count
+      # increment card count
       card_num += 6
     end
   end
 
 
   def shape_strings!(card)
-    #store basic values from the card
+    # store basic values from the card
     shape = card[1]
     fill = card[2]
     number = card[3]
     color = card[0]
 
-    #set up unicode values for the different shapes
+    # set up unicode values for the different shapes
     shapes1 = { filled_circle: "\u25CF".encode('utf-8'),
-                 half_circle: "\u25D0".encode('utf-8'),
-                 open_circle: "\u25CB".encode('utf-8'),
-                 filled_tri: "\u25B2".encode('utf-8'),
-                 half_tri: "\u25ED".encode('utf-8'),
-                 open_tri: "\u25B3".encode('utf-8'),
-                 filled_square: "\u25A0".encode('utf-8'),
-                 half_square: "\u25E7".encode('utf-8'),
-                 open_square: "\u25A1".encode('utf-8') }
+                half_circle: "\u25D0".encode('utf-8'),
+                open_circle: "\u25CB".encode('utf-8'),
+                filled_tri: "\u25B2".encode('utf-8'),
+                half_tri: "\u25ED".encode('utf-8'),
+                open_tri: "\u25B3".encode('utf-8'),
+                filled_square: "\u25A0".encode('utf-8'),
+                half_square: "\u25E7".encode('utf-8'),
+                open_square: "\u25A1".encode('utf-8') }
 
-    #set up the different lines for the card display based off initial card values             
-    card[4] = "▁▁▁▁▁▁▁"
-    card[5] = "|=====|".colorize(:black).colorize(background: color.to_sym)
-    if number == 3 || number == 2
-      card[6] = ("|| " +shapes1["#{fill}_#{shape}".to_sym]+ " ||").colorize(:black).colorize(background: color.to_sym)
+    # set up the different lines for the card display based off initial card values             
+    card[4] = "\xE2\x96\x81\xE2\x96\x81\xE2\x96\x81\xE2\x96\x81\xE2\x96\x81\xE2\x96\x81\xE2\x96\x81"
+    card[5] = '|=====|'.colorize(:black).colorize(background: color.to_sym)
+    if number == 2 || number == 3
+      card[6] = ('|| ' +shapes1["#{fill}_#{shape}".to_sym]+ ' ||').colorize(:black).colorize(background: color.to_sym)
+      card[8] = ('|| ' +shapes1["#{fill}_#{shape}".to_sym]+ ' ||').colorize(:black).colorize(background: color.to_sym)
     else
-      card[6] = "||   ||".colorize(:black).colorize(background: color.to_sym)
+      card[6] = '||   ||'.colorize(:black).colorize(background: color.to_sym)
+      card[8] = '||   ||'.colorize(:black).colorize(background: color.to_sym)
     end
     if number == 3 || number == 1
-      card[7] = ("|| " +shapes1["#{fill}_#{shape}".to_sym]+ " ||").colorize(:black).colorize(background: color.to_sym)
+      card[7] = ('|| ' +shapes1["#{fill}_#{shape}".to_sym]+ ' ||').colorize(:black).colorize(background: color.to_sym)
     else
-      card[7] = "||   ||".colorize(:black).colorize(background: color.to_sym)
+      card[7] = '||   ||'.colorize(:black).colorize(background: color.to_sym)
     end
-    if number == 2 || number == 3
-      card[8] = ("|| " +shapes1["#{fill}_#{shape}".to_sym]+ " ||").colorize(:black).colorize(background: color.to_sym)
-    else
-      card[8] = "||   ||".colorize(:black).colorize(background: color.to_sym)
-    end
-    card[9] = "|=====|".colorize(:black).colorize(background: color.to_sym)
-    card[10] = "▔▔▔▔▔▔▔"
-  end
 
-  #allow @cards to be read
-  attr_reader :cards
+    card[9] = '|=====|'.colorize(:black).colorize(background: color.to_sym)
+    card[10] = "\xE2\x96\x94\xE2\x96\x94\xE2\x96\x94\xE2\x96\x94\xE2\x96\x94\xE2\x96\x94\xE2\x96\x94"
+  end
 
 end

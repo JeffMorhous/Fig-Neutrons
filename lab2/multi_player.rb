@@ -1,6 +1,6 @@
 require_relative 'player'
-# This creates multiple playe
 
+# This class creates multiple players
 class MultiPlayer < Player
   attr_reader :players, :num_players, :current_player_index
 
@@ -9,7 +9,7 @@ class MultiPlayer < Player
     @num_players = num_players
     @players = []
     @current_player_index = nil
-    (0..num_players - 1).each { |i| @players[i] = Player.new}
+    (0..num_players - 1).each { |i| @players[i] = Player.new }
   end
 
   # allows you to name all the players in the array
@@ -38,11 +38,11 @@ class MultiPlayer < Player
     winner = @players[0]
     (0..num_players - 1).each do |i|
       puts "\n#{@players[i].name} : #{@players[i].score}"
-      tie = @players[i].score == winner.score ? true : false
+      tie = @players[i].score == winner.score
       winner = @players[i] if @players[i].score > winner.score
     end
-    
+
     puts "\nIt was tie!" if tie == true
-    puts "Congratulations "  + winner.name + "!! You win!!\n" if tie == false
+    puts 'Congratulations ' + winner.name + "!! You win!!\n" if tie == false
   end
 end
