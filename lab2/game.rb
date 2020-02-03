@@ -96,10 +96,10 @@ class Game < Array
   def pick_a_set
     cards = []
     (1..3).each do |i|
-      print "Choose card #{i}:"
+      print "Choose card #{i}: "
       answer = gets.to_i
       until answer.between?(1, @board.length) && !cards.include?(@board[answer - 1])
-        print "Try again! Choose card #{i}:"
+        print "Try again! Choose card #{i}: "
         answer = gets.to_i
       end
       cards << @board[answer - 1]
@@ -164,14 +164,14 @@ class Game < Array
 
     # Display the hint options
     puts "\nHint Types:"
-    puts "1. Show number of matching sets (-1 point)"
-    puts "2. Show one card that belongs to a set (-2 points)"
-    puts "3. Go back"
-    print "Choose what kind of hint you want:"
+    puts '1. Show number of matching sets (-1 point)'
+    puts '2. Show one card that belongs to a set (-2 points)'
+    puts '3. Go back'
+    print 'Choose what kind of hint you want: '
 
     answer = gets.to_i
     until answer.between?(1, 3)
-      print 'Try again. Choose 1 or 2 for a hint or 3 to go back:'
+      print 'Try again. Choose 1 or 2 for a hint or 3 to go back: '
       answer = gets.to_i
     end
     if answer == 1

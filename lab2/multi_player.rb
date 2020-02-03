@@ -5,6 +5,8 @@ class MultiPlayer < Player
   attr_reader :players, :num_players, :current_player_index
 
   # create an array of players
+  # Params
+  # num_players - the amount of players for the game
   def initialize(num_players)
     @num_players = num_players
     @players = []
@@ -42,7 +44,7 @@ class MultiPlayer < Player
       winner = @players[i] if @players[i].score > winner.score
     end
 
-    puts "\nIt was tie!" if tie == true
+    puts "\nIt was a tie!" if tie == true
     puts 'Congratulations ' + winner.name + "!! You win!!\n" if tie == false
   end
 end

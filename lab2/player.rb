@@ -12,7 +12,7 @@ class Player
 
   # asks for and sets a name for a player
   def name_player(player)
-    print 'Enter the name for ' + player + ':'
+    print 'Enter the name for ' + player + ': '
     @name = gets.chomp
   end
 
