@@ -12,11 +12,11 @@ class Deck < Array
     @cards.each { |card| shape_strings!(card) }
   end
 
-  #prints out the given cards (|cards| <= 12)
+  # prints out the given cards (|cards| <= 12)
   def print_cards(cards) 
     puts '  '
     card_num = 0
-    #calculate how many rows are needed to display all the cards
+    # calculate how many rows are needed to display all the cards
     rows = 1
     rows +=1 if cards.length > 6
 
