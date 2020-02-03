@@ -20,7 +20,6 @@ describe Player do
 
   describe "#name_player" do
     it "changes player name" do
-      STDOUT.should_receive(:puts).with("Enter the name for Player1:") #absorb console output and check it
       Player.any_instance.stub(gets: 'This name') #Fake user input
       expect(@player.name_player("Player1")).to eq "This name"
     end
