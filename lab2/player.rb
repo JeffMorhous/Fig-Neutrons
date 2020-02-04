@@ -11,6 +11,8 @@ class Player
   end
 
   # asks for and sets a name for a player
+  # Params
+  # player - The specified player to be named
   def name_player(player)
     print 'Enter the name for ' + player + ': '
     @name = gets.chomp
@@ -22,6 +24,8 @@ class Player
   end
 
   # function that decreases the players score by whatever value is inputted
+  # Params
+  # value - The number of points to deduct from the player score
   def decrease_points(value)
     @score -= value
   end
