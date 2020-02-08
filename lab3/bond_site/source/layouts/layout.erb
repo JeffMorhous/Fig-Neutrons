@@ -11,12 +11,15 @@
     <%= javascript_include_tag "site" %>
   </head>
   <body>
-    <ul class="navigation">
+    <div class="navigation">
+    <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="research.html">Research</a></li>
       <li><a href="teaching.html">Teaching</a></li>
       <li><a href="plass.html">PLaSS</a></li>
     </ul>
+    </div>
+    
     <hr>
     <%= yield %>
   </body>
