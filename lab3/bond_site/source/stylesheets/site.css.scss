@@ -117,12 +117,15 @@ h3{
 }
 .column-one-third {
   float: left;
-  width: 33.33%;
+  width: 33%;
 }
 
 .column-two-third {
+  margin-left: 2.99%;
   float: left;
-  width: 66.66%;
+  width: 64%;
+  border: 2px solid black;
+  padding: 0 5px 5px 5px;
 }
 
 .avatar{
