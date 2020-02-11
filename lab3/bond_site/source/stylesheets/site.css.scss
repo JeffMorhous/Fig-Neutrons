@@ -37,7 +37,7 @@ a {
   }
 }
 
-// Center content for the research group page 
+// Center content for the research group page
 .plassCenter{
   margin: auto;
   width: 50%;
@@ -100,6 +100,43 @@ div.desc {
   text-align: center;
 }
 
+h1{
+  text-align: center;
+}
+
+h2{
+  text-align: center;
+}
+
+h3{
+  text-align: center;
+}
+
+.row{
+  text-align: center;
+}
+.column-one-third {
+  float: left;
+  width: 33%;
+}
+
+.column-two-third {
+  margin-left: 2.99%;
+  float: left;
+  width: 64%;
+  border: 2px solid black;
+  padding: 0 5px 5px 5px;
+}
+
+.avatar{
+  max-width: 80%;
+  border-radius: 50%;
+  max-height: 580px;
+
+}
+// li a:hover {
+//   background-color: #111;
+// }
 /* The actual timeline (the vertical ruler) */
 .timeline {
   position: relative;
@@ -115,7 +152,7 @@ div.desc {
   background-color: #8e7167;
   top: 0;
   bottom: 0;
-  left: 47%;
+  left: 40%;
   margin-left: -1px;
 }
 
@@ -148,7 +185,7 @@ div.desc {
 
 /* Place the container to the right */
 .right {
-  left: 47%;
+  left: 40%;
 }
 
 /* Add arrows to the left container (pointing right) */
