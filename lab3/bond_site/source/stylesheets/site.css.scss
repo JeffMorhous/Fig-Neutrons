@@ -7,6 +7,7 @@ body {
     "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
   // padding: 18vh 1rem;
   // text-align: center;
+  margin: 0;
 }
 
 a {
@@ -38,6 +39,33 @@ li a {
   text-decoration: none;
 }
 
+h1{
+  text-align: center;
+}
+
+h2{
+  text-align: center;
+}
+
+.row{
+  text-align: center;
+}
+.column-one-third {
+  float: left;
+  width: 33.33%;
+}
+
+.column-two-third {
+  float: left;
+  width: 66.66%;
+}
+
+.avatar{
+  max-width: 80%;
+  border-radius: 50%;
+  max-height: 580px;
+
+}
 // li a:hover {
 //   background-color: #111;
 // }
