@@ -1,0 +1,1847 @@
+<div class="paperCenter">
+  <h1>Publications of <a href="plass.html">PLaSS</a> and Mike Bond</h1>
+
+  <div id="peacenik">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Peacenik: Architecture Support for Not Failing under Fail-Stop Memory Consistency</h3>
+    <p>Rui Zhang,
+      <a href=https://www.cse.iitk.ac.in/users/swarnendu/>Swarnendu Biswas</a>,
+      <a href=https://users.ece.cmu.edu/~vigneshb/>Vignesh Balaji</a>,
+      <a href=http://www.cse.ohio-state.edu/~mikebond/>Michael D. Bond</a>, and
+      <a href=https://brandonlucia.com/>Brandon Lucia</a>
+    </p>
+    <p>
+      25th International Conference on Architectural Support for Programming Languages and Operating Systems
+      (<a href=https://asplos-conference.org>ASPLOS 2020</a>),
+      Lausanne, Switzerland, March 2020
+    <p>
+    <p>Read the <a href=./docs/peacenik-asplos-2020.pdf><strong>paper</strong></a>
+      and view the <a href=https://github.com/PLaSSticity/peacenik-simulators-asplos20><strong>source code</strong>.</a>
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Modern shared-memory systems have erroneous, undefined behavior for programs
+      that are not well synchronized. A promising solution is to provide <i>fail-stop
+      memory consistency</i>, which ensures well-defined behavior for <i>all</i> programs. While
+      fail-stop consistency avoids undefined behavior, it can lead to unexpected
+      failures, imperiling performance or progress.
+      <br>
+      <br>
+      This paper presents architecture support called <i>Peacenik</i> that avoids failures in
+      the context of fail-stop memory consistency. We demonstrate Peacenik by applying
+      Peacenik's general mechanisms to two existing architectures that provide
+      fail-stop consistency. A simulation-based evaluation shows that Peacenik
+      eliminates nearly all of the high costs of fail-stop behavior incurred by the
+      baseline architectures, demonstrating how to get the benefits of fail-stop
+      consistency without incurring most or all of its costs.
+    </blockquote>
+  </div>
+
+  <div id="depaware">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Dependence-Aware, Unbounded Sound Predictive Race Detection</h3>
+    <p>Kaan Gen&ccedil;, Jake Roemer, Yufan Xu, and
+      <a href=http://www.cse.ohio-state.edu/~mikebond/>Michael D. Bond</a>
+    </p>
+    <p>
+      ACM SIGPLAN International Conference on Object-Oriented Programming, Systems, Languages, and Applications
+      (<a href=https://conf.researchr.org/track/splash-2019/splash-2019-oopsla>OOPSLA 2019</a>), Athens, Greece, October 2019
+    <p>
+    <p>
+      Read the <a href=https://arxiv.org/pdf/1904.13088.pdf><strong>Extended Version</strong></a> and the
+      <a href=./docs/depaware-oopsla-2019.pdf><strong>Conference Version</strong></a>,
+      watch the <a href=https://docs.google.com/presentation/d/1nf4ujFVRNpvapidNXi0ruCaXp4XAz9BHkJyMY1PMoeU>
+      <strong>Talk by Kaan Gen&ccedil;</strong></a>,
+      and view the <a href=https://github.com/PLaSSticity/SDP-WDP-implementation><strong>Source Code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Data races are a real problem for parallel software, yet hard to detect.
+      Sound predictive analysis observes a program execution and detects data races
+      that exist in some <i>other, unobserved</i> execution.
+      However, existing predictive analyses miss races because they do not
+      scale to full program executions or do not precisely incorporate data and control dependence.
+      <br>
+      <br>
+      This paper introduces two novel, sound predictive approaches that
+      incorporate data and control dependence and handle full program executions.
+      An evaluation using real, large Java programs shows that these approaches
+      detect more data races than the closest related approaches,
+      thus advancing the state of the art in sound predictive race detection.
+    </blockquote>
+  </div>
+
+  <div id="arc">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Rethinking Support for Region Conflict Exceptions</h3>
+    <p><a href=https://www.cse.iitk.ac.in/users/swarnendu/>Swarnendu Biswas</a>,
+      Rui Zhang,
+      <a href=http://www.cse.ohio-state.edu/~mikebond/>Michael D. Bond</a>, and
+      <a href=https://brandonlucia.com/>Brandon Lucia</a>
+    </p>
+    <p>
+      IEEE International Parallel and Distributed Processing Symposium
+      (<a href=http://www.ipdps.org/>IPDPS 2019</a>),
+      Rio de Janeiro, Brazil, May 2019
+    <p>
+    <p>
+      Read the <a href=./docs/arc-ipdps-2019.pdf><strong>paper,</strong></a>
+      watch the Talk by Swarnendu Biswas with <a href=./docs/arc-ipdps-2019-talk.pptx>
+      <strong>Powerpoint</strong></a> or <a href=./docs/arc-ipdps-2019-talk.pdf><strong>PDF</strong></a>
+      and view the <a href=https://github.com/PLaSSticity/SDP-WDP-implementation><strong>Source Code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Current shared-memory systems provide well-defined execution semantics <i>only for</i> data-race-free executions. A
+      state-of-the-art technique called <i>Conflict Exceptions</i> (CE) extends M(O)ESI-based coherence to provide defined
+      semantics to <i>all</i> program executions. However, CE incurs significant performance costs because of its need to
+      frequently access metadata in memory.
+      <br>
+      <br>
+      In this work, we explore designs for practical architecture support for region conflict exceptions. First, we
+      propose an on-chip metadata cache called access information memory (AIM) to reduce memory accesses in CE. The
+      extended design is called <i>CE+</i>. In spite of the AIM, CE+ stresses or saturates the on-chip interconnect and the
+      off-chip memory network bandwidth because of its reliance on eager write-invalidation-based coherence. We
+      explore whether detecting conflicts is <i>potentially</i> better suited to cache coherence based on release
+      consistency and self-invalidation, rather than M(O)ESI-based coherence. We realize this insight in a novel
+      architecture design called <i>ARC</i>.
+      <br>
+      <br>
+      Our evaluation shows that CE+ improves the run-time performance and energy usage over CE for several
+      applications across different core counts, but can suffer performance penalties from network saturation. ARC
+      generally outperforms CE, and is competitive with CE+ on average while stressing the on-chip interconnect and
+      off-chip memory network much less, showing that coherence based on release consistency and self-invalidation
+      is well suited to detecting region conflicts.
+    </blockquote>
+  </div>
+
+  <div id="vindicator">
+  <hr class="fancyLine">
+  <h3 class="snugTitle">High-Coverage, Unbounded Sound Predictive Race Detection</h3>
+  <p>
+    Jake Roemer,
+    Kaan Gen&ccedil;, and
+    <a href=http://www.cse.ohio-state.edu/~mikebond/>Michael D. Bond</a>
+  </p>
+  <p>
+    ACM SIGPLAN Conference on
+    Programming Language Design and Implementation
+    (<a href=https://pldi18.sigplan.org/>PLDI 2018</a>),
+    Philadelphia, PA, USA, June 2018
+  <p>
+  <p>
+    Read the <a href=./docs/vindicator-pldi-2018-xtr.pdf><strong>Extended Technical Report</strong></a>, which includes all appendices,
+    or the <a href=./docs/vindicator-pldi-2018.pdf><strong>Conference Version</strong></a>, which excludes some appendices.
+    Watch the <a href=https://docs.google.com/presentation/d/1fzuHhz5xWKC9zQd-SrEf_T914HYjxbSSJxWtbGrsJj8/><strong>Talk by Jake Roemer</strong></a>,
+    and view the <a href=https://github.com/PLaSSticity/Vindicator><strong>source code</strong></a>.
+  </p>
+  <p><strong>Abstract: </strong></p>
+  <blockquote>
+    Dynamic program analysis can <i>predict</i> data races knowable from an observed execution,
+    but existing predictive analyses either miss races or cannot analyze full program executions.
+    This paper presents <i>Vindicator</i>, a novel, sound (no false races) predictive approach that
+    finds more data races than existing predictive approaches. Vindicator achieves high coverage by using a new,
+    efficient analysis that finds all possible predictable races but may detect false races. Vindicator ensures
+    soundness using a novel algorithm that checks each potential race to determine whether it is a true predictable race.
+    An evaluation using large Java programs shows that Vindicator finds hard-to-detect
+    predictable races that existing sound predictive analyses miss, at a comparable performance cost.
+  </blockquote>
+</div>
+
+  <div id="fib">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Instrumentation Bias for Dynamic Data Race Detection</h3>
+    <p>
+      <a href=http://cs.wellesley.edu/~bpw/>Benjamin P. Wood</a>
+      <a href=http://www.cse.ohio-state.edu/~caoma/>Man Cao</a>,
+      <a href=http://www.cse.ohio-state.edu/~mikebond/>Michael D. Bond</a>, and
+      <a href=https://homes.cs.washington.edu/~djg/>Dan Grossman</a>
+    </p>
+    <p>
+      ACM SIGPLAN International Conference on
+      Object-Oriented Programming, Systems, Languages, and Applications
+      (<a href=http://2017.splashcon.org/track/splash-2017-OOPSLA>OOPSLA 2017</a>),
+      Vancouver, Canada, October 2017
+    <p>
+    <p>
+      Read the <a href=./docs/fib-oopsla-2017.pdf><strong>paper</strong></a>
+      and view the <a href=https://bitbucket.org/bpw/fib><strong>source code</strong>.</a>
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      This paper presents Fast Instrumentation Bias (FIB), a sound and complete dynamic data race detection algorithm
+      that improves performance by reducing or eliminating the costs of analysis atomicity. In addition to checking
+      for errors in target programs, dynamic data race detectors must introduce synchronization to guard against
+      <i>metadata races</i> that may corrupt analysis state and compromise soundness or completeness. Pessimistic
+      analysis synchronization can account for nontrivial performance overhead in a data race detector.
+      <br>
+      <br>
+      The core contribution of FIB is a novel cooperative ownership-based synchronization protocol whose states and
+      transitions are derived purely from preexisting analysis metadata and logic in a standard data race detection
+      algorithm. By exploiting work already done by the analysis, FIB ensures atomicity of dynamic analysis actions
+      with zero additional time or space cost in the common case. Analysis of temporally thread-local or read-shared
+      accesses completes safely with no synchronization. Uncommon write-sharing transitions require synchronous
+      cross-thread coordination to ensure common cases may proceed synchronization-free.
+      <br>
+      <br>
+      We implemented FIB in the Jikes RVM Java virtual machine. Experimental evaluation shows that FIB eliminates
+      nearly all instrumentation atomicity costs on programs where data often experience windows of thread-local access.
+      Adaptive extensions to the ownership policy effectively eliminate high coordination costs of the core ownership
+      protocol on programs with high rates of serialized sharing. FIB outperforms a naive pessimistic synchronization
+      scheme by 50% on average. Compared to a tuned optimistic metadata synchronization scheme based on conventional
+      fine-grained atomic compare-and-swap operations, FIB is competitive overall, and up to 17% faster on some programs.
+      Overall, FIB effectively exploits latent analysis and program invariants to bring strong integrity guarantees to
+      an otherwise unsynchronized data race detection algorithm at minimal cost.
+    </blockquote>
+  </div>
+
+  <div id="hybrid-relaxed-tracking-topc">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Hybridizing and Relaxing Dependence Tracking for Efficient Parallel Runtime Support</h3>
+    <p>
+      <a href=http://www.cse.ohio-state.edu/~caoma/>Man Cao</a>,
+      <a href=http://zhangminjia.me/>Minjia Zhang</a>,
+      <a href=http://web.cse.ohio-state.edu/~sengupta/>Aritra Sengupta,</a>
+      <a href=http://users.ices.utexas.edu/~sbiswas/>Swarnendu Biswas</a>, and
+      <a href=http://www.cse.ohio-state.edu/~mikebond/>Michael D. Bond</a>
+    </p>
+    <p>
+      ACM Transactions on Parallel Computing
+      (<a href=http://topc.acm.org/>TOPC</a>),
+      August 2017
+    <p>
+    <p>
+      Read the <a href="./docs/hybrid-relaxed-tracking-topc-2017.pdf"><strong>paper</strong></a>
+      and view the source code for <a href=#hybrid-tracking><strong>hybrid tracking</strong></a> and for
+      <a href=#relaxed-tracking><strong>relaxed tracking</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      It is notoriously challenging to develop parallel software systems that are both scalable and correct.
+      Runtime support for parallelism&mdash;such as multithreaded record and replay, data race detectors,
+      transactional memory, and enforcement of stronger memory models&mdash;helps achieve these goals, but existing
+      commodity solutions slow programs substantially to track (i.e., detect or control) an execution’s cross-thread
+      dependencies accurately. Prior work tracks cross-thread dependencies either "pessimistically," slowing every
+      program access, or "optimistically," allowing for lightweight instrumentation of most accesses but dramatically
+      slowing accesses that are <i>conflicting</i> (i.e., involved in cross-thread dependencies).
+      <br>
+      <br>
+      This article presents two novel approaches that seek to improve the performance of dependence tracking.
+      <i>Hybrid tracking</i> (HT) hybridizes pessimistic and optimistic tracking by overcoming a fundamental mismatch
+      between these two kinds of tracking. HT uses an adaptive, profile-based policy to make runtime decisions about
+      switching between pessimistic and optimistic tracking. <i>Relaxed tracking</i> (RT) attempts to reduce optimistic
+      tracking’s overhead on conflicting accesses by tracking dependencies in a "relaxed" way&mdash;meaning that not all
+      dependencies are tracked accurately&mdash;while still preserving both program semantics and runtime support’s
+      correctness. To demonstrate the usefulness and potential of HT and RT, we build runtime support based on the two
+      approaches. Our evaluation shows that both approaches offer performance advantages over existing approaches, but
+      there exist challenges and opportunities for further improvement.
+      <br>
+      <br>
+      HT and RT are distinct solutions to the same problem. It is easier to build runtime support based on HT than on
+      RT, although RT does not incur the overhead of online profiling. This article presents the two approaches together
+      to inform and inspire future designs for efficient parallel runtime support.
+    </blockquote>
+  </div>
+
+  <div id="avalon">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Avoiding Consistency Exceptions Under Strong Memory Models</h3>
+    <p>
+      <a href=http://zhangminjia.me/>Minjia Zhang</a>,
+      <a href=http://users.ices.utexas.edu/~sbiswas/>Swarnendu Biswas</a>, and
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>
+    </p>
+    <p>
+      ACM SIGPLAN International Symposium on Memory Management
+      (<a href=http://conf.researchr.org/home/ismm-2017>ISMM 2017</a>),
+      Barcelona, Spain, June 2017
+    <p>
+    <p>
+      Read the <a href="./docs/avalon-ismm-2017.pdf"><strong>paper</strong></a>,
+      watch the <a href=https://docs.google.com/presentation/d/14bbRjLoKRvyjhOLJCDJySYVl_I9NFuCX7ubtLVQ_RGo/edit?usp=sharing>
+      <strong>Talk by Jake Roemer</strong></a>, and
+      and view the <a href=http://sourceforge.net/p/jikesrvm/research-archive/57/><strong>source code</strong>.</a>
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Shared-memory languages and systems generally provide weak or undefined semantics for executions with data races.
+      Prior work has proposed memory consistency models that ensure well-defined, easy-to-understand semantics based on
+      <em>region serializability</em> (RS), but the resulting system may throw a <em>consistency exception</em> in the
+      presence of a data race. Consistency exceptions can occur unexpectedly even in well-tested programs, hurting
+      availability and thus limiting the practicality of RS-based memory models.
+      <br>
+      <br>
+      To our knowledge, this paper is the first to consider the problem of availability for memory consistency models
+      that throw consistency exceptions. We first extend existing approaches that enforce <em>RSx</em>, a memory model
+      based on serializability of synchronization-free regions (SFRs), to avoid region conflicts and thus consistency
+      exceptions. These new approaches demonstrate both the potential for and limitations of avoiding consistency
+      exceptions under RSx. To improve availability further, we introduce (1) a new memory model called <em>RIx</em>
+      based on <em>isolation</em> of SFRs and (2) a new approach called <em>Avalon</em> that provides RIx. We demonstrate
+      wo variants of Avalon that offer different performance–availability tradeoffs for RIx.
+      <br>
+      <br>
+      An evaluation on real Java programs shows that this work’s novel approaches are able to reduce consistency
+      exceptions, thereby improving the applicability of strong memory consistency models. Furthermore, the approaches
+      provide compelling points in the performance–availability tradeoff space for memory consistency enforcement. RIx
+      and Avalon thus represent a promising direction for tackling the challenge of availability under strong consistency
+      models that throw consistency exceptions.
+    </blockquote>
+  </div>
+
+  <div id="legato">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Legato: End-to-End Bounded Region Serializability Using Commodity Hardware Transactional Memory</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~sengupta/">Aritra Sengupta</a>,
+      <a href="http://www.cse.ohio-state.edu/~caoma/">Man Cao</a>,
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>, and
+      <a href="http://engineering.purdue.edu/~milind/">Milind Kulkarni</a>
+    </p>
+    <p>
+      International Symposium on Code Generation and Optimization
+      (<a href=http://cgo.org/cgo2017/>CGO</a>),
+      Austin, TX, USA, February 2017
+    <p>
+    <p>
+      Read the <a href="./docs/legato-cgo-2017-xtr.pdf"><strong>Extended Version</strong></a>, which includes appendices
+      or the <a href="./docs/legato-cgo-2017.pdf"><strong>Conference Version</strong></a>, which excludes appendices.
+      Watch the talk by Aritra Sengupta in <a href="./docs/legato-cgo-2017-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/legato-cgo-2017-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href=https://sourceforge.net/p/jikesrvm/research-archive/56/><strong>source code</strong>.</a>
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Shared-memory languages and systems provide strong guarantees only for well-synchronized (data-race-free) programs.
+      Prior work introduces support for memory consistency based on region serializability of executing code regions,
+      but all approaches incur serious limitations such as adding high run-time overhead or relying on complex custom hardware.
+      <br>
+      <br>
+      This paper explores the potential for leveraging widely available, commodity hardware transactional memory
+      to provide an end-to-end memory consistency model called <i>dynamically bounded region serializability</i> (DBRS).
+      To amortize high per-transaction costs, yet mitigate the risk of unpredictable, costly aborts,
+      we introduce dynamic runtime support called <i>Legato</i> that executes multiple dynamically bounded regions (DBRs)
+      in a single transaction. Legato varies the number of DBRs per transaction on the fly,
+      based on the recent history of committed and aborted transactions.
+      Legato outperforms existing commodity enforcement of DBRS,
+      and its costs are less sensitive to a program's shared-memory communication patterns.
+      These results demonstrate the potential
+      for providing always-on strong memory consistency using commodity transactional hardware.
+    </blockquote>
+  </div>
+
+  <div id="racechaser-caper">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Lightweight Data Race Detection for Production Runs</h3>
+    <p>
+      <a href=http://users.ices.utexas.edu/~sbiswas/>Swarnendu Biswas</a>,
+      <a href="http://www.cse.ohio-state.edu/~caoma/">Man Cao</a>,
+      <a href=http://zhangminjia.me/>Minjia Zhang</a>,
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>, and
+      <a href=http://cs.wellesley.edu/~bpw/>Benjamin P. Wood</a>
+    </p>
+    <p>
+      International Conference on Compiler Construction
+      (<a href=http://conf.researchr.org/home/CC-2017>CC</a>),
+      Austin, TX, USA, February 2017
+    <p>
+    <p>
+      Read the <a href="./docs/racechaser-caper-cc-2017.pdf"><strong>paper</strong></a>,
+      watch the talk by Swarnendu Biswas in <a href="./docs/racechaser-caper-cc-2017-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/racechaser-caper-cc-2017-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href="https://sourceforge.net/p/jikesrvm/research-archive/55/"><strong>source code</strong>.</a>
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      To detect data races that harm production systems, program analysis must target production runs. However, sound
+      and precise data race detection adds too much run-time overhead for use in production systems. Even existing
+      approaches that provide soundness <i>or</i> precision incur significant limitations.
+      <br>
+      <br>
+      This work addresses the need for soundness (no missed races) and precision (no false races) by introducing novel,
+      efficient production-time analyses that address each need separately. (1) <i>Precise</i> data race detection is
+      useful for developers, who want to fix bugs but loathe false positives. We introduce a precise analysis called
+      <i>RaceChaser</i> that provides low, bounded run-time overhead. (2) <i>Sound</i> race detection benefits analyses
+      and tools whose correctness relies on knowledge of <i>all</i> potential data races. We present a sound, efficient
+      approach called <i>Caper</i> that combines static and dynamic analysis to catch all data races in observed runs.
+      RaceChaser and Caper are useful not only on their own; we introduce a framework that combines these analyses,
+      using Caper as a sound filter for precise data race detection by RaceChaser.
+      <br>
+      <br>
+      Our evaluation shows that RaceChaser and Caper are efficient and effective, and compare favorably with existing
+      state-of-the-art approaches. These results suggest that RaceChaser and Caper enable practical data race detection
+      that is precise and sound, respectively, ultimately leading to more reliable software systems.
+    </blockquote>
+  </div>
+
+  <div id="prescient-memory">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Prescient Memory: Exposing Weak Memory Model Behavior by Looking into the Future</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~caoma/">Man Cao</a>, Jake Roemer,
+      <a href="http://www.cse.ohio-state.edu/~sengupta/">Aritra Sengupta</a>, and
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>
+    </p>
+    <p>
+      ACM SIGPLAN International Symposium on Memory Management
+      (<a href=http://conf.researchr.org/home/ismm-2016>ISMM 2016</a>),
+      Santa Barbara, CA, USA, June 2016
+    <p>
+    <p>
+      Read the <a href="./docs/prescient-memory-ismm-2016.pdf"><strong>paper</strong></a>
+      watch the talk by Man Cao in <a href="./docs/prescient-memory-ismm-2016-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/prescient-memory-ismm-2016-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/54/"><strong>source code</strong>.</a>
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Shared-memory parallel programs are hard to get right.
+      A major challenge is
+      that language and hardware memory models
+      allow unexpected, erroneous behaviors for executions containing data races.
+      Researchers have introduced dynamic analyses that expose weak memory model behaviors,
+      but these approaches cannot expose behaviors due to loading a "future value"&mdash;a
+      value written by a program store that executes <i>after</i> the program load that uses the value.
+      <br>
+      <br>
+      This paper presents <i>prescient memory</i> (PM), a novel dynamic analysis that exposes behaviors
+      due to future values.
+      PM speculatively returns a future value at a program load, and tries to
+      validate the speculative value at a later store.
+      To enable PM to expose behaviors due to future values in real application executions, we introduce a novel approach
+      that increases the chances of using and successfully validating future values,
+      by profiling and predicting future values and guiding execution.
+      Experiments show that our approach is able to uncover a few previously unknown
+      behaviors due to future values in benchmarked versions of real applications.
+      Overall, PM overcomes a key limitation of existing approaches, broadening the
+      scope of program behaviors that dynamic analyses can expose.
+    </blockquote>
+  </div>
+
+  <div id="relaxed-tracking">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Relaxed Dependence Tracking for Parallel Runtime Support</h3>
+    <p>
+      <a href=http://zhangminjia.me/>Minjia Zhang</a>,
+      <a href=http://users.ices.utexas.edu/~sbiswas/>Swarnendu Biswas</a>, and
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>
+    </p>
+    <p>
+      International Conference on Compiler Construction
+      (<a href="http://cc2016.eew.technion.ac.il/">CC 2016</a>),
+      Barcelona, Spain, March 2016
+    <p>
+    <p>
+      Read the <a href="./docs/relaxed-tracking-cc-2016.pdf"><strong>paper</strong></a>,
+      watch the <a href="https://docs.google.com/presentation/d/1qCfIdbQ1n11LOmlujbwmvvXEyYtscfgRNSA_7jwQrrY/edit?usp=sharing"><strong>Talk</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/53/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      It is notoriously difficult to achieve
+      both correctness and scalability
+      for many shared-memory parallel programs.
+      To improve correctness and scalability, researchers have developed
+      various kinds of <i>parallel runtime support</i> such as multithreaded
+      record & replay and software transactional memory.
+      Existing forms of runtime support slow programs significantly in order to
+      track
+      (i.e., detect or control)
+      an execution's cross-thread dependences accurately.
+      <br>
+      <br>
+      This paper investigates the potential for runtime support to hide latency introduced by dependence tracking,
+      by tracking dependences
+      in a <i>relaxed</i> way&mdash;meaning that not all dependences are tracked accurately.
+      The key challenge in relaxing dependence tracking
+      is to preserve both
+      the program's semantics
+      and the runtime support's guarantees.
+      We present an approach called <i>relaxed tracking</i> (RT)
+      and demonstrate its potential by building two types of RT-based runtime support.
+      Our evaluation shows that RT hides much of the latency incurred by dependence tracking,
+      although RT-based runtime support incurs costs and complexity in order to handle relaxed dependence information.
+      By demonstrating how to relax dependence tracking to hide latency while preserving correctness,
+      this work shows the potential for addressing a key cost of dependence tracking,
+      thus advancing knowledge in the design of parallel runtime support.
+    </blockquote>
+  </div>
+
+  <div id="hybrid-tracking">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Drinking from Both Glasses: Combining Pessimistic and Optimistic Tracking of Cross-Thread Dependences</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~caoma/">Man Cao</a>,
+      <a href=http://zhangminjia.me/>Minjia Zhang</a>,
+      <a href="http://www.cse.ohio-state.edu/~sengupta/">Aritra Sengupta</a>, and
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>
+    </p>
+    <p>
+      ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming
+      (<a href="http://ppopp15.soe.ucsc.edu/">PPoPP 2016</a>),
+      Barcelona, Spain, March 2016
+    <p>
+    <p>
+      Read the <a href="./docs/hybrid-tracking-ppopp-2016.pdf"><strong>paper</strong></a>,
+      watch the talk by Man Cao in <a href="./docs/hybrid-tracking-ppopp-2016-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/hybrid-tracking-ppopp-2016-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/52/"><strong>source code</strong>.</a>
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      It is notoriously challenging to develop parallel software systems that are both scalable and correct. Runtime
+      support for parallelism&mdash;such as multithreaded record & replay, data race detectors, transactional memory,
+      and enforcement of stronger memory models&mdash;helps achieve these goals, but existing commodity solutions slow
+      programs substantially in order to track (i.e., detect or control) an execution's cross-thread dependences
+      accurately. Prior work tracks cross-thread dependences either "pessimistically," slowing every program access,
+      or "optimistically," allowing for lightweight instrumentation of most accesses but dramatically slowing accesses
+      involved in cross-thread dependences.
+      <br>
+      <br>
+      This paper seeks to <i>hybridize</i> pessimistic and optimistic tracking, which is challenging because there
+      exists a fundamental mismatch between pessimistic and optimistic tracking. We address this challenge based on
+      insights about how dependence tracking and program synchronization interact, and introduce a novel approach called
+      <i>hybrid tracking</i>. Hybrid tracking is suitable for building efficient runtime support, which we demonstrate
+      by building hybrid-tracking-based versions of a dependence recorder and a region serializability enforcer. An
+      adaptive, profile-based policy makes run-time decisions about switching between pessimistic and optimistic tracking.
+      Our evaluation shows that hybrid tracking enables runtime support to overcome the performance limitations of both
+      pessimistic and optimistic tracking alone.
+    </blockquote>
+  </div>
+
+  <div id="valor">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Valor: Efficient, Software-Only Region Conflict Exceptions</h3>
+    <p>
+      <a href=http://users.ices.utexas.edu/~sbiswas/>Swarnendu Biswas</a>,
+      <a href=http://zhangminjia.me/>Minjia Zhang</a>,
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>, and
+      <a href="http://brandonlucia.com/">Brandon Lucia</a>
+    </p>
+    <p>
+      ACM SIGPLAN International Conference on
+      Object-Oriented Programming, Systems, Languages, and Applications
+      (<a href="http://2015.splashcon.org/track/oopsla2015">OOPSLA 2015</a>),
+      Pittsburgh, PA, USA, October 2015
+    <p>
+    <p>
+      <em>OOPSLA 2015 Distinguished Paper Award</em>
+    <p>
+      <em>OOPSLA 2015 Distinguished Artifact Award</em>
+    <p>
+    <p>
+      Read the <a href="./docs/valor-oopsla-2015.pdf"><strong>paper</strong></a>,
+      watch the talk by Swarnendu Biswas in <a href="./docs/valor-oopsla-2015-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/valor-oopsla-2015-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/51/"><strong>source code</strong>.</a>
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Data races complicate programming language semantics, and a data race is often a bug. Existing techniques detect
+      data races and define their semantics by detecting conflicts between <i>synchronization-free regions</i> (SFRs).
+      However, such techniques either modify hardware or slow programs dramatically, preventing always-on use today.
+      <br>
+      <br>
+      This paper describes <i>Valor</i>, a sound, precise, software-only region conflict detection analysis that achieves
+      high performance by eliminating the costly analysis on each read operation that prior approaches require. Valor
+      instead logs a region's reads and <i>lazily</i> detects conflicts for logged reads when the region ends. As a
+      comparison, we have also developed <i>FastRCD</i>, a conflict detector that leverages the epoch optimization
+      strategy of the FastTrack data race detector.
+      <br>
+      <br>
+      We evaluate Valor, FastRCD, and FastTrack, showing that Valor dramatically outperforms FastRCD and FastTrack.
+      Valor is the first region conflict detector to provide strong semantic guarantees for racy program executions
+      with under 2X slowdown. Overall, Valor advances the state of the art in always-on support for strong behavioral
+      guarantees for data races.
+    </blockquote>
+  </div>
+
+  <div id="replay">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Efficient Deterministic Replay of Multithreaded Programs Based on Efficient Tracking of Cross-Thread Dependences</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>,
+      <a href="http://engineering.purdue.edu/~milind/">Milind Kulkarni</a>,
+      <a href="http://www.cse.ohio-state.edu/~caoma/">Man Cao</a>,
+      <a href="http://www.cse.ohio-state.edu/~fathi/">Meisam Fathi Salmi</a>, and
+      <a href="http://huangjip.github.io/">Jipeng Huang</a>
+    </p>
+    <p>
+      International Conference on Principles and Practices of Programming on the Java Platform<!--: virtual machines, languages, and tools-->
+      (<a href="http://pppj2015.cs.fit.edu/">PPPJ 2015</a>),
+      Melbourne, FL, USA, September 2015
+    <p>
+    <p>
+      Read the <a href="./docs/replay-pppj-2015.pdf"><strong>paper</strong></a>,
+      watch the talk by Man Cao in <a href="./docs/replay-pppj-2015-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/replay-pppj-2015-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/49/"><strong>source code</strong>.</a>
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Shared-memory
+      parallel programs are inherently nondeterministic, making it difficult to
+      diagnose rare bugs and to achieve deterministic execution.
+      Existing multithreaded record & replay approaches have serious limitations such
+      as relying on custom hardware,
+      handling only data-race-free executions,
+      or slowing programs by an order of magnitude.
+      Furthermore, language virtual machines (VMs) such as Java VMs (JVMs) introduce
+      various sources of nondeterminism that thwart demonstrating deterministic replay.
+      <br>
+      <br>
+      This paper introduces an approach for multithreaded record & replay based on
+      tracking and reproducing shared-memory dependences accurately and efficiently.
+      Building on prior work that introduces an efficient dependence <i>recorder</i>, we
+      develop a new analysis for <i>replaying</i> dependences.
+      To demonstrate multithreaded record & replay,
+      we modify a JVM to
+      support
+      a new methodology that enables demonstrating and evaluating replay in the inherently nondeterministic JVM.
+      Overall, the performance of both recorded and replayed executions compares favorably with
+      performance reported by prior work for competing record & replay approaches.
+    </blockquote>
+  </div>
+
+  <div id="hybrid-enforser">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Toward Efficient Strong Memory Model Support for the Java Platform via Hybrid Synchronization</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~sengupta/">Aritra Sengupta</a>,
+      <a href="http://www.cse.ohio-state.edu/~caoma/">Man Cao</a>,
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>, and
+      <a href="http://engineering.purdue.edu/~milind/">Milind Kulkarni</a>
+    </p>
+    <p>
+      International Conference on Principles and Practices of Programming on the Java Platform<!--: virtual machines, languages, and tools-->
+      (<a href="http://pppj2015.cs.fit.edu/">PPPJ 2015</a>),
+      Melbourne, FL, USA, September 2015
+    <p>
+    <p>
+      Read the <a href="./docs/hybrid-EnfoRSer-pppj-2015.pdf"><strong>paper</strong></a>,
+      watch the talk by Aritra Sengupta in <a href="./docs/hybrid-EnfoRSer-pppj-2015-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/hybrid-EnfoRSer-pppj-2015-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/50/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      The Java memory model provides strong behavior guarantees for data-race-free
+      executions. However, it provides very weak guarantees for racy executions,
+      leading to unexpected, unintuitive behaviors. This paper focuses on how to
+      provide a memory model, called <i>statically bounded region serializability</i>
+      (SBRS), that is substantially stronger than the Java memory model. Our prior
+      work introduces SBRS, as well as compiler and runtime support for enforcing SBRS
+      called <i>EnfoRSer</i>. EnfoRSer modifies the dynamic compiler to insert
+      instrumentation to acquire a lock on each object accessed by the program.
+      For most programs, EnfoRSer's primary run-time cost is executing this instrumentation
+      at essentially every memory access.
+      <br>
+      <br>
+      This paper focuses on reducing the run-time overhead of enforcing SBRS by
+      avoiding instrumentation at every memory access that acquires a per-object lock.
+      We experiment with an alternative approach for providing SBRS that instead
+      acquires a single <i>static</i> lock before each executed region; all regions
+      that potentially race with each other&mdash;according to a sound whole-program
+      static analysis&mdash;must acquire the same lock. This approach slows most programs
+      dramatically by needlessly serializing regions that do not actually conflict
+      with each other. We thus introduce a <i>hybrid</i> approach that judiciously
+      combines the two locking strategies, using a cost model and run-time profiling.
+      <br>
+      <br>
+      Our implementation and evaluation in a Java virtual machine use offline profiling and recompilation, thus
+      demonstrating the potential of the approach without incurring online profiling costs.
+      The results show that although the overall performance benefit is modest, our hybrid approach
+      never significantly worsens performance, and for two programs, it significantly outperforms
+      both approaches that each use only one kind of locking.
+      These results demonstrate the potential of a technique based on combining synchronization
+      mechanisms to provide a strong end-to-end memory model for Java and other JVM languages.
+    </blockquote>
+  </div>
+
+  <div id="enforser">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Hybrid Static&ndash;Dynamic Analysis for Statically Bounded Region Serializability</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~sengupta/">Aritra Sengupta</a>,
+      <a href=http://users.ices.utexas.edu/~sbiswas/>Swarnendu Biswas</a>,
+      <a href=http://zhangminjia.me/>Minjia Zhang</a>,
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>, and
+      <a href="http://engineering.purdue.edu/~milind/">Milind Kulkarni</a>
+    </p>
+    <p>
+      20th International Conference on Architectural Support for Programming Languages and Operating Systems
+      (<a href=http://asplos15.bilkent.edu.tr/>ASPLOS 2015</a>),
+      Istanbul, Turkey, March 2015
+    <p>
+    <p>
+      Read the <a href="./docs/EnfoRSer-asplos-2015-xtr.pdf"><strong>Extended Technical Report</strong></a>, which includes all appendices,
+      or the <a href="./docs/EnfoRSer-asplos-2015.pdf"><strong>Conference Version</strong></a>, which excludes some appendices.
+      Watch the talk by Aritra Sengupta in <a href="./docs/EnfoRSer-asplos-2015-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/EnfoRSer-asplos-2015-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/48/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Data races are common. They are difficult to detect, avoid, or eliminate, and programmers sometimes introduce them intentionally.
+      However, shared-memory programs with data races have unexpected, erroneous behaviors.
+      Intentional and unintentional data races lead to atomicity and sequential consistency (SC) violations,
+      and they make it more difficult to understand, test, and verify software.
+      Existing approaches for providing stronger guarantees for racy executions
+      add high run-time overhead and/or rely on custom hardware.
+      <br>
+      <br>
+      This paper shows how to provide stronger semantics for racy programs while
+      providing relatively good performance on commodity systems. A novel hybrid
+      static&ndash;dynamic analysis called <i>EnfoRSer</i> provides end-to-end support for a memory model called
+      <i>statically bounded region serializability</i> (SBRS) that is not only stronger than
+      weak memory models but is strictly stronger than SC.
+      EnfoRSer uses static compiler analysis to transform regions,
+      and dynamic analysis to detect and resolve conflicts at run time.
+      By demonstrating commodity support for a reasonably strong memory model with reasonable overheads,
+      we show its potential as an always-on execution model.
+    </blockquote>
+  </div>
+
+  <div id="larktm">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Low-Overhead Software Transactional Memory with Progress Guarantees and Strong Semantics</h3>
+    <p>
+      <a href=http://zhangminjia.me/>Minjia Zhang</a>,
+      <a href="http://huangjip.github.io/">Jipeng Huang</a>,
+      <a href="http://www.cse.ohio-state.edu/~caoma/">Man Cao</a>, and
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>
+    </p>
+    <p>
+      ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming
+      (<a href="http://ppopp15.soe.ucsc.edu/">PPoPP 2015</a>),
+      San Francisco, CA, USA, February 2015
+    <p>
+    <p>
+      Read the <a href="./docs/larktm-ppopp-2015.pdf"><strong>paper</strong></a>,
+      watch the talk by Minjia Zhang in <a href="./docs/larktm-ppopp-2015-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/larktm-ppopp-2015-talk.pdf"><strong>PDF</strong></a>.
+      LarkTM (including NOrec and IntelSTM implementations) and our modified port of the STAMP benchmarks are available as
+      separate downloads from the
+      <a href="http://www.jikesrvm.org/Resources/ResearchArchive/"><strong>Jikes RVM Research Archive</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Software transactional memory offers an appealing alternative to locks by
+      improving programmability, reliability, and scalability.
+      However, existing STMs are impractical because they add high instrumentation costs
+      and often provide weak progress guarantees and/or semantics.
+      <br>
+      <br>
+      This paper introduces a novel STM called LarkTM that provides three significant features.
+      (1) Its instrumentation adds low overhead except when accesses actually conflict,
+      enabling low single-thread overhead and scaling well on low-contention workloads.
+      (2) It uses eager concurrency control mechanisms, yet naturally supports
+      flexible conflict resolution, enabling strong progress guarantees.
+      (3) It naturally provides strong atomicity semantics at low cost.
+      <br>
+      <br>
+      LarkTM's design works well for low-contention workloads, but adds significant
+      overhead under higher contention, so we design an <i>adaptive</i> version of LarkTM
+      that uses alternative
+      concurrency control for high-contention objects.
+      <br>
+      <br>
+      An implementation and evaluation in a Java virtual machine show that the basic
+      and adaptive versions of LarkTM not only provide low single-thread overhead,
+      but their multithreaded performance compares favorably with existing high-performance STMs.
+    </blockquote>
+  </div>
+
+  <div id="doublechecker">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">DoubleChecker: Efficient Sound and Precise Atomicity Checking</h3>
+    <p>
+      <a href=http://users.ices.utexas.edu/~sbiswas/>Swarnendu Biswas</a>,
+      <a href="http://huangjip.github.io/">Jipeng Huang</a>,
+      <a href="http://www.cse.ohio-state.edu/~sengupta/">Aritra Sengupta</a>, and
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>
+    </p>
+    <p>
+      ACM SIGPLAN Conference on Programming Language Design and Implementation
+      (<a href="http://conferences.inf.ed.ac.uk/pldi2014/">PLDI 2014</a>),
+      Edinburgh, June 2014
+    <p>
+    <p>
+      Read the <a href="./docs/doublechecker-pldi-2014.pdf"><strong>paper</strong></a>,
+      watch the talk by Swarnendu Biswas in <a href="./docs/doublechecker-pldi-2014-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/doublechecker-pldi-2014-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/45/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Atomicity is a key
+      correctness property that allows programmers to
+      reason about code regions in isolation.
+      However, programs often fail to enforce atomicity correctly, leading to
+      atomicity
+      violations that are difficult to detect.
+      Dynamic program analysis can detect atomicity violations
+      based on an atomicity specification,
+      but existing approaches
+      slow programs substantially.
+      <br>
+      <br>
+      This paper presents DoubleChecker, a novel sound and precise atomicity checker
+      whose key insight lies in its use of two new cooperating dynamic analyses.
+      Its <i>imprecise</i> analysis tracks cross-thread dependences soundly but
+      imprecisely with significantly better performance than a fully precise analysis.
+      Its <i>precise</i> analysis is more expensive but only needs to process a subset of the execution identified
+      as potentially involved in atomicity violations by the imprecise analysis.
+      If DoubleChecker operates in <i>single-run</i> mode, the two analyses execute in the same program run,
+      which guarantees soundness and precision but requires logging program accesses to pass from the imprecise to the precise analysis.
+      In <i>multi-run</i> mode, the first program run executes only the imprecise analysis,
+      and a second run executes both analyses. Multi-run mode trades accuracy for performance;
+      each run of multi-run mode outperforms single-run mode, but can potentially miss violations.
+      <br>
+      <br>
+      We have implemented DoubleChecker and an existing state-of-the-art atomicity checker
+      called Velodrome in a high-performance Java virtual machine.  DoubleChecker's single-run mode significantly outperforms
+      Velodrome, while still providing full soundness and precision.
+      DoubleChecker's multi-run mode improves performance further, without significantly impacting soundness in practice.
+      These results suggest that DoubleChecker's approach is a promising direction for
+      improving the performance of dynamic atomicity checking over prior work.
+    </blockquote>
+  </div>
+
+  <div id="laminar-toplas">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Practical Fine-Grained Information Flow Control Using Laminar</h3>
+    <p>
+      <a href="http://www.cs.stonybrook.edu/~porter/">Donald E. Porter</a>,
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>,
+      <a href="http://www.hpl.hp.com/people/indrajitr/">Indrajit Roy</a>,
+      <a href="http://research.microsoft.com/en-us/people/mckinley/">Kathryn S. McKinley</a>, and
+      <a href="http://www.cs.utexas.edu/~witchel/">Emmett Witchel</a>
+    </p>
+    <p>
+      ACM Transactions on Programming Languages and Systems
+      (<a href=http://dl.acm.org/citation.cfm?id=J783>TOPLAS</a>),
+      November 2014
+    <p>
+    <p>
+      Read the <a href="./docs/laminar-toplas-2014.pdf"><strong>paper</strong></a>
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/26/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Decentralized Information Flow Control (DIFC) is a promising model for writing programs with powerful, end-to-end
+      security guarantees. Current DIFC systems that run on commodity hardware can be broadly categorized into two types:
+      language-level and operating system-level DIFC. Language solutions provide no guarantees against security violations
+      on system resources such as files and sockets. Operating system solutions mediate accesses to system resources but
+      are either inefficient or imprecise at monitoring the flow of information through fine-grained program data structures.
+      This article describes Laminar, the first system to implement DIFC using a unified set of abstractions for OS resources
+      and heap-allocated objects. Programmers express security policies by labeling data with secrecy and integrity
+      labels and access the labeled data in <i>security methods</i>. Laminar enforces the security policies specified
+      by the labels at runtime. Laminar is implemented using a modified Java virtual machine and a new Linux security
+      module. This article shows that security methods ease incremental deployment and limit dynamic security checks by
+      retrofitting DIFC policies on four application case studies. Replacing the applications' ad hoc security policies
+      changes less than 10% of the code and incurs performance overheads from 5% to 56%. Compared to prior DIFC systems,
+      Laminar supports a more general class of multithreaded DIFC programs efficiently and integrates language and OS
+      abstractions.
+    </blockquote>
+  </div>
+
+  <div id="adaptive-sync">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Drinking from Both Glasses:
+      Adaptively Combining Pessimistic and Optimistic Synchronization for
+      Efficient Parallel Runtime Support</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~caoma/">Man Cao</a>,
+      <a href=http://zhangminjia.me/>Minjia Zhang</a>, and
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>
+    </p>
+    <p>
+      Workshop on Determinism and Correctness in Parallel Programming
+      (<a href="http://wodet.cs.washington.edu/">WoDet 2014</a>),
+      Salt Lake City, March 2014
+    <p>
+    <p>
+      This paper is <i>subsumed by</i> our PPoPP 2016 <a href="#hybrid-tracking">paper</a>.
+      (If you're interested in the WoDet 2014 paper, it's <a href="./docs/adaptive-sync-wodet-2014-talk.pptx">here</a>).
+      You can watch the talk by Man Cao in <a href="./docs/larktm-ppopp-2015-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/adaptive-sync-wodet-2014-talk.pdf"><strong>PDF</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      It is notoriously challenging to achieve parallel software systems that are both
+      scalable and reliable. Parallel runtime support&mdash;such as multithreaded record
+      & replay, data race and atomicity violation detectors, transactional memory,
+      and support for stronger memory models&mdash;helps achieve these goals, but existing
+      commodity solutions slow programs substantially in order to capture (track or
+      control) the program's cross-thread dependences accurately. Capturing cross-thread
+      dependences using "pessimistic" synchronization slows every program access, while
+      "optimistic" synchronization allows for lightweight instrumentation of most
+      accesses but dramatically slows accesses involved in cross-thread dependences.
+      <br>
+      <br>
+        This paper introduces (1) a hybrid of pessimistic and optimistic synchronization
+        and (2) an adaptive policy that enables fine-grained switching
+        between pessimistic and optimistic synchronization based on program
+        behavior. The adaptive policy uses online profiling and a cost&ndash;benefit model to
+        inform its decisions. We design a dependence recorder on top of our approach to
+        demonstrate its feasibility as a framework for efficient parallel runtime
+        support.
+      <br>
+      <br>
+        We have implemented our approach in a high-performance Java virtual machine and
+        show that it outperforms parallel runtime support based solely on pessimistic or
+        optimistic synchronization. These results show the potential for adaptive,
+        hybrid synchronization for efficient parallel runtime support in commodity
+        systems.
+    </blockquote>
+  </div>
+
+  <div id="octet">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Octet: Capturing and Controlling Cross-Thread Dependences Efficiently</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>,
+      <a href="http://engineering.purdue.edu/~milind/">Milind Kulkarni</a>,
+      <a href="http://www.cse.ohio-state.edu/~caoma/">Man Cao</a>,
+      <a href=http://zhangminjia.me/>Minjia Zhang</a>,
+      <a href="http://www.cse.ohio-state.edu/~fathi/">Meisam Fathi Salmi</a>,
+      <a href=http://users.ices.utexas.edu/~sbiswas/>Swarnendu Biswas</a>,
+      <a href="http://www.cse.ohio-state.edu/~sengupta/">Aritra Sengupta</a>, and
+      <a href="http://huangjip.github.io/">Jipeng Huang</a>
+    </p>
+    <p>
+      ACM SIGPLAN International Conference on Object-Oriented Programming, Systems, Languages, and Applications
+      (<a href="http://splashcon.org/2013/program/oopsla-research-papers">OOPSLA 2013</a>), Indianapolis, IN, USA, October 2013
+    <p>
+    <p>
+      Read the <a href="./docs/octet-oopsla-2013.pdf"><strong>paper</strong></a>,
+      watch the talk in <a href="./docs/octet-oopsla-2013-talk.pptx"><strong>PowerPoint</strong></a> or
+      <a href="./docs/octet-oopsla-2013-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/45/"><strong>source code</strong></a>.
+      <a href="http://www.cs.hmc.edu/~stone/"><strong>Chris Stone</strong></a> from Harvey Mudd has implemented Octet for C++11 and
+      made it available <a href=https://github.com/christopherastone/octet><strong>here</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Parallel programming is essential for reaping the benefits of parallel hardware,
+      but it is notoriously difficult to develop and debug reliable, scalable software
+      systems.  One key challenge is that modern languages and systems provide poor
+      support for ensuring <i>concurrency correctness properties</i>&mdash;atomicity,
+      sequential consistency, and multithreaded determinism&mdash;because all
+      existing approaches are impractical.  Dynamic, software-based approaches slow
+      programs by up to an order of magnitude because capturing and controlling cross-thread dependences
+      (i.e., conflicting accesses to shared memory) requires synchronization at virtually every
+      access to potentially shared memory.
+      <br>
+      <br>
+      This paper introduces a new software-based concurrency control mechanism called
+      Octet that soundly captures cross-thread dependences and can be used to build
+      dynamic analyses for concurrency correctness.  Octet achieves low overheads
+      by tracking the <i>locality state</i> of each potentially shared object.
+      Non-conflicting accesses conform to the locality state and require no
+      synchronization; only conflicting accesses require a state change and
+      heavyweight synchronization.  This optimistic tradeoff leads to significant
+      efficiency gains in capturing cross-thread dependences: a prototype
+      implementation of Octet in a high-performance Java virtual machine slows
+      real-world concurrent programs by only 26% on average.
+      A dependence recorder, suitable for record & replay, built on top of Octet adds an additional 5% overhead on average.
+      These results suggest that Octet can provide a foundation for developing
+      low-overhead analyses that check and enforce concurrency correctness.
+    </blockquote>
+  </div>
+
+  <div id="ccu">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Efficient Context Sensitivity for Dynamic Analyses via
+      Calling Context Uptrees and Customized Memory Management</h3>
+    <p>
+      <a href="http://huangjip.github.io/">Jipeng Huang</a> and
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>
+    </p>
+    <p>
+      ACM SIGPLAN International Conference on Object-Oriented Programming, Systems, Languages, and Applications
+      (<a href="http://splashcon.org/2013/program/oopsla-research-papers">OOPSLA 2013</a>), Indianapolis, IN, USA, October 2013
+    <p>
+    <p>
+      Read the <a href="./docs/ccu-oopsla-2013.pdf"><strong>paper</strong></a>,
+      watch the <a href="./docs/ccu-oopsla-2013-talk.pptx"><strong>Talk by Jipeng Huang</strong></a>,
+      and view the <a href="https://sourceforge.net/p/jikesrvm/research-archive/44/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      State-of-the-art dynamic bug detectors such as data race and memory leak
+      detectors report program locations that are likely causes of bugs.
+      However, programmers need more than <i>static</i> program locations to
+      understand the behavior of increasingly complex and concurrent software.  <i>Dynamic
+      calling context</i> provides additional information, but it is expensive to record
+      calling context frequently, e.g., at every read and write.
+      Context-sensitive dynamic analyses can build and maintain a calling
+      context tree (CCT) to track calling context&mdash;but in order to reuse existing nodes,
+      CCT-based approaches require an expensive lookup.
+      <br>
+      <br>
+      This paper introduces a new approach for context sensitivity that avoids this
+      expensive lookup.  The approach uses a new data structure called the
+      <i>calling context uptree</i> (CCU) that adds low overhead by avoiding the lookup and instead
+      allocating a new node for each context. A key
+      contribution is that the approach can mitigate the costs of allocating many nodes by
+      extending tracing garbage collection (GC): GC collects unused CCU nodes naturally
+      and efficiently, and we extend GC to merge duplicate nodes lazily.
+      <br>
+      <br>
+      We implement our CCU-based approach in a high-performance Java virtual
+      machine and integrate it with a staleness-based memory leak detector and
+      happens-before data race detector, so they can
+      report context-sensitive program locations that cause bugs. We show that
+      the CCU-based approach, in concert with an extended GC, provides a compelling
+      alternative to CCT-based approaches for adding context sensitivity
+      to dynamic analyses.
+    </blockquote>
+  </div>
+
+  <div id="leak-chaser">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">LeakChaser: Helping Programmers Narrow Down Causes of Memory Leaks</h3>
+    <p>
+      <a href="http://www.ics.uci.edu/~guoqingx/">Guoqing "Harry" Xu</a>,
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>,
+      <a href="http://www.cse.ohio-state.edu/~qin/">Feng Qin</a>, and
+      <a href="http://www.cse.ohio-state.edu/~rountev/">Atanas Rountev</a>
+    </p>
+    <p>
+      ACM SIGPLAN Conference on Programming Language Design and Implementation
+      (<a href="http://http://pldi11.cs.utah.edu/">PLDI 2011</a>),
+      San Jose, CA, USA, June 2011
+    <p>
+    <p>
+      Read the <a href="./docs/leakchaser-pldi-2011.pdf"><strong>paper</strong></a>
+      and view the <a href="https://sourceforge.net/p/jikesrvm/research-archive/37/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      In large programs written in managed languages such as Java and C#, holding unnecessary
+      references often results in memory leaks and bloat, degrading
+      significantly their run-time performance and scalability. Despite the
+      existence of many leak detectors for such languages, these
+      detectors often target low-level objects; as a result, their reports
+      contain many false warnings and lack sufficient semantic information
+      to help diagnose problems. This paper introduces a specification-based
+      technique called LeakChaser that can not only capture precisely the
+      unnecessary references leading to leaks, but also explain, with
+      high-level semantics, why these references become unnecessary.
+      <br>
+      <br>
+      At the heart of LeakChaser is a three-tier approach that uses
+      varying levels of abstraction to assist programmers with different
+      skill levels and code familiarity to find leaks. At the highest tier
+      of the approach, the programmer only needs to specify the boundaries
+      of coarse-grained activities, referred to as transactions. The tool
+      automatically infers liveness properties of these transactions, by
+      monitoring the execution, in order to find unnecessary references.
+      Diagnosis at this tier can be performed by any programmer after
+      inspecting the APIs and basic modules of a program, without
+      understanding of the detailed implementation of these APIs. At the
+      middle tier, the programmer can introduce application-specific
+      semantic information by specifying properties for the transactions. At
+      the lowest tier of the approach is a liveness checker that does not
+      rely on higher-level semantic information, but rather allows a
+      programmer to assert lifetime relationships for pairs of objects. This
+      task could only be performed by skillful programmers who have a clear
+      understanding of data structures and algorithms in the program.
+      <br>
+      <br>
+      We have implemented LeakChaser in Jikes RVM and used it to help us
+      diagnose several real-world leaks. The implementation incurs a
+      reasonable overhead for debugging and tuning. Our case studies
+      indicate that the implementation is powerful in guiding programmers
+      with varying code familiarity to find the root causes of several
+      memory leaks &ndash; even someone who had not studied a leaking program can
+      quickly find the cause after using LeakChaser's iterative process
+      that infers and checks properties with different levels of semantic
+      information.
+    </blockquote>
+  </div>
+
+  <div id="security-policy-oracle">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">A Security Policy Oracle: Detecting Security Holes Using Multiple API Implementations</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>,
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>, and
+      <a href="http://www.cs.utexas.edu/~shmat/">Vitaly Shmatikov</a>
+    </p>
+    <p>
+      ACM SIGPLAN Conference on Programming Language Design and Implementation
+      (<a href="http://http://pldi11.cs.utah.edu/">PLDI 2011</a>),
+      San Jose, CA, USA, June 2011
+    <p>
+    <p>
+      Read the <a href="./docs/security-policy-oracle-pldi-2011.pdf"><strong>paper</strong></a>.
+      The source code is not yet available.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Even experienced developers struggle to implement security policies
+      correctly.  For example, despite 15 years of development, standard Java
+      libraries still suffer from missing and incorrectly applied permission
+      checks, which enable untrusted applications to execute native calls or
+      modify private class variables without authorization.  Previous techniques
+      for static verification of authorization enforcement rely on manually
+      specified policies or attempt to infer the policy by code-mining.  Neither
+      approach guarantees that the policy used for verification is correct.
+      <br>
+      <br>
+      In this paper, we exploit the fact that many modern APIs have
+      <i>multiple, independent</i> implementations.  Our flow- and
+      context-sensitive analysis takes as input an API, multiple implementations
+      thereof, and the definitions of security checks and security-sensitive
+      events.  For each API entry point, the analysis computes the security
+      policies enforced by the checks before security-sensitive events such as
+      native method calls and API
+      returns, compares these policies across implementations, and reports the
+      differences.  Unlike code-mining, this technique finds missing checks even
+      if they are part of a rare pattern.  Security-policy differencing has no
+      intrinsic false positives: implementations of the same API <i>must</i>
+      enforce the same policy, or at least one of them is wrong!
+      <br>
+      <br>
+      Our analysis finds 20 new, confirmed security vulnerabilities and 11
+      interoperability bugs in the Sun, Harmony, and Classpath implementations
+      of the Java Class Library, many of which were missed by prior analyses.
+      These problems manifest in 499 entry points in these mature, well-studied
+      libraries.  Multiple API implementations are proliferating due to
+      cloud-based software services and standardization of library interfaces.
+      Comparing software implementations for consistency is a new approach to
+      discovering "deep" bugs in them.
+    </blockquote>
+  </div>
+
+  <div id="pacer">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Pacer: Proportional Detection of Data Races</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>,
+      <a href="http://www.cs.utexas.edu/~coonske/">Katherine E. Coons</a>, and
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>
+    </p>
+    <p>
+      ACM SIGPLAN Conference on Programming Language Design and Implementation
+      (<a href="http://www.cs.stanford.edu/pldi10/">PLDI 2010</a>),
+      Toronto, June 2010
+    <p>
+    <p>
+      Read the <a href="./docs/pacer-pldi-2010.pdf"><strong>paper</strong></a>, or the <a href="./docs/pacer-pldi-2010-xtr.pdf">
+      <strong>extended tech report</strong></a> with additional proof details.
+      Watch the <a href="./docs/pacer-pldi-2010-talk.pptx"><strong>talk</strong></a>,
+      and view the <a href="https://sourceforge.net/p/jikesrvm/research-archive/28/"><strong>source code</strong></a>.
+      Li, Srisa-an, and Dwyer built on our implementation for their OOPSLA 2011
+      <a href="http://dl.acm.org/citation.cfm?id=2048072"><strong>paper</strong></a>.
+      Xie and Xue used our implementation for their CGO 2011
+      <a href="http://dl.acm.org/citation.cfm?id=2190068"><strong>paper</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Data races indicate serious concurrency bugs such as order, atomicity,
+      and sequential consistency violations. Races are difficult to
+      find and fix, often manifesting only after deployment. The frequency
+      and unpredictability of these bugs will only increase as
+      software adds parallelism to exploit multicore hardware. Unfortunately,
+      sound and precise race detectors slow programs by factors
+      of eight or more and do not scale to large numbers of threads.
+      <br>
+      <br>
+      This paper presents a precise, low-overhead <i>sampling-based</i>
+      data race detector called Pacer. Pacer makes a <i>proportionality</i>
+      guarantee: it detects <i>any</i> race at a rate equal to the sampling rate,
+      by finding races whose first access occurs during a global sampling
+      period. During sampling, Pacer tracks all accesses using
+      the dynamically sound and precise FastTrack algorithm. In non-sampling
+      periods, Pacer discards sampled access information that
+      cannot be part of a reported race, <i>and</i> Pacer simplifies tracking
+      of the happens-before relationship, yielding near-constant, instead
+      of linear, overheads. Experimental results confirm our theoretical
+      guarantees. Pacer reports races in proportion to the sampling rate.
+      Its time and space overheads scale with the sampling rate, and
+      sampling rates of 1-3% yield overheads low enough to consider
+      in production software. The resulting system provides a "get what
+      you pay for" approach that is suitable for identifying real, hard-to-reproduce
+      races in deployed systems.
+    </blockquote>
+  </div>
+
+  <div id="breadcrumbs">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Breadcrumbs: Efficient Context Sensitivity for Dynamic Bug Detection Analyses</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>,
+      Graham Z. Baker, and
+      <a href="http://www.cs.tufts.edu/~sguyer/">Samuel Z. Guyer</a>
+    </p>
+    <p>
+      ACM SIGPLAN Conference on Programming Language Design and Implementation
+      (<a href="http://www.cs.stanford.edu/pldi10/">PLDI 2010</a>),
+      Toronto, June 2010
+    <p>
+    <p>
+      Read the <a href="./docs/breadcrumbs-pldi-2010.pdf"><strong>paper</strong></a>,
+      watch the <a href="./docs/breadcrumbs-pldi-2010-talk.pptx"><strong>Talk by Sam Guyer</strong></a>,
+      and view the <a href="https://sourceforge.net/p/jikesrvm/research-archive/29/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Calling context &ndash; the set of active methods on the stack &ndash; is critical
+      for understanding the dynamic behavior of large programs. Dynamic
+      program analysis tools, however, are almost exclusively context
+      insensitive because of the prohibitive cost of representing calling
+      contexts at run time. Deployable dynamic analyses, in particular,
+      have been limited to reporting only static program locations.
+      <br>
+      <br>
+      This paper presents Breadcrumbs, an efficient technique for
+      recording and reporting dynamic calling contexts. It builds on an
+      existing technique for computing a compact (one word) encoding
+      of each calling context that client analyses can use in place of a
+      program location. The key feature of our system is a search algorithm
+      that can reconstruct a calling context from its encoding using
+      only a static call graph and a small amount of dynamic information
+      collected at cold (infrequently executed) callsites. Breadcrumbs requires
+      no offline training or program modifications, and handles all
+      language features, including dynamic class loading.
+      <br>
+      <br>
+      We use Breadcrumbs to add context sensitivity to two dynamic
+      analyses: a data-race detector and an analysis for diagnosing null
+      pointer exceptions. On average, it adds 10% to 20% runtime overhead,
+      depending on a tunable parameter that controls how much dynamic
+      information is collected. Collecting less information lowers
+      the overhead, but can result in a search space explosion. In some
+      cases this causes reconstruction to fail, but in most cases Breadcrumbs
+      produces non-trivial calling contexts that have the potential
+      to significantly improve both the precision of the analyses and the
+      quality of the bug reports.
+    </blockquote>
+  </div>
+
+  <div id="pecan">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Efficient, Context-Sensitive Detection of Real-World Semantic Attacks</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>,
+      <!--<a href="http://www.cs.utexas.edu/~varun/">-->Varun Srivastava<!--</a>-->,
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>, and
+      <a href="http://www.cs.utexas.edu/~shmat/">Vitaly Shmatikov</a>
+    </p>
+    <p>
+      ACM SIGPLAN Workshop on Programming Languages and Analysis for Security
+      (<a href="http://software.imdea.org/events/plas2010/index.html">PLAS 2010</a>),
+      Toronto, June 2010
+    <p>
+    <p>
+      Read the <a href="./docs/pecan-plas-2010.pdf"><strong>paper</strong></a>,
+      watch the <a href="./docs/pecan-plas-2010-talk.pptx"><strong>talk</strong></a>,
+      and view the <a href="https://sourceforge.net/p/jikesrvm/research-archive/30/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Software developers are increasingly choosing memory-safe languages.
+      As a result, semantic vulnerabilities &ndash; omitted security checks,
+      misconfigured security policies, and other software design errors &ndash; are
+      supplanting memory-corruption exploits as the primary cause of security
+      violations.  Semantic attacks are difficult to detect because they
+      violate <i>program</i> semantics, rather than <i>language</i> semantics.
+      This paper presents <i>Pecan</i>, a new dynamic anomaly detector.  Pecan
+      identifies unusual program behavior using history sensitivity and
+      depth-limited context sensitivity.  Prior work on context-sensitive
+      anomaly detection relied on stack-walking, which incurs overheads of
+      50% to over 200%.  By contrast, the average overhead of Pecan is
+      5%, which is low enough for practical deployment.
+      We evaluate Pecan on four representative <i>real-world attacks</i>
+      from security vulnerability reports.  These attacks exploit subtle
+      bugs in Java applications and libraries, using legal program executions
+      that nevertheless violate programmers' expectations.
+      Anomaly detection
+      must balance precision and sensitivity: high sensitivity leads to
+      many benign behaviors appearing anomalous (false positives), while
+      low sensitivity may miss attacks.  With application-specific tuning,
+      Pecan efficiently tracks depth-limited context and history and reports
+      few false positives.
+    </blockquote>
+  </div>
+
+  <div id="leak-pruning">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Leak Pruning</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a> and
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>
+    </p>
+    <p>
+      14th International Conference on Architectural Support for Programming Languages and Operating Systems
+      (<a href="http://www.cs.virginia.edu/asplos09/">ASPLOS 2009</a>),
+      Washington, DC, March 2009
+    <p>
+    <p>
+      Read the <a href="./docs/leak-pruning-asplos-2009.pdf"><strong>paper</strong></a>,
+      watch the Talk with <a href="./docs/leak-pruning-asplos-2009-talk.pptx">
+      <strong>PowerPoint</strong></a> or <a href="./docs/arc-ipdps-2019-talk.pdf"><strong>PDF</strong></a>
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/24/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Managed languages improve programmer productivity with type safety and
+      garbage collection, which eliminate memory errors such as dangling pointers,
+      double frees, and buffer overflows.  However, because garbage collection
+      uses reachability to over-approximate live objects, programs may still
+      <i>leak</i> memory if programmers forget to eliminate the last reference to
+      an object that will not be used again.  Leaks slow programs by increasing
+      collector workload and frequency. Growing leaks eventually crash programs.
+      <br>
+      <br>
+      This paper introduces <i>leak pruning</i>, which keeps programs running by
+      predicting and reclaiming leaked objects at run time. It predicts dead
+      objects and reclaims them based on observing data structure usage patterns.
+      Leak pruning <i>preserves semantics</i> because it waits for heap exhaustion
+      before reclaiming objects and <i>poisons</i> references to objects it
+      reclaims. If the program later tries to access a poisoned reference, the
+      virtual machine (VM) throws an error.  We show leak pruning has low overhead
+      in a Java VM and evaluate it on 10 leaking programs. Leak pruning does not
+      help two programs, executes five substantial programs 1.6-81X longer, and
+      executes three programs, including a leak in Eclipse, for at least 24 hours.
+      In the worst case, leak pruning defers fatal errors.  In the best case, it
+      keeps leaky programs running with preserved semantics and consistent
+      throughput.
+    </blockquote>
+  </div>
+
+  <div id="laminar">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Laminar: Practical Fine-Grained Decentralized Information Flow Control</h3>
+    <p>
+      <a href="http://www.cs.utexas.edu/~indrajit/">Indrajit Roy</a>,
+      <a href="http://www.cs.utexas.edu/~porterde/">Donald E. Porter</a>,
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>,
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>, and
+      <a href="http://www.cs.utexas.edu/~witchel/">Emmett Witchel</a>
+    </p>
+    <p>
+      ACM SIGPLAN Conference on Programming Language Design and Implementation
+      (<a href="http://www-plan.cs.colorado.edu/~pldi09/">PLDI 2009</a>),
+      Dublin, June 2009
+    <p>
+    <p>
+      Read the <a href="./docs/laminar-pldi-2009.pdf"><strong>paper</strong></a>,
+      watch the <a href="./docs/laminar-pldi-2009-talk.pptx"><strong>Talk by Indrajit Roy</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/26/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Decentralized information flow control (DIFC) is a promising model for
+      writing programs with powerful, end-to-end security guarantees.
+      Current DIFC systems that run on commodity hardware can be broadly categorized into two
+      types:  language-level and operating system-level DIFC.
+      Language level solutions
+      provide no guarantees against security violations on system resources,
+      like files and sockets. Operating system solutions
+      can mediate accesses to system resources, but are
+      inefficient at monitoring the flow of information through fine-grained
+      program data structures.
+      <br>
+      <br>
+      This paper describes Laminar, the first system to implement
+      decentralized information flow control using a single set of
+      abstractions for OS resources and heap-allocated objects.
+      Programmers express security policies by labeling data with secrecy
+      and integrity labels, and then access the labeled
+      data in lexically scoped <i>security regions</i>.  Laminar
+      enforces the security policies specified by the labels at runtime.
+      Laminar is implemented using a modified Java virtual machine
+      and a new Linux security module.  This paper shows that security
+      regions ease incremental deployment and limit dynamic security checks,
+      allowing us to retrofit DIFC policies on four application case
+      studies. Replacing the applications' ad-hoc security policies changes less than
+      10% of the code, and incurs performance overheads from 1% to 56%.
+      Whereas prior DIFC systems only support limited types of
+      multithreaded programs, Laminar supports a more general class of
+      multithreaded DIFC programs that can access heterogeneously labeled
+      data.
+    </blockquote>
+  </div>
+
+  <div id="thesis">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Diagnosing and Tolerating Bugs in Deployed Systems</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael David Bond</a>
+    </p>
+    <p>
+      Doctoral Dissertation,
+      <a href="http://www.cs.utexas.edu/">Department of Computer Sciences</a>,
+      <a href="http://www.utexas.edu/">The University of Texas at Austin</a>,
+      December 2008
+    </p>
+    <i>ACM SIGPLAN Outstanding Doctoral Dissertation Award (<a href="http://www.sigplan.org/Awards/Dissertation/2008">citation</a>)</i>
+    <p>
+      Read the <a href=><strong>Official PDF</strong></a>,
+      the <a href="./docs/bond-diss-2008-2.pdf"><strong>PDF with 2 pages on a page</strong></a>,
+      or the <a href="./docs/bond-diss-2008-4.pdf"><strong>PDF with 4 pages on a page</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Deployed software is never free of bugs.  These bugs cause
+      software to fail, wasting billions of dollars and sometimes causing
+      injury or death. Bugs are pervasive in modern software, which is
+      increasingly complex due to demand for features, extensibility, and
+      integration of components. Complete validation and exhaustive testing
+      are infeasible for substantial software systems, and therefore deployed
+      software exhibits untested and unanalyzed behaviors.
+      <br>
+      <br>
+      Software behaves differently after deployment due to different environments
+      and inputs, so developers cannot find and fix all bugs before deploying
+      software, and they cannot easily reproduce post-deployment bugs outside of
+      the deployed setting. This dissertation argues that <i>post-deployment is
+      a compelling environment</i> for diagnosing and tolerating bugs, and it
+      introduces a general approach called <i>post-deployment debugging</i>.
+      Techniques in this class are efficient enough to go unnoticed by users and
+      accurate enough to find and report the sources of errors to developers.  We
+      demonstrate that they help developers find and fix bugs and help users get
+      more functionality out of failing software.
+      <br>
+      <br>
+      To diagnose post-deployment failures, programmers need to understand the
+      program operations &ndash; control and data flow &ndash; responsible for failures. Prior
+      approaches for widespread tracking of control and data flow often slow
+      programs by two times or more and increase memory usage significantly,
+      making them impractical for online use.  We present novel techniques for
+      representing control and data flow that add modest overhead while still
+      providing diagnostic information directly useful for fixing bugs.  The first
+      technique, <i>probabilistic calling context</i> (PCC), provides low-overhead
+      context sensitivity to dynamic analyses that detect new or anomalous
+      deployed behavior.
+      Second, <i>Bell</i> statistically correlates control flow with data, and it
+      reconstructs program locations associated with data.  We apply Bell to leak
+      detection, where it tracks and reports program locations responsible for
+      real memory leaks.  The third technique, <i>origin tracking</i>, tracks the
+      originating program locations of <i>unusable values</i> such as null
+      references, by storing origins <i>in place</i> of unusable values.  These
+      origins are cheap to track and are directly useful for diagnosing real-world
+      null pointer exceptions.
+      <br>
+      <br>
+      Post-deployment <i>diagnosis</i> helps developers find and fix bugs, but in
+      the meantime, users need help with failing software.  We present techniques
+      that <i>tolerate memory leaks</i>, which are particularly difficult to
+      diagnose since they have no immediate symptoms and may take days or longer
+      to materialize.  Our techniques effectively narrow the gap between
+      reachability and liveness by providing the illusion that dead but reachable
+      objects do not consume resources.  The techniques identify <i>stale</i>
+      objects not used in a while and remove them from the application and garbage
+      collector's working set.
+      The first technique, <i>Melt</i>, relocates stale memory to disk, so it can
+      restore objects if the program uses them later.  Growing leaks exhaust the
+      disk eventually, and some embedded systems have no disk.  Our second
+      technique, <i>leak pruning</i>, addresses these limitations by automatically
+      reclaiming likely leaked memory.  It preserves semantics by waiting until
+      heap exhaustion to reclaim memory &ndash; then intercepting program attempts
+      to access reclaimed memory.
+      <br>
+      <br>
+      We demonstrate the utility and efficiency of post-deployment debugging on
+      large, real-world programs &ndash; where they pinpoint bug causes and improve
+      software availability. Post-deployment debugging efficiently exposes and
+      exploits programming language semantics and opens up a promising direction
+      for improving software robustness.
+    </blockquote>
+  </div>
+
+  <div id="melt">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Tolerating Memory Leaks</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a> and
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>
+    </p>
+    <p>
+      23rd Annual International Conference on Object-Oriented Programming, Systems, Languages, and Applications
+      (<a href="http://oopsla.org/oopsla2008/">OOPSLA 2008</a>),
+      Nashville, October 2008
+    <p>
+    <p>
+      Read the <a href="./docs/melt-oopsla-2008.pdf"><strong>paper</strong></a>,
+      watch the talk with <a href="./docs/melt-oopsla-2008-talk.pptx">
+      <strong>PowerPoint</strong></a> or <a href="./docs/melt-oopsla-2008-talk.pdf"><strong>PDF</strong></a>
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/23/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Type safety and garbage collection in managed languages eliminate
+      memory errors such as dangling pointers, double frees, and leaks of
+      unreachable objects.  Unfortunately, a program still leaks memory
+      if it maintains references to objects it will never use again.
+      Leaked objects decrease program locality and increase garbage
+      collection frequency and workload. A growing leak will eventually
+      exhaust memory and crash the program.
+      <br>
+      <br>
+      This paper introduces a <i>leak tolerance</i> approach called
+      <i>Melt</i> that safely eliminates performance degradations and
+      crashes due to leaks of dead but reachable objects in managed
+      languages, given sufficient disk space to hold leaking objects.
+      Melt (1) identifies <i>stale</i> objects that the program is not
+      accessing; (2) segregates in-use and stale objects by storing stale
+      objects to disk; and (3) preserves safety by activating stale
+      objects if the program subsequently accesses them.  We design and
+      build a prototype implementation of Melt in a Java VM and show it
+      adds overhead low enough for production systems. Whereas existing
+      VMs grind to a halt and then crash on programs with leaks, Melt
+      keeps many of these programs running much longer without
+      significantly degrading performance. Melt provides users the
+      illusion of a fixed leak and gives developers more time to fix
+      leaky programs.
+    </blockquote>
+  </div>
+
+  <div id="pcc">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Probabilistic Calling Context</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a> and
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>
+    </p>
+    <p>
+      22nd Annual International Conference on Object-Oriented Programming, Systems, Languages, and Applications
+      (<a href="http://oopsla.org/oopsla2007/">OOPSLA 2007</a>),
+      Montreal, October 2007
+    <p>
+    <p>
+      Read the <a href="./docs/pcc-oopsla-2007.pdf"><strong>paper</strong></a>,
+      watch the talk with <a href="./docs/pcc-oopsla-2007-talk.ppt">
+      <strong>PowerPoint</strong></a> or <a href="./docs/pcc-oopsla-2007-talk.pdf"><strong>PDF</strong></a>
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/18/"><strong>source code</strong></a>.
+      Jones and Ryder used our implementation for context-sensitive allocation sites in their ISMM 2008
+      <a href="http://www.cs.kent.ac.uk/pubs/2008/2749/index.html">paper</a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      <i>Calling context</i> enhances program understanding and dynamic
+      analyses by providing a rich representation of program location.
+      Compared to imperative programs, object-oriented programs use more
+      interprocedural and less intraprocedural control flow, increasing
+      the importance of context sensitivity for analysis.  However, prior
+      online methods for computing calling context, such as stack-walking
+      or maintaining the current location in a calling context tree, are
+      expensive in time and space. This paper introduces a new online
+      approach called <i>probabilistic calling context</i> (PCC) that
+      continuously maintains a probabilistically unique value
+      representing the current calling context.  For millions of unique
+      contexts, a 32-bit PCC value has few conflicts.  Computing the PCC
+      value adds 3% average overhead to a Java virtual machine.  PCC is
+      well-suited to clients that detect new or anomalous behavior since
+      PCC values from training and production runs can be compared easily
+      to detect new context-sensitive behavior; clients that query
+      the PCC value at every system call, Java utility call, and Java API
+      call add 0-9% overhead on average.  PCC adds space overhead
+      proportional to the distinct contexts stored by the client (one
+      word per context).  Our results indicate PCC is efficient and
+      accurate enough to use in deployed software for residual testing,
+      bug detection, and intrusion detection.
+    </blockquote>
+  </div>
+
+  <div id="origin-tracking">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Tracking Bad Apples: Reporting the Origin of Null and Undefined Value Errors</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>,
+      <a href="http://www.valgrind.org/njn/">Nicholas Nethercote</a>,
+      Stephen W. Kent,
+      <a href="http://www.cs.tufts.edu/~sguyer/">Samuel Z. Guyer</a>, and
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>
+    </p>
+    <p>
+      22nd Annual International Conference on Object-Oriented Programming, Systems, Languages, and Applications
+      (<a href="http://oopsla.org/oopsla2007/">OOPSLA 2007</a>),
+      Montreal, October 2007
+    <p>
+    <p>
+      Read the <a href="./docs/origin-tracking-oopsla-2007.pdf"><strong>paper</strong></a>,
+      watch the talk with <a href="./docs/origin-tracking-oopsla-2007-talk.ppt">
+      <strong>PowerPoint</strong></a> or <a href="./docs/origin-tracking-oopsla-2007-talk.pdf"><strong>PDF</strong></a>.
+      For the source code there are two implementations publicly available:
+      <ul>
+        <li> Origin tracking for null references in Java is available for download from the
+          <a href="http://sourceforge.net/p/jikesrvm/research-archive/19/">Jikes RVM Research Archive</a>
+        <li> Origin tracking for undefined values in Valgrind's Memcheck tool is available as a branch in the
+          <a href="http://valgrind.org/downloads/repository.html">Valgrind Source Code Repository</a>:
+          <code>svn://svn.valgrind.org/valgrind/branches/ORIGIN_TRACKING</code>
+      </ul>
+    </p>
+    <p><strong>Bug suite: </strong></p>
+    <blockquote>
+      We've made available 12 Java null pointer exceptions
+      as the <a href="bad-apples-suite.html">Bad Apples Suite</a>.
+    </blockquote>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Programs sometimes crash due to <i>unusable</i> values, for example,
+      when Java and C# programs dereference null pointers and when
+      C and C++ programs use undefined values to affect program
+      behavior.  A stack trace
+      produced on such a crash identifies the effect of the unusable
+      value, not its cause, and is often not much help to the
+      programmer.
+      <br>
+      <br>
+      This paper presents efficient <i>origin tracking</i> of unusable
+      values; it shows how to record where these values come into
+      existence, correctly propagate them, and report them if they cause
+      an error.  The key idea is <i>value piggybacking</i>: when the
+      original program stores an unusable value, value piggybacking
+      instead stores origin information in the spare bits of the unusable
+      value. Modest compiler support alters the program to
+      propagate these modified values through operations such as
+      assignments and comparisons.  We evaluate two
+      implementations: the first
+      tracks null pointer origins in a JVM, and the second tracks
+      undefined value origins in a memory-checking tool built with
+      Valgrind.  These implementations show that origin tracking via value
+      piggybacking is fast and often useful, and in the Java case, has low
+      enough overhead for use in a production environment.
+    </blockquote>
+  </div>
+
+  <div id="cgc">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Correcting the Dynamic Call Graph Using Control Flow Constraints</h3>
+    <p>
+      <a href="http://rsl.gist.ac.kr/~bclee/">Byeongcheol Lee</a>,
+      Kevin Resnick,
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>, and
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>
+    </p>
+    <p>
+      16th International Conference on Compiler Construction
+      (<a href="http://cc2007.cs.brown.edu/">CC 2007</a>),
+      Braga, Portugal, March 2007
+    <p>
+    <p>
+      Read the <a href="./docs/cgc-cc-2007.pdf"><strong>paper</strong></a>, or a longer
+      <a href="./docs/cgc-techreport-2006.pdf"><strong>tech report</strong></a> version that includes proofs and algorithms.
+      Watch the <a href="./docs/cgc-cc-2007-talk.ppt"><strong>talk by Byeongcheol Lee</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/20/"><strong>source code</strong></a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      To reason about programs, dynamic optimizers and analysis tools use
+      sampling to collect a <i>dynamic call graph</i> (DCG). However,
+      sampling has not achieved high accuracy with low runtime overhead. As
+      object-oriented programmers compose increasingly complex programs,
+      inaccurate call graphs will inhibit analysis and optimizations.
+      This paper demonstrates how to use static and dynamic <i>control
+      flow graph</i> (CFG) constraints to improve the accuracy of the DCG.
+      We introduce the <i>frequency dominator</i> (FDOM), a novel CFG
+      relation that extends the dominator relation to expose static
+      relative execution frequencies of basic blocks. We combine
+      conservation of flow and dynamic CFG basic block profiles to further
+      improve the accuracy of the DCG.  Together these approaches add
+      minimal overhead (1%) and achieve 85% accuracy compared to a
+      perfect call graph for SPEC JVM98 and DaCapo benchmarks.  Compared to
+      sampling alone, accuracy improves by 12 to 36%. These results
+      demonstrate that static and dynamic control-flow information offer
+      accurate information for efficiently improving the DCG.
+    </blockquote>
+  </div>
+
+  <div id="bell">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Bell: Bit-Encoding Online Memory Leak Detection</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a> and
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>
+    </p>
+    <p>
+      12th International Conference on Architectural Support for Programming Languages and Operating Systems
+      (<a href="http://www.princeton.edu/~asplos06/">ASPLOS-XII</a>),
+      San Jose, October 2006
+    <p>
+    <p>
+      Read the <a href="./docs/bell-asplos-2006.pdf"><strong>paper</strong></a>,
+      watch the talk with <a href="./docs/bell-asplos-2006-talk.ppt">
+      <strong>PowerPoint</strong></a> or <a href="./docs/bell-asplos-2006-talk.pdf"><strong>PDF</strong></a>.
+      View the <a href="http://sourceforge.net/p/jikesrvm/research-archive/7/"><strong>source code</strong></a>.
+      Tang, Gao, and Qin modified our implementation for their USENIX 2008
+      <a href="http://www.cse.ohio-state.edu/~qin/publication.htm">paper</a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Memory leaks compromise availability and security by crippling
+      performance and crashing programs.  Leaks are difficult to diagnose
+      because they have no immediate symptoms.  Online leak detection tools
+      benefit from storing and reporting per-object <i>sites</i> (e.g.,
+      allocation sites) for potentially leaking objects. In programs with
+      many small objects, per-object sites add high space overhead,
+      limiting their use in production environments.
+      <br>
+      <br>
+      This paper introduces <i>Bit-Encoding Leak Location</i> (Bell), a
+      statistical approach that <i>encodes</i> per-object sites to a single
+      bit per object.  A bit loses information about a site,
+      but given sufficient objects that use the site and a known,
+      finite set of possible sites, Bell uses brute-force <i>decoding</i> to
+      recover the site with high accuracy.
+      <br>
+      <br>
+      We use this approach to encode object allocation and last-use sites
+      in <i>Sleigh</i>, a new leak detection tool.  Sleigh detects
+      <i>stale</i> objects (objects unused for a long time) and uses Bell
+      decoding to report their allocation and last-use sites.  Our
+      implementation steals four unused bits in the object header and thus
+      incurs no per-object space overhead.  Sleigh's instrumentation adds
+      29% execution time overhead, which adaptive profiling reduces to
+      11%.  Sleigh's output is directly useful for finding and fixing
+      leaks in SPEC JBB2000 and Eclipse, although sufficiently many objects
+      must leak before Bell decoding can report sites with confidence.
+      Bell is suitable for other leak detection approaches that store
+      per-object sites, and for other problems amenable to statistical
+      per-object metadata.
+    </blockquote>
+  </div>
+
+  <div id="pep">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Continuous Path and Edge Profiling</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a> and
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>
+    </p>
+    <p>
+      38th International Symposium on Microarchitecture
+      (<a href="http://pcsostres.ac.upc.edu/micro38/">MICRO-38</a>),
+      Barcelona, November 2005
+    <p>
+    <p>
+      Read the <a href="./docs/pep-micro-2005.pdf"><strong>paper</strong></a>,
+      watch the talk with <a href="./docs/pep-micro-2005-talk.ppt">
+      <strong>PowerPoint</strong></a> or <a href="./docs/pep-micro-2005-talk.pdf"><strong>PDF</strong></a>,
+      and view the <a href="http://sourceforge.net/p/jikesrvm/research-archive/8/"><strong>source code</strong></a>.
+      D'Elia and Demetrescu modified our path profiling implementation for their OOPSLA 2013
+      <a href=http://www.dis.uniroma1.it/~demetres/kstream/kblpp-preprint.pdf>paper</a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Microarchitectures increasingly rely on dynamic
+      optimization to improve performance in ways that are difficult or
+      impossible for ahead-of-time compilers.  Dynamic optimizers in turn
+      require continuous, portable, low cost, and accurate control-flow
+      profiles to inform their decisions, but prior approaches have
+      struggled to meet these goals simultaneously.
+      <br>
+      <br>
+      This paper presents PEP, a hybrid instrumentation and sampling
+      approach for continuous path and edge profiling that is
+      <i>efficient</i>, <i>accurate</i>, and <i>portable</i>.  PEP uses a subset of
+      Ball-Larus path profiling to identify paths with low overhead, and
+      uses sampling to mitigate the expense of storing paths.  PEP further
+      reduces overhead by using profiling to guide instrumentation
+      placement.  PEP improves profile accuracy with a modified version of
+      Arnold-Grove sampling.  The resulting system has 1.2% average and
+      4.3% maximum overhead, 94% path profile accuracy, and 96% edge
+      profile accuracy on a set of Java benchmarks.
+    </blockquote>
+  </div>
+
+  <div id="ppp">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Practical Path Profiling for Dynamic Optimizers</h3>
+    <p>
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a> and
+      <a href="http://www.cs.utexas.edu/~mckinley/">Kathryn S. McKinley</a>
+    </p>
+    <p>
+      3rd International Symposium on Code Generation and Optimization
+      (<a href="http://www.cgo.org/cgo2005/">CGO-3</a>),
+      San Jose, March 2005
+    </p>
+    <p>
+      Read the <a href="./docs/ppp-cgo-2005.pdf"><strong>paper</strong></a>,
+      watch the talk with <a href="./docs/ppp-cgo-2005-talk.ppt">
+      <strong>PowerPoint</strong></a> or <a href="./docs/ppp-cgo-2005-talk.pdf"><strong>PDF</strong></a>.
+      The source code is available as part of the <a href="http://www.cs.utexas.edu/users/cart/Scale/"><strong>Scale</strong></a> compiler.
+      Vaswani, Nori, and Chilimbi modified our path profiling implementation for their POPL 2007 and FSE 2007
+      <a href="http://research.microsoft.com/en-us/projects/ppp">papers</a>.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      Modern processors are hungry for instructions. To satisfy them,
+      compilers need to find and optimize execution paths across multiple
+      basic blocks. Path profiles provide this context, but their high
+      overhead has so far limited their use by dynamic compilers. We present
+      new techniques for low overhead online <i>practical path profiling</i>
+      (PPP).
+      Following targeted path profiling (TPP), PPP uses an edge profile
+      to simplify path profile instrumentation (profile-guided
+      profiling). PPP improves over prior work by (1) reducing the amount of
+      profiling instrumentation on cold paths and paths that the edge
+      profile predicts well and
+      (2) reducing the cost of the remaining instrumentation.
+      <br>
+      <br>
+      Experiments in an ahead-of-time compiler
+      perform edge profile-guided inlining and unrolling
+      prior to path profiling instrumentation.
+      These transformations are faithful to staged optimization,
+      and create longer, harder to predict paths.
+      We introduce the <i>branch-flow</i>
+      metric to measure path flow as a function of branch
+      decisions, rather than weighting all paths equally as in prior work.
+      On SPEC2000, PPP maintains high accuracy and coverage, but has
+      only 5% overhead on average (ranging from -3% to 13%),
+      making it appealing for use by dynamic compilers.
+    </blockquote>
+  </div>
+
+  <div id="tpp">
+    <hr class="fancyLine">
+    <h3 class="snugTitle">Targeted Path Profiling: Lower Overhead Path Profiling for Staged Dynamic Optimization Systems</h3>
+    <p>
+      Rahul Joshi,
+      <a href="http://www.cse.ohio-state.edu/~mikebond/">Michael D. Bond</a>, and
+      <a href="http://www-faculty.cs.uiuc.edu/~zilles/">Craig Zilles</a>
+    </p>
+    <p>
+      2nd International Symposium on Code Generation and Optimization
+      (<a href="http://www.cgo.org/cgo2004/">CGO-2</a>),
+      Palo Alto, March 2004
+    </p>
+    <i>Best student presenter</i>
+    <p>
+      Read the <a href="./docs/tpp-cgo-2004.pdf"><strong>paper</strong></a>,
+      watch the talk with <a href="./docs/tpp-cgo-2004-talk.ppt">
+      <strong>PowerPoint</strong></a> or <a href="./docs/tpp-cgo-2004-talk.pdf"><strong>PDF</strong></a>.
+      This paper's source code is subsumed by the <a href="#ppp">Practical Path Profiling</a> source code.
+    </p>
+    <p><strong>Abstract: </strong></p>
+    <blockquote>
+      In this paper, we present a technique for reducing the overhead of
+      collecting path profiles in the context of a dynamic optimizer.  The
+      key idea to our approach, called <i>Targeted Path Profiling</i> (TPP),
+      is to use an edge profile to simplify the collection of a path
+      profile.  This notion of profile-guided profiling is a natural fit for
+      dynamic optimizers, which typically optimize the code in a series of
+      stages.
+      <br>
+      <br>
+      TPP is an extension to the Ball-Larus Efficient Path
+      Profiling algorithm.  Its increased efficiency comes from two sources:
+      (i) reducing the number of potential paths by not enumerating paths
+      with cold edges, allowing array accesses to be substituted for more
+      expensive hash table lookups, and (ii) not instrumenting regions where
+      paths can be unambiguously derived from an edge profile.  Our results
+      suggest that on average the overhead of profile collection can be reduced by half (SPEC95) to almost two-thirds (SPEC2000)
+      relative to the Ball-Larus algorithm with minimal impact on
+      the information collected.
+    </blockquote>
+  </div>
+
+
+</div>
