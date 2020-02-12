@@ -364,3 +364,21 @@ td,td {
 .center{
   text-align:center;
 }
+
+.fancyLine {
+  height: 20px;
+  border-style: solid;
+  border-color: #7B8E67;
+  border-width: 4px 0 0 0;
+  border-radius: 10px 0px;
+}
+
+.snugTitle {
+  padding-top: -10px;
+  margin-top: -10px;
+}
+
+.paperCenter{
+  margin: auto;
+  width: 75%;
+  padding: 10px;
