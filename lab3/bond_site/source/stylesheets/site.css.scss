@@ -2,9 +2,9 @@ body {
   background-color: #EFF1EC;
   color: #333;
   font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir",
-  "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans",
-  "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu",
-  "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+    "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans",
+    "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu",
+    "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
 }
 
 a {
@@ -24,7 +24,7 @@ a {
     padding: 0;
     overflow: hidden;
   }
-  li {
+   li {
     float: left;
   }
 
@@ -37,7 +37,7 @@ a {
   }
 }
 
-// Center content for the research group page
+// Center content for the research group page 
 .plassCenter{
   margin: auto;
   width: 50%;
@@ -100,46 +100,6 @@ div.desc {
   text-align: center;
 }
 
-h1{
-  text-align: center;
-}
-
-h2{
-  text-align: center;
-}
-
-h3{
-  text-align: center;
-}
-
-.row{
-  text-align: center;
-  margin-top: 40px;
-}
-.column-one-third {
-  float: left;
-  width: 33%;
-}
-
-.column-two-third {
-  margin-left: 2.99%;
-  float: left;
-  width: 64%;
-  border: 2px solid #7b8367;
-  padding: 0 5px 5px 5px;
-}
-
-.avatar{
-  max-width: 80%;
-  border-radius: 50%;
-  max-height: 580px;
-
-}
-
-// li a:hover {
-//   background-color: #111;
-// }
-
 /* The actual timeline (the vertical ruler) */
 .timeline {
   position: relative;
@@ -155,7 +115,7 @@ h3{
   background-color: #8e7167;
   top: 0;
   bottom: 0;
-  left: 40%;
+  left: 47%;
   margin-left: -1px;
 }
 
@@ -188,7 +148,7 @@ h3{
 
 /* Place the container to the right */
 .right {
-  left: 40%;
+  left: 47%;
 }
 
 /* Add arrows to the left container (pointing right) */
@@ -259,110 +219,6 @@ table, th, td {
 
 td,td {
   padding: 15px;
-}
-
-.research {
-
-  table, th, td {
-    border: 5px solid #8E7167;
-    border-collapse: collapse;
-  }
-
-  table {
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 90%;
-  }
-
-  ul, li {
-    font-size: 20px;
-  }
-
-  h1 {
-    font-size: 40px;
-    text-align: center;
-  }
-
-  background-color: inherit;
-  margin: 10px 5%;
-  position: center;
-  width: 90%;
-}
-
-.upper{
-  background-color: inherit;
-  display: grid;
-  grid-template-colums: 2.5% 45% 5% 45% 2.5%;
-  margin:10px 40px;
-  width: 90%;
-
-  p {
-    font-size: 18px;
-  }
-}
-
-.lower{
-  clear: both;
-  background-color: inherit;
-  height: 90%;
-  padding: 10px;
-  margin:10px 40px;
-  width: 90%;
-
-  h2 {
-    text-align: center;
-  }
-
-  #purple{
-    table, th, td {
-      border-color: #8E677B;
-    }
-  }
-
-  #blue{
-    table, th, td {
-      border-color: #678E8D;
-    }
-  }
-
-  #green{
-    table, th, td {
-      border-color: #7B8E67;
-    }
-  }
-}
-
-.block{
-  background-color: inherit;
-  border: 4px solid #8E7167;
-  border-radius: 12px;
-  height: auto;
-  margin-left: 4%;
-  margin-right: 4%;
-  padding: 10px;
-  width: auto;
-}
-
-.group{
-  grid-column-start: 2;
-  grid-column-end: 3;
-
-  h2{
-    font-size: 30px
-  }
-
-  p{
-    font-size: 20px
-  }
-}
-
-.intrest{
-  grid-column-start: 4;
-  grid-column-end: 5;
-}
-
-.center{
-  text-align:center;
 }
 
 .fancyLine {
