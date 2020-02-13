@@ -1,0 +1,9 @@
+Correctness: Nice job making program robust and not vulnerable to invalid input! Doesn't seem to be functionality to declare that there are no valid sets on the board. Great use of rspec to test common deck and player functions!
+
+Functionality/Features: Nice addition of colors and ASCII art to make game easier to play! Good addition of hint generator, score keeping, and multiplayer gameplay. Consider adding ability to play against computer, leaderboard, etc. to make the game a little more engaging.
+
+Design: Great object-oriented design for deck, game, player, and multiplayer classes! Main script is extremely concise which is a great thing and would make the game easy to expand on!
+
+Documentation: Readme is sufficient but could be expanded on to include more about gameplay, additional features, etc. Great class and function-level documentation (consider also adding documentation for return values from functions in the future). Nice commit messages!
+
+Style: Good use of consistent styling between all files. Nice job utilizing common features of Ruby! Consider citing a style guide in your Readme or documenting general style rules that are being followed.
