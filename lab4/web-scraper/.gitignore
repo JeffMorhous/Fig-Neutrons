@@ -28,6 +28,10 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+Gemfile.lock
+.rakeTasks
+.idea/
+.generators
 /public/packs
 /public/packs-test
 /node_modules
