@@ -1,24 +1,14 @@
-# README
+# Lab 4 - Web Scraper
+This project scrapes https://web.cse.ohio-state.edu/oportal/schedule_display
+for information  on CSE courses, and displays it to the user.
+###To install neccesary gems, run
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+``bundle install``
 
-Things you may want to cover:
+###To serve the site locally, run
 
-* Ruby version
+``rails server``
 
-* System dependencies
+###To execute tests, run
+``rails test``
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
