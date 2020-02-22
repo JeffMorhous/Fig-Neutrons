@@ -1,0 +1,11 @@
+Client Impression: Nice job including all information from original site in a more organized manner! Navigation bar at the top of each page is a nice touch to provide easier navigation between pages. Publications and activities table provide a clear upgrade over original site. Redesigned site is not overly complex, but provides clear upgrades over original site!
+
+Aesthetics: Navigation bar is a great element to have, but try styling it beyond a normal list in order to draw more attention to it. Pictures and captions on PLaSS page would look nicer if they were centered to take up more of the screen. Try to add more customizations (colors, fonts, table styling, etc.) to make site more visually-appealing!
+
+Performance: Performance seems good!
+
+Design: Good use of Middleman and embedded ruby! Nice job using layout.erb to include navigation bar on all pages (although in the future it would be recommended to put navbar in a separate partial file). Great use of descriptive CSS classes and loose coupling between HTML and CSS files! Next step would be to use features of embedded Ruby (loops, if-else, etc.) to reduce amount of repeated code in HTML files (especially with reducing code needed for long tables and lists).
+
+Documentation: Good job detailing instructions on how to run code in README (consider adding some documentation about what design decisions were made to enhance the site beyond the original site). Commit messages are sufficient for the most part. Missing all in-code documentation (at the very least, want file-level documentation).
+
+Style: Consider citing a style guide in README or documenting loose style rules that were followed. Fair amount of HTML validation issues exist throughout various HTML files. HTML formatting is fairly consistent (with a few cases of inconsistent spacing/indentation).
