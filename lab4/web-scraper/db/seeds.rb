@@ -19,11 +19,13 @@ links.each do |item|
   courseTitle = item.text
   hashMap[courseNumber.to_s] = courseTitle
 end
+
 tables = page.css("tr.group0, tr.group1")
 tables.each do |item|
 sectionData = item.text.split("\n")
 Course.create(number: sectionData[1],
               title: hashMap["#" + item.parent.parent.parent.attribute('id')],
+              lab: sectionData[2].include?("LAB"),
               location: sectionData[3],
               time: sectionData[4],
               instructor: sectionData[5])
