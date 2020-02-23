@@ -6,6 +6,7 @@ for information  on CSE courses, and displays it to the user.
 ``bundle install``
 
 ###To serve the site locally, run
+``rake db:seeds``
 
 ``rails server``
 
