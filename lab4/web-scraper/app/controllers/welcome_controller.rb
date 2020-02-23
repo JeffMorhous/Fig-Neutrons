@@ -14,17 +14,23 @@ class WelcomeController < ApplicationController
       hashMap[courseNumber.to_s] = courseTitle
     end
 
-    tables = page.css("tr.group0, tr.group1")
-    tables.each do |item|
-      puts "Course Title:" + hashMap["#" + item.parent.parent.parent.attribute('id')]
-      sectionData = item.text.split("\n")
-      puts "Class number: " + sectionData[1]
-      puts "Component: " + sectionData[2]
-      puts "Location: " + sectionData[3]
-      puts "Times: " + sectionData[4]
-      puts "Instructor: " + sectionData[5]
-      puts "Session: " + sectionData[6]
-      puts "\n"
+    # tables = page.css("tr.group0, tr.group1")
+    # tables.each do |item|
+    #   sectionData = item.text.split("\n")
+    #   section = Course.new
+    #   section.number = sectionData[1]
+    #   section.title = hashMap["#" + item.parent.parent.parent.attribute('id')]
+    #   section.location = sectionData[3]
+    #   section.time = sectionData[4]
+    #   section.instructor = sectionData[5]
+    #   section.save
+    # end
+
+
+    Course.all.each do |temp|
+      #the code here is called once for each user
+      # user is accessible by 'user' variable
+      puts temp.title
     end
   end
 end
