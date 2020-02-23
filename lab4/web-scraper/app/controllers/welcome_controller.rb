@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
   def index
     Course.all.each do |section|
       puts section.title
-      puts section.lab
+      puts section.component
     end
   end
 end

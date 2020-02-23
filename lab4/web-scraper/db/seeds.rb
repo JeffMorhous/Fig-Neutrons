@@ -33,7 +33,7 @@ tables.each do |item|
   section_data = item.text.split("\n")
   Course.create(number: section_data[1],
                 title: hash_map["#" + item.parent.parent.parent.attribute('id')],
-                lab: section_data[2].include?("LAB"),
+                component: section_data[2],
                 location: section_data[3],
                 time: section_data[4],
                 instructor: section_data[5])
