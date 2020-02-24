@@ -1,1 +1,25 @@
-<h1>Hello World!</h1>
+<h1>Ohio State CSE Courses</h1>
+<table>
+  <tr>
+    <th>Course Number and Name</th>
+    <th>Section Number</th>
+    <th>Component</th>
+    <th>Time</th>
+    <th>Location</th>
+    <th>Instructor</th>
+  </tr>
+  <% @courses.each do |course| %>
+    <tr>
+      <td><%= course.title %></td>
+      <td><%= course.number %></td>
+      <td><%= course.component %></td>
+      <td><%= course.time %></td>
+      <td><% if course.location.strip.empty? %>
+            NA
+          <% else %>
+            <%= course.location %>
+          <% end %></td>
+      <td><%= course.instructor %></td>
+    </tr>
+  <% end %>
+</table>
