@@ -1,12 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 require 'rubygems'
 require 'mechanize'
+
+# Scrape the CSE Course info page to seed the database with all the course and section information
 
 Course.delete_all
 agent = Mechanize.new
@@ -27,12 +22,15 @@ links.each do |item|
 end
 
 # Find all the rows for each table to get the information for each section of a course
+# and add each section to the database
 tables = page.css("tr.group0, tr.group1")
 tables.each do |item|
+
   # Use the course id to find the title of the section's course
+  course_title = hash_map["#" + item.parent.parent.parent.attribute('id')]
   section_data = item.text.split("\n")
   Course.create(number: section_data[1],
-                title: hash_map["#" + item.parent.parent.parent.attribute('id')],
+                title: course_title,
                 component: section_data[2],
                 location: section_data[3],
                 time: section_data[4],
