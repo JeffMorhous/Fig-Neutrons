@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'mechanize'
 
+# This file is the controller that handles initial page load and retrieving the CSE course data
+
 class WelcomeController < ApplicationController
   def index
 
