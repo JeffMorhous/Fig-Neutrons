@@ -1,3 +1,4 @@
+# This migration was created by "rails generate model" to create the "courses" table
 class CreateCourses < ActiveRecord::Migration[6.0]
   def change
     create_table :courses do |t|
