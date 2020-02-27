@@ -6,7 +6,7 @@ for information  on CSE courses, and displays it to the user.
 ``bundle install``
 
 ### To serve the site locally, run
-``rake db:setup`` which will set up the database and populate it 
+``rake db:setup`` which will set up the database and populate it with
 
 ``rails server`` which actually runs the site.
 
