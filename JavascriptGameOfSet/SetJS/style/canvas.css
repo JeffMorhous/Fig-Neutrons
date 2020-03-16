@@ -1,0 +1,25 @@
+body {
+  background: url(butcherblock.png) #404040;
+}
+
+.topnav {
+  background-color: #BF9877;
+  margin-bottom: 50px;
+}
+
+.topnav a {
+  float: center;
+  color: black;
+  text-align: center;
+  padding: 20px 16px;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+.card {
+  width: 200px;
+  object-fit: cover;
+  object-position: 20%;
+  float: left;
+  margin: 10px;
+}
