@@ -42,7 +42,8 @@ function displayBoard() {
   for (let i = 0; i < board.length; i++) {
     let card = board[i];
     let cardDiv = document.createElement("div");
-    let cardPic = document.createElement("IMG");
+    let cardPic = document.createElement("img");
+    cardPic.onclick = () => alert("you clicked");
     cardPic.src = "../pictures/" + card.number + "-" + card.fill + "-" + card.color + "-" + card.shape + ".png";
     cardPic.alt = card.number + " " + card.fill + " " + card.color + " " + card.shape
     cardPic.className = "card";
@@ -51,11 +52,6 @@ function displayBoard() {
   }
 }
 
-function newGame() {
-  deck = getDeck();
-  board = dealBoard();
-  displayBoard();
-}
 
 function shuffleBoard() {
   let newBoard = new Array();
@@ -64,4 +60,14 @@ function shuffleBoard() {
   }
   board = newBoard;
   displayBoard();
+}
+
+function newGame() {
+  deck = getDeck();
+  board = dealBoard();
+  displayBoard();
+}
+
+function isSet(cardOne, cardTwo, cardThree) {
+
 }
