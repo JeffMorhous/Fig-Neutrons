@@ -53,17 +53,22 @@ function displayBoard() {
   }
 }
 
+//this function deals with when the user chooses a card
 function userClickEvent(cardInfo) {
-    alert(cardInfo);
-    if( cards[0] == ""){
-      cards[0] = cardInfo;
-    } else if (cards[1] == "") {
-      cards[1] = cardInfo;
-    } else {
-      cards[2] = cardInfo
-      alert("hooray");
-    }
+  //first make sure that this card wasn't previously selected
+  if(cards[0] == cardInfo || cards[1] == cardInfo || cards[2] == cardInfo){
+    alert("Error: A Card Has Been Selected More Than Once");
+    return;
+  }
 
+  if(cards[0] == ""){
+    cards[0] = cardInfo;
+  } else if (cards[1] == "") {
+    cards[1] = cardInfo;
+  } else {
+    cards[2] = cardInfo;
+    checkSet();
+  }
 };
 
 function shuffleBoard() {
@@ -81,6 +86,26 @@ function newGame() {
   displayBoard();
 }
 
-function isSet(cardOne, cardTwo, cardThree) {
+function checkSet() {
+  let cardOne = cards[0].split(" ");
+  let cardTwo = cards[1].split(" ");
+  let cardThree = cards[2].split(" ");
+  if((allSame(cardOne[0], cardTwo[0], cardThree[0]) || allDifferent(cardOne[0], cardTwo[0], cardThree[0])) &&
+     (allSame(cardOne[1], cardTwo[1], cardThree[1]) || allDifferent(cardOne[1], cardTwo[1], cardThree[1])) &&
+     (allSame(cardOne[2], cardTwo[2], cardThree[2]) || allDifferent(cardOne[2], cardTwo[2], cardThree[2])) &&
+     (allSame(cardOne[3], cardTwo[3], cardThree[3]) || allDifferent(cardOne[3], cardTwo[3], cardThree[3]))) {
+      //if in here then a match was found hooray
+  } else {
+    //no match was found time to subtract points
+  }
 
+  cards = ["", "", ""];
+}
+
+function allSame(one, two, three) {
+  return (one == two && two == three);
+}
+
+function allDifferent(one, two, three) {
+  return (one != two && one != three);
 }
