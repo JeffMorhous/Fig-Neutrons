@@ -1,5 +1,6 @@
 var deck = getDeck();
 var board = dealBoard();
+var cards = ["", "", ""];
 
 
 function getDeck() {
@@ -43,7 +44,7 @@ function displayBoard() {
     let card = board[i];
     let cardDiv = document.createElement("div");
     let cardPic = document.createElement("img");
-    cardPic.onclick = () => alert("you clicked");
+    cardPic.onclick = () => userClickEvent(cardPic.alt);
     cardPic.src = "../pictures/" + card.number + "-" + card.fill + "-" + card.color + "-" + card.shape + ".png";
     cardPic.alt = card.number + " " + card.fill + " " + card.color + " " + card.shape
     cardPic.className = "card";
@@ -52,6 +53,18 @@ function displayBoard() {
   }
 }
 
+function userClickEvent(cardInfo) {
+    alert(cardInfo);
+    if( cards[0] == ""){
+      cards[0] = cardInfo;
+    } else if (cards[1] == "") {
+      cards[1] = cardInfo;
+    } else {
+      cards[2] = cardInfo
+      alert("hooray");
+    }
+
+};
 
 function shuffleBoard() {
   let newBoard = new Array();
