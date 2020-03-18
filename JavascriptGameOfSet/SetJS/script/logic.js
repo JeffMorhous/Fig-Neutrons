@@ -1,7 +1,7 @@
 var deck = getDeck();
 var board = dealBoard();
 var cards = ["", "", ""];
-var score = 0;
+var score;
 
 
 function getDeck() {
@@ -98,6 +98,7 @@ function shuffleBoard() {
 function newGame() {
   deck = getDeck();
   board = dealBoard();
+  score = 0;
   displayBoard();
 }
 
@@ -105,6 +106,7 @@ function checkSet() {
   let cardOne = cards[0].split(" ");
   let cardTwo = cards[1].split(" ");
   let cardThree = cards[2].split(" ");
+  cards = ["", "", ""];
   if((allSame(cardOne[0], cardTwo[0], cardThree[0]) || allDifferent(cardOne[0], cardTwo[0], cardThree[0])) &&
      (allSame(cardOne[1], cardTwo[1], cardThree[1]) || allDifferent(cardOne[1], cardTwo[1], cardThree[1])) &&
      (allSame(cardOne[2], cardTwo[2], cardThree[2]) || allDifferent(cardOne[2], cardTwo[2], cardThree[2])) &&
@@ -112,12 +114,12 @@ function checkSet() {
       //if in here then a match was found hooray
       score++;
       document.getElementById('score').innerHTML = score;
+      //update the board now
+      removeThree(cardOne, cardTwo, cardThree);
   } else {
     score--;
     document.getElementById('score').innerHTML = score;
   }
-
-  cards = ["", "", ""];
 }
 
 function allSame(one, two, three) {
@@ -126,4 +128,20 @@ function allSame(one, two, three) {
 
 function allDifferent(one, two, three) {
   return (one != two && one != three);
+}
+
+
+function removeThree(cardOne, cardTwo, cardThree){
+  let newBoard = new Array();
+  for (let i = 0; i < 12; i++) {
+    if((board[i].number == cardOne[0] && board[i].fill == cardOne[1] && board[i].color == cardOne[2] && board[i].shape == cardOne[3]) ||
+      (board[i].number == cardTwo[0] && board[i].fill == cardTwo[1] && board[i].color == cardTwo[2] && board[i].shape == cardTwo[3]) ||
+      (board[i].number == cardThree[0] && board[i].fill == cardThree[1] && board[i].color == cardThree[2] && board[i].shape == cardThree[3]))
+      alert(board[i].number);
+    else {
+      newBoard.push(board[i]);
+    }
+  }
+  board = newBoard;
+  displayBoard();
 }
