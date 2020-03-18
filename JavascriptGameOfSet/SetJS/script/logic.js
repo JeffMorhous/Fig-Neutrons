@@ -99,6 +99,7 @@ function newGame() {
   deck = getDeck();
   board = dealBoard();
   score = 0;
+  cards = ["", "", ""];
   displayBoard();
 }
 
@@ -116,6 +117,7 @@ function checkSet() {
       document.getElementById('score').innerHTML = score;
       //update the board now
       removeThree(cardOne, cardTwo, cardThree);
+      addThree();
   } else {
     score--;
     document.getElementById('score').innerHTML = score;
@@ -142,6 +144,15 @@ function removeThree(cardOne, cardTwo, cardThree){
       newBoard.push(board[i]);
     }
   }
+  board = newBoard;
+}
+
+function addThree(){
+  let newBoard = new Array();
+  newBoard = board;
+  newBoard.push(draw(deck));
+  newBoard.push(draw(deck));
+  newBoard.push(draw(deck));
   board = newBoard;
   displayBoard();
 }
