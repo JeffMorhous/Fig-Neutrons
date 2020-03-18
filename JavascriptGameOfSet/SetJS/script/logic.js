@@ -1,6 +1,7 @@
 var deck = getDeck();
 var board = dealBoard();
 var cards = ["", "", ""];
+var score = 0;
 
 
 function getDeck() {
@@ -95,8 +96,11 @@ function checkSet() {
      (allSame(cardOne[2], cardTwo[2], cardThree[2]) || allDifferent(cardOne[2], cardTwo[2], cardThree[2])) &&
      (allSame(cardOne[3], cardTwo[3], cardThree[3]) || allDifferent(cardOne[3], cardTwo[3], cardThree[3]))) {
       //if in here then a match was found hooray
+      score++;
+      document.getElementById('score').innerHTML = score;
   } else {
-    //no match was found time to subtract points
+    score--;
+    document.getElementById('score').innerHTML = score;
   }
 
   cards = ["", "", ""];
