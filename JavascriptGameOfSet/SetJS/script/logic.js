@@ -31,11 +31,25 @@ function draw(pile) {
   return pile.splice(index,1)[0];
 }
 
+function ensureMatchesExist(board) {
+  let numMatches = 0;
+
+
+  //update this to return the number of matches found
+  return 1;
+}
+
 function dealBoard() {
   let board = new Array();
-  for (let i = 0; i < 12; i++) {
-    board.push(draw(deck));
-  }
+
+  //the cards in the board will be regenerated as many times as is necessary to ensure
+  //there is at least one match
+  do {
+    for (let i = 0; i < 12; i++) {
+      board.push(draw(deck));
+    }
+  } while (ensureMatchesExist(board) == 0)
+
   return board;
 }
 
