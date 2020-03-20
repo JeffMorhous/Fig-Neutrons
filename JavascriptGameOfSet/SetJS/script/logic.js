@@ -37,9 +37,42 @@ function draw(pile) {
 
 /**
  * Returns the number of matches found on the board
+ * @param {boolean} hint a boolean variable to indicate if an alert is brought up when clicking hint
+ */
+function numberOfSets(hint) {
+  let i=0;
+  let numMatches = 0;
+  while(board.length-i >= 3) {
+    card1=board[i]; 
+    for(j=i+1;j<board.length-1;j++) {
+      card2=board[j];
+      for(r=j+1;r<board.length;r++) {
+        card3=board[r];
+        let card1String = `${card1.number} ${card1.fill} ${card1.color} ${card1.shape}`;
+        let card2String = `${card2.number} ${card2.fill} ${card2.color} ${card2.shape}`
+        let card3String = `${card3.number} ${card3.fill} ${card3.color} ${card3.shape}`
+        if (checkSet([card1String, card2String, card3String])) {
+          numMatches ++;
+        }
+      } 
+    }
+    i+=1;
+  }
+  if (hint) {
+    if (numMatches === 1) {
+      alert(`There is ${numMatches} match`);
+    } else {
+      alert(`There are ${numMatches} matches`);
+    }
+  }
+  return numMatches;
+}
+
+/**
+ * Returns the number of matches found on the board
  * @param {Array} board array consisting of 12 cards to represent the current board
  */
-function numberOfSets(board) {
+function findASet() {
   let i=0;
   let numMatches = 0;
   while(board.length-i >= 3) {
@@ -52,7 +85,10 @@ function numberOfSets(board) {
         let card2String = `${card2.number} ${card2.fill} ${card2.color} ${card2.shape}`
         let card3String = `${card3.number} ${card3.fill} ${card3.color} ${card3.shape}`
         if  (checkSet([card1String, card2String, card3String])) {
-          numMatches ++;
+          document.querySelector(`img[alt='${card1String}']`).parentElement.style.backgroundColor = "yellow";
+          document.querySelector(`img[alt='${card2String}']`).parentElement.style.backgroundColor = "yellow";
+          document.querySelector(`img[alt='${card3String}']`).parentElement.style.backgroundColor = "yellow";
+          return;
         }
       } 
     }
@@ -62,7 +98,7 @@ function numberOfSets(board) {
 }
 
 function dealBoard() {
-  let board = new Array();
+  board = new Array();
 
   //the cards in the board will be regenerated as many times as is necessary to ensure
   //there is at least one match
@@ -70,7 +106,7 @@ function dealBoard() {
     for (let i = 0; i < 12; i++) {
       board.push(draw(deck));
     }
-  } while (numberOfSets(board) == 0)
+  } while (numberOfSets(false) == 0)
 
   return board;
 }
@@ -130,16 +166,20 @@ function userClickEvent(clickedCard) {
     cards[1] = cardInfo;
   } else {
     cards[2] = cardInfo;
+    let cardOne = cards[0].split(" ");
+    let cardTwo = cards[1].split(" ");
+    let cardThree = cards[2].split(" ");
     setTimeout(function () {
       const isMatch = checkSet(cards);
       if(isMatch) {
-
+        
         // Match found - update score and update the board
+        
         score++;
         document.getElementById('score').innerHTML = score;
-        alert("You got a set!");
         removeThree(cardOne, cardTwo, cardThree);
         addThree();
+        alert("You got a set!");
       } else {
 
         // Match not found - decrement score and deselect cards by changing the border back to black
@@ -161,6 +201,7 @@ function shuffleBoard() {
     newBoard.push(draw(board));
   }
   board = newBoard;
+  document.getElementById("gameRules").style.display = "none";
   displayBoard();
 }
 
@@ -209,8 +250,8 @@ function removeThree(cardOne, cardTwo, cardThree){
   for (let i = 0; i < 12; i++) {
     if((board[i].number == cardOne[0] && board[i].fill == cardOne[1] && board[i].color == cardOne[2] && board[i].shape == cardOne[3]) ||
       (board[i].number == cardTwo[0] && board[i].fill == cardTwo[1] && board[i].color == cardTwo[2] && board[i].shape == cardTwo[3]) ||
-      (board[i].number == cardThree[0] && board[i].fill == cardThree[1] && board[i].color == cardThree[2] && board[i].shape == cardThree[3]))
-      alert(board[i].number);
+      (board[i].number == cardThree[0] && board[i].fill == cardThree[1] && board[i].color == cardThree[2] && board[i].shape == cardThree[3])){}
+      // alert(board[i].number);
     else {
       newBoard.push(board[i]);
     }

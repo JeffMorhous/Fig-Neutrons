@@ -7,9 +7,11 @@
 </head>
 <body>
   <div class="topnav">
-    <a onclick="openRules()">View Rules</a>
+    <a href="javascript:void(0)" onclick="openRules()">View Rules</a>
     <a href="javascript:void(0)" onclick="newGame()">New Game</a>
     <a href="javascript:void(0)" onclick="shuffleBoard()">Shuffle Board</a>
+    <a href="javascript:void(0)" onclick="findASet()">Find Set</a>
+    <a href="javascript:void(0)" onclick="numberOfSets(true)">Hint</a>
     <a>Score = <span id="score">0</span></a>
   </div>
 
@@ -47,6 +49,7 @@
         lose 1 or 2 points depending on the hint type. There is no penalty if you 
         need to shuffle the board to get a new perspective. Have fun!</p>
     </div>
+    <!-- <div id="message">Test</div> -->
     <div id="board">
       <table id="setBoard"></table>
     </div>
