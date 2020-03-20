@@ -39,25 +39,26 @@ function draw(pile) {
  * Returns the number of matches found on the board
  * @param {Array} board array consisting of 12 cards to represent the current board
  */
-function ensureMatchesExist(board) {
+function numberOfSets(board) {
+  let i=0;
   let numMatches = 0;
-
-  // Find all the possible combinations of 3 cards (12 choose 3 = 220)
-  const allCardCombinations = k_combinations(board,3);
-  for(let i = 0; i < allCardCombinations.length; i++) {
-    const cardSet = [];
-
-    // Combine the properties of each card in the combination to a string 
-    // and then check if the those three cards make a set 
-    for(const card of allCardCombinations[i]) {
-      const line = `${card.number} ${card.fill} ${card.color} ${card.shape}`;
-      cardSet.push(line);
+  while(board.length-i >= 3) {
+    card1=board[i]; 
+    for(j=i+1;j<board.length-1;j++) {
+      card2=board[j];
+      for(r=j+1;r<board.length;r++) {
+        card3=board[r];
+        let card1String = `${card1.number} ${card1.fill} ${card1.color} ${card1.shape}`;
+        let card2String = `${card2.number} ${card2.fill} ${card2.color} ${card2.shape}`
+        let card3String = `${card3.number} ${card3.fill} ${card3.color} ${card3.shape}`
+        if  (checkSet([card1String, card2String, card3String])) {
+          numMatches ++;
+        }
+      } 
     }
-    if(checkSet(cardSet)) {
-      numMatches++;
-    }
+    i+=1;
   }
-  return numMatches;
+  return numMatches ++;
 }
 
 function dealBoard() {
@@ -69,7 +70,7 @@ function dealBoard() {
     for (let i = 0; i < 12; i++) {
       board.push(draw(deck));
     }
-  } while (ensureMatchesExist(board) == 0)
+  } while (numberOfSets(board) == 0)
 
   return board;
 }
@@ -235,68 +236,4 @@ function openRules () {
 function closeRules() {
   document.getElementById("rules-background").style.display = "none";
   document.getElementById("rules-content").style.display = "none";
-}
-
-
-/**
- * SOURCE: https://gist.github.com/axelpale/3118596
- * Get k-sized combinations of elements in a set
- * @param {Array} set Array of objects of any type
- * @param {number} k size of combinations to search for
- */
-function k_combinations(set, k) {
-	var i, j, combs, head, tailcombs;
-	
-	// There is no way to take e.g. sets of 5 elements from
-	// a set of 4.
-	if (k > set.length || k <= 0) {
-		return [];
-	}
-	
-	// K-sized set has only one K-sized subset.
-	if (k == set.length) {
-		return [set];
-	}
-	
-	// There is N 1-sized subsets in a N-sized set.
-	if (k == 1) {
-		combs = [];
-		for (i = 0; i < set.length; i++) {
-			combs.push([set[i]]);
-		}
-		return combs;
-	}
-	
-	// Assert {1 < k < set.length}
-	
-	// Algorithm description:
-	// To get k-combinations of a set, we want to join each element
-	// with all (k-1)-combinations of the other elements. The set of
-	// these k-sized sets would be the desired result. However, as we
-	// represent sets with lists, we need to take duplicates into
-	// account. To avoid producing duplicates and also unnecessary
-	// computing, we use the following approach: each element i
-	// divides the list into three: the preceding elements, the
-	// current element i, and the subsequent elements. For the first
-	// element, the list of preceding elements is empty. For element i,
-	// we compute the (k-1)-computations of the subsequent elements,
-	// join each with the element i, and store the joined to the set of
-	// computed k-combinations. We do not need to take the preceding
-	// elements into account, because they have already been the i:th
-	// element so they are already computed and stored. When the length
-	// of the subsequent list drops below (k-1), we cannot find any
-	// (k-1)-combs, hence the upper limit for the iteration:
-	combs = [];
-	for (i = 0; i < set.length - k + 1; i++) {
-		// head is a list that includes only our current element.
-		head = set.slice(i, i + 1);
-		// We take smaller combinations from the subsequent elements
-		tailcombs = k_combinations(set.slice(i + 1), k - 1);
-		// For each (k-1)-combination we join it with the current
-		// and store it to the set of k-combinations.
-		for (j = 0; j < tailcombs.length; j++) {
-			combs.push(head.concat(tailcombs[j]));
-		}
-	}
-	return combs;
 }
