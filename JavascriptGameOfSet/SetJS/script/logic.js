@@ -65,6 +65,7 @@ function numberOfSets(hint) {
       alert(`There are ${numMatches} matches`);
     }
   }
+  updateScore(-1);
   return numMatches;
 }
 
@@ -88,6 +89,7 @@ function findASet() {
           document.querySelector(`img[alt='${card1String}']`).parentElement.style.backgroundColor = "yellow";
           document.querySelector(`img[alt='${card2String}']`).parentElement.style.backgroundColor = "yellow";
           document.querySelector(`img[alt='${card3String}']`).parentElement.style.backgroundColor = "yellow";
+          updateScore(-2);
           return;
         }
       } 
@@ -117,10 +119,10 @@ function dealBoard() {
 function displayBoard() {
   document.getElementById('setBoard').innerHTML = '';
   let cardTableRow = document.createElement("TR");
-  for(let j = 1; j < board.length+1; j++) {
+  for(let j = 0; j < board.length; j++) {
     let cardTableEntry = document.createElement("TD");
     cardTableEntry.className = "cardTableEntry";
-    let card = board[j-1];
+    let card = board[j];
     let cardPic = document.createElement("img");
     cardTableEntry.onclick = () => userClickEvent(cardPic);
     cardPic.src = "../pictures/SET/" + card.number + "-" + card.fill + "-" + card.color + "-" + card.shape + ".png";
@@ -131,7 +133,7 @@ function displayBoard() {
     cardTableRow.appendChild(cardTableEntry);
 
     // Start a new row after 4 cards have been placed
-    if( j % 4 == 0 ) {
+    if( (j+1) % 4 == 0 ) {
       document.getElementById('setBoard').appendChild(cardTableRow);
       cardTableRow = document.createElement("TR");
     }
@@ -174,8 +176,7 @@ function userClickEvent(clickedCard) {
       if(isMatch) {
         
         // Match found - update score and update the board
-        
-        score++;
+        updateScore(3);
         document.getElementById('score').innerHTML = score;
         removeThree(cardOne, cardTwo, cardThree);
         addThree();
@@ -183,7 +184,7 @@ function userClickEvent(clickedCard) {
       } else {
 
         // Match not found - decrement score and deselect cards by changing the border back to black
-        score--;
+        updateScore(-1);
         alert("Incorrect set!");
         const selectedCards = document.getElementsByClassName("selectedCard");
         for (let i = 0; i < selectedCards.length; i++) {
@@ -195,6 +196,9 @@ function userClickEvent(clickedCard) {
   }
 };
 
+/**
+ * Shuffle the cards on the board by reordering the board array
+ */
 function shuffleBoard() {
   let newBoard = new Array();
   while(board.length > 0) {
@@ -205,13 +209,15 @@ function shuffleBoard() {
   displayBoard();
 }
 
+/**
+ * Start a new game of SET by filling the deck and dealing the board
+ */
 function newGame() {
   deck = getDeck();
   board = dealBoard();
   score = 0;
   cards = ["", "", ""];
-  document.getElementById("score").innerHTML = score;
-  document.getElementById("gameRules").style.display = "none";
+  setUINewGame();
   displayBoard();
 }
 
@@ -236,15 +242,32 @@ function checkSet(cardSet) {
   }
 }
 
+/**
+ * Check if all the properties of the 3 cards are the same
+ * @param {string} one the first card's properties
+ * @param {string} two the second card's properties
+ * @param {string} three the third card's properties
+ */
 function allSame(one, two, three) {
   return (one == two && two == three);
 }
 
+/**
+ * Check if all the properties of the 3 cards are different
+ * @param {string} one the first card's properties
+ * @param {string} two the second card's properties
+ * @param {string} three the third card's properties
+ */
 function allDifferent(one, two, three) {
   return (one != two && one != three && two != three);
 }
 
-
+/**
+ * Remove three cards out of the current cards on the board
+ * @param {Array} cardOne the properties of the first card
+ * @param {Array} cardTwo the properties of the second card
+ * @param {Array} cardThree the properties of the third card
+ */
 function removeThree(cardOne, cardTwo, cardThree){
   let newBoard = new Array();
   for (let i = 0; i < 12; i++) {
@@ -259,6 +282,9 @@ function removeThree(cardOne, cardTwo, cardThree){
   board = newBoard;
 }
 
+/**
+ * Add three cards to the board
+ */
 function addThree(){
   let newBoard = new Array();
   newBoard = board;
@@ -269,12 +295,42 @@ function addThree(){
   displayBoard();
 }
 
+/**
+ * Update the player's score
+ * @param {number} scoreVal 
+ */
+function updateScore(scoreVal){
+  score = score + scoreVal;
+  document.getElementById("score").innerHTML = score.toString();
+}
+
+/**
+ * Open the rules modal
+ */
 function openRules () {
   document.getElementById("rules-background").style.display = "block";
   document.getElementById("rules-content").style.display = "block";
 }
 
+/**
+ * Close the rules modal
+ */
 function closeRules() {
   document.getElementById("rules-background").style.display = "none";
   document.getElementById("rules-content").style.display = "none";
+}
+
+/**
+ * Update the state of the UI to show and enable buttons
+ */
+function setUINewGame(){
+  document.getElementById("topNavRules").style.display= "unset";
+  document.getElementsByClassName("topNavScore")[0].style.display = "unset";
+  document.getElementById("score").innerHTML = score;
+  document.getElementById("gameRules").style.display = "none";
+  document.getElementById("topNavShuffle").disabled = false;
+  document.getElementById("topNavFindSet").disabled = false;
+  document.getElementById("topNavNumSet").disabled = false;
+
+
 }

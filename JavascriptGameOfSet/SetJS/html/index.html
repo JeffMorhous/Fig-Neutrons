@@ -6,13 +6,14 @@
   <link rel="stylesheet" type="text/css" href="..\style\canvas.css" />
 </head>
 <body>
+  <h1 class="title">SET Card Game</h1>
   <div class="topnav">
-    <a href="javascript:void(0)" onclick="openRules()">View Rules</a>
-    <a href="javascript:void(0)" onclick="newGame()">New Game</a>
-    <a href="javascript:void(0)" onclick="shuffleBoard()">Shuffle Board</a>
-    <a href="javascript:void(0)" onclick="findASet()">Find Set</a>
-    <a href="javascript:void(0)" onclick="numberOfSets(true)">Hint</a>
-    <a>Score = <span id="score">0</span></a>
+    <button class="topNavButton" id="topNavRules" onclick="openRules()">View Rules</button>
+    <button class="topNavButton" onclick="newGame()">New Game</button>
+    <button class="topNavButton" id="topNavShuffle" disabled onclick="shuffleBoard()">Shuffle Board</button>
+    <button class="topNavButton" id="topNavFindSet" disabled onclick="findASet()">Find Set</button>
+    <button class="topNavButton" id="topNavNumSet" disabled onclick="numberOfSets(true)">Hint</button>
+    <button class="topNavScore">Score = <span id="score"></span></button>
   </div>
 
   <div id="pop-up">
@@ -31,7 +32,7 @@
       all the same or all different. If you guess correctly, you get 3 points.
       If you guess incorrectly you lose a point. If you request a hint, you will
       lose 1 or 2 points depending on the hint type. There is no penalty if you 
-      need to shuffle the board to get a new perspective. Have fun!</p>
+      need to shuffle the board to get a new perspective. Click on New Game to begin. Have fun!</p>
 
     </div>
 
@@ -47,7 +48,7 @@
         all the same or all different. If you guess correctly, you get 3 points.
         If you guess incorrectly you lose a point. If you request a hint, you will
         lose 1 or 2 points depending on the hint type. There is no penalty if you 
-        need to shuffle the board to get a new perspective. Have fun!</p>
+        need to shuffle the board to get a new perspective. Click on New Game to begin. Have fun!</p>
     </div>
     <!-- <div id="message">Test</div> -->
     <div id="board">

@@ -1,19 +1,40 @@
 body {
-  background: #fff5d7
+  background: #fff5d7;
+  /* font-family: 'Roboto'; */
 }
 
-.topnav {
-  background-color: #BF9877;
-  margin-bottom: 50px;
-}
-
-.topnav a {
-  float: center;
-  color: black;
+.title {
   text-align: center;
-  padding: 20px 16px;
-  text-decoration: none;
-  font-size: 25px;
+}
+.topnav {
+  margin-bottom: 20px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.topNavButton {
+  cursor: pointer;
+  border: 1px;
+  border-radius: 10px;
+  background: lightslategray;
+  padding: 5px 15px;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+}
+
+#topNavRules {
+  display: none;
+}
+.topNavScore {
+  display: none;
+  border: 1px;
+  border-radius: 10px;
+  background: lightslategray;
+  padding: 5px 15px;
+  font-size: 20px;
+  text-align: center;
+  color: white;
 }
 
 #gameRules {
@@ -21,11 +42,6 @@ body {
   width: 50%;
   margin: auto;
 }
-
-/* #message {
-  text-align: center;
-  font-size: 16px;
-} */
 
 .card {
   /* for the old images: 
@@ -65,7 +81,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  margin: 50px auto 0px auto;
+  margin: 200px auto 0px auto;
   border: 1px solid black;
   border-radius: 10px;
   padding: 15px;
