@@ -9,14 +9,14 @@
   <h1 class="title">SET Card Game</h1>
   <div class="topnav">
     <button class="topNavButton" id="topNavRules" onclick="openRules()">View Rules</button>
-    <button class="topNavButton" onclick="newGame()">New Game</button>
+    <button class="topNavButton" onclick="openNewGameMenu()">New Game</button>
     <button class="topNavButton" id="topNavShuffle" disabled onclick="shuffleBoard()">Shuffle Board</button>
     <button class="topNavButton" id="topNavFindSet" disabled onclick="findASet()">Find Set</button>
     <button class="topNavButton" id="topNavNumSet" disabled onclick="numberOfSets(true)">Hint</button>
     <button class="topNavScore">Score = <span id="score"></span></button>
   </div>
 
-  <div id="pop-up">
+  <div id="pop-up-rules">
 
     <!--Modal window to display rules -->
     <div id="rules-background" class="modal-background" onclick="closeRules()"></div>
@@ -34,6 +34,32 @@
       lose 1 or 2 points depending on the hint type. There is no penalty if you 
       need to shuffle the board to get a new perspective. Click on New Game to begin. Have fun!</p>
 
+    </div>
+
+  </div>
+
+  <div id="pop-up-menu">
+
+    <!--Modal window to display rules -->
+    <div id="menu-background" class="modal-background" onclick="closeNewGameMenu()"></div>
+    <div id="menu-content" class="modal-content">
+      <div id="close-menu">
+        <img id="close" src = "../pictures/close_icon.svg" alt = "Close" height= "20" width = "20" onclick="closeNewGameMenu()">
+      </div>
+      <h3>Player(s)</h3>
+      <input type="radio" id="Singleplayer" name="Players" value="Singleplayer" onclick="setPlayer(this.value)">
+      <label for="Singleplayer">Singleplayer</label>
+      <input type="radio" id="Multiplayer" name="Players" value="Multiplayer" onclick="setPlayer(this.value)">
+      <label for="Multiplayer">Multiplayer</label>
+      <h3>Difficulty</h3>
+      <input type="radio" id="Easy" name="Difficulty" value="Easy" onclick="setDifficulty(this.value)">
+      <label for="Easy">Easy</label>
+      <input type="radio" id="Medium" name="Difficulty" value="Medium" onclick="setDifficulty(this.value)">
+      <label for="Medium">Medium</label>
+      <input type="radio" id="Hard" name="Difficulty" value="Hard" onclick="setDifficulty(this.value)">
+      <label for="Hard">Hard</label>
+      <br><br>
+      <button class="topNavButton" id="menuStartButton" disabled onclick="newGame()">Start Game</button>
     </div>
 
   </div>
