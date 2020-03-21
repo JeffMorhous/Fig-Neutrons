@@ -6,15 +6,54 @@
   <link rel="stylesheet" type="text/css" href="..\style\canvas.css" />
 </head>
 <body>
+  <h1 class="title">SET Card Game</h1>
   <div class="topnav">
-    <a href="rules.html">View Rules</a>
-    <a href="javascript:void(0)" onclick="newGame()">New Game</a>
-    <a href="javascript:void(0)" onclick="shuffleBoard()">Shuffle Board</a>
-    <a>No Matches</a>
-    <a>Score = <span id="score"></span></a>
+    <button class="topNavButton" id="topNavRules" onclick="openRules()">View Rules</button>
+    <button class="topNavButton" onclick="newGame()">New Game</button>
+    <button class="topNavButton" id="topNavShuffle" disabled onclick="shuffleBoard()">Shuffle Board</button>
+    <button class="topNavButton" id="topNavFindSet" disabled onclick="findASet()">Find Set</button>
+    <button class="topNavButton" id="topNavNumSet" disabled onclick="numberOfSets(true)">Hint</button>
+    <button class="topNavScore">Score = <span id="score"></span></button>
   </div>
+
+  <div id="pop-up">
+
+    <!--Modal window to display rules -->
+    <div id="rules-background" class="modal-background" onclick="closeRules()"></div>
+    <div id="rules-content" class="modal-content">
+      <div id="close-rules">
+        <img id="close" src = "../pictures/close_icon.svg" alt = "Close" height= "20" width = "20" onclick="closeRules()">
+      </div>
+      <h3>Rules</h3>
+      <p>Pick three cards to make a set. Click on a card to mark it as part of a set. 
+      Click on a card again to unselect it. Cards are different in four ways:
+      color, shape, number of shapes, and how the shapes are filled.
+      To make a set, the details on the three cards must each be either
+      all the same or all different. If you guess correctly, you get 3 points.
+      If you guess incorrectly you lose a point. If you request a hint, you will
+      lose 1 or 2 points depending on the hint type. There is no penalty if you 
+      need to shuffle the board to get a new perspective. Click on New Game to begin. Have fun!</p>
+
+    </div>
+
+  </div>
+
   <div class="board">
-    <div id="board"></div>
+    <div id="gameRules">
+      <h3>Rules</h3>
+      <p>Pick three cards to make a set. Click on a card to mark it as part of a set. 
+        Click on a card again to unselect it. Cards are different in four ways:
+        color, shape, number of shapes, and how the shapes are filled.
+        To make a set, the details on the three cards must each be either
+        all the same or all different. If you guess correctly, you get 3 points.
+        If you guess incorrectly you lose a point. If you request a hint, you will
+        lose 1 or 2 points depending on the hint type. There is no penalty if you 
+        need to shuffle the board to get a new perspective. Click on New Game to begin. Have fun!</p>
+    </div>
+    <!-- <div id="message">Test</div> -->
+    <div id="board">
+      <table id="setBoard"></table>
+    </div>
   </div>
   <script src="..\script\logic.js" async></script>
 </body>
