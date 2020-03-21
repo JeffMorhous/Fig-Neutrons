@@ -133,7 +133,7 @@ function displayBoard() {
     cardTableRow.appendChild(cardTableEntry);
 
     // Start a new row after 4 cards have been placed
-    if( (j+1) % 4 == 0 ) {
+    if( (j+1) % 6 == 0 ) {
       document.getElementById('setBoard').appendChild(cardTableRow);
       cardTableRow = document.createElement("TR");
     }
