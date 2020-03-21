@@ -1,5 +1,7 @@
 var deck = getDeck();
 var board = dealBoard();
+var cards = ["", "", ""];
+var score;
 
 
 function getDeck() {
@@ -29,11 +31,25 @@ function draw(pile) {
   return pile.splice(index,1)[0];
 }
 
+function ensureMatchesExist(board) {
+  let numMatches = 0;
+
+
+  //update this to return the number of matches found
+  return 1;
+}
+
 function dealBoard() {
   let board = new Array();
-  for (let i = 0; i < 12; i++) {
-    board.push(draw(deck));
-  }
+
+  //the cards in the board will be regenerated as many times as is necessary to ensure
+  //there is at least one match
+  do {
+    for (let i = 0; i < 12; i++) {
+      board.push(draw(deck));
+    }
+  } while (ensureMatchesExist(board) == 0)
+
   return board;
 }
 
@@ -42,7 +58,8 @@ function displayBoard() {
   for (let i = 0; i < board.length; i++) {
     let card = board[i];
     let cardDiv = document.createElement("div");
-    let cardPic = document.createElement("IMG");
+    let cardPic = document.createElement("img");
+    cardPic.onclick = () => userClickEvent(cardPic.alt);
     cardPic.src = "../pictures/" + card.number + "-" + card.fill + "-" + card.color + "-" + card.shape + ".png";
     cardPic.alt = card.number + " " + card.fill + " " + card.color + " " + card.shape
     cardPic.className = "card";
@@ -51,17 +68,91 @@ function displayBoard() {
   }
 }
 
-function newGame() {
-  deck = getDeck();
-  board = dealBoard();
-  displayBoard();
-}
+//this function deals with when the user chooses a card
+function userClickEvent(cardInfo) {
+  //first make sure that this card wasn't previously selected
+  if(cards[0] == cardInfo || cards[1] == cardInfo || cards[2] == cardInfo){
+    alert("Error: A Card Has Been Selected More Than Once");
+    return;
+  }
+
+  if(cards[0] == ""){
+    cards[0] = cardInfo;
+  } else if (cards[1] == "") {
+    cards[1] = cardInfo;
+  } else {
+    cards[2] = cardInfo;
+    checkSet();
+  }
+};
 
 function shuffleBoard() {
   let newBoard = new Array();
   while(board.length > 0) {
     newBoard.push(draw(board));
   }
+  board = newBoard;
+  displayBoard();
+}
+
+function newGame() {
+  deck = getDeck();
+  board = dealBoard();
+  score = 0;
+  cards = ["", "", ""];
+  displayBoard();
+}
+
+function checkSet() {
+  let cardOne = cards[0].split(" ");
+  let cardTwo = cards[1].split(" ");
+  let cardThree = cards[2].split(" ");
+  cards = ["", "", ""];
+  if((allSame(cardOne[0], cardTwo[0], cardThree[0]) || allDifferent(cardOne[0], cardTwo[0], cardThree[0])) &&
+     (allSame(cardOne[1], cardTwo[1], cardThree[1]) || allDifferent(cardOne[1], cardTwo[1], cardThree[1])) &&
+     (allSame(cardOne[2], cardTwo[2], cardThree[2]) || allDifferent(cardOne[2], cardTwo[2], cardThree[2])) &&
+     (allSame(cardOne[3], cardTwo[3], cardThree[3]) || allDifferent(cardOne[3], cardTwo[3], cardThree[3]))) {
+      //if in here then a match was found hooray
+      score++;
+      document.getElementById('score').innerHTML = score;
+      //update the board now
+      removeThree(cardOne, cardTwo, cardThree);
+      addThree();
+  } else {
+    score--;
+    document.getElementById('score').innerHTML = score;
+  }
+}
+
+function allSame(one, two, three) {
+  return (one == two && two == three);
+}
+
+function allDifferent(one, two, three) {
+  return (one != two && one != three);
+}
+
+
+function removeThree(cardOne, cardTwo, cardThree){
+  let newBoard = new Array();
+  for (let i = 0; i < 12; i++) {
+    if((board[i].number == cardOne[0] && board[i].fill == cardOne[1] && board[i].color == cardOne[2] && board[i].shape == cardOne[3]) ||
+      (board[i].number == cardTwo[0] && board[i].fill == cardTwo[1] && board[i].color == cardTwo[2] && board[i].shape == cardTwo[3]) ||
+      (board[i].number == cardThree[0] && board[i].fill == cardThree[1] && board[i].color == cardThree[2] && board[i].shape == cardThree[3]))
+      alert(board[i].number);
+    else {
+      newBoard.push(board[i]);
+    }
+  }
+  board = newBoard;
+}
+
+function addThree(){
+  let newBoard = new Array();
+  newBoard = board;
+  newBoard.push(draw(deck));
+  newBoard.push(draw(deck));
+  newBoard.push(draw(deck));
   board = newBoard;
   displayBoard();
 }
