@@ -42,6 +42,12 @@ body {
   margin: auto;
 }
 
+#currentPlayer {
+  display: none;
+  text-align: center;
+  margin: auto;
+}
+
 a:hover {
   background-color: #111;
 }

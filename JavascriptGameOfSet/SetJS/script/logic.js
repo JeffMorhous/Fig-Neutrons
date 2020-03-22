@@ -4,10 +4,11 @@ var cards = ["", "", ""];
 var score;
 var p1Score;
 var p2Score;
-var multiplayer = 1;
-var multiplayerTemp = 1;
-var difficulty = false;
-var difficultyTemp = false;
+var turn = false; //if true it is player 1's turn
+var multiplayer = false; //false = singleplayer, true = multiplayer
+var multiplayerTemp = false;
+var difficulty = 1; //1 = easy, 2 = medium, 3 = hard
+var difficultyTemp = 1;
 
 
 function getDeck() {
@@ -80,8 +81,8 @@ function numberOfSets(hint) {
     } else {
       alert(`There are ${numMatches} matches`);
     }
+    updateScore(-1);
   }
-  updateScore(-1);
   return numMatches;
 }
 
@@ -197,6 +198,7 @@ function userClickEvent(clickedCard) {
         removeThree(cardOne, cardTwo, cardThree);
         addThree();
         alert("You got a set!");
+
       } else {
 
         // Match not found - decrement score and deselect cards by changing the border back to black
@@ -207,6 +209,14 @@ function userClickEvent(clickedCard) {
           selectedCards[i].parentElement.style.border = "3px solid #bfbfbf";
         }
         document.getElementById('score').innerHTML = score;
+      }
+      if(multiplayer){
+        turn = !turn;
+        if(turn){
+          document.getElementById('player').innerHTML = "2";
+        } else {
+          document.getElementById('player').innerHTML = "1";
+        }
       }
     }, 100);
   }
@@ -231,11 +241,12 @@ function shuffleBoard() {
 function newGame() {
   difficulty = difficultyTemp;
   multiplayer = multiplayerTemp;
-  deck = getDeck();
-  board = dealBoard();
+  document.getElementById("player").innerHTML = "1";
   p1Score = 0;
   p2Score = 0;
-  score = "Player 1's Score: " + multiplayer + "\nPlayer 2's Score: " + difficulty;
+  updateScore(0);
+  deck = getDeck();
+  board = dealBoard();
   cards = ["", "", ""];
   setUINewGame();
   displayBoard();
@@ -320,8 +331,18 @@ function addThree(){
  * @param {number} scoreVal 
  */
 function updateScore(scoreVal){
-  score = score + scoreVal;
-  document.getElementById("score").innerHTML = score.toString();
+  if(turn){
+    p2Score+=scoreVal;
+  } else {
+    p1Score+=scoreVal;
+  }
+
+  if(multiplayer){
+    score = "Player 1: " + p1Score.toString() + " Player 2: " + p2Score.toString();
+  } else {
+    score = "Score: " + p1Score.toString();
+  }
+  document.getElementById("score").innerHTML = score;
 }
 
 /**
@@ -358,6 +379,11 @@ function setUINewGame(){
   document.getElementsByClassName("topNavScore")[0].style.display = "unset";
   document.getElementById("score").innerHTML = score;
   document.getElementById("gameRules").style.display = "none";
+  if(multiplayer){
+    document.getElementById("currentPlayer").style.display = "block";
+  } else {
+    document.getElementById("currentPlayer").style.display = "none";
+  }
   document.getElementById("topNavShuffle").disabled = false;
   document.getElementById("topNavFindSet").disabled = false;
   document.getElementById("topNavNumSet").disabled = false;
@@ -389,3 +415,4 @@ function setDifficulty(challenge){
   }
 }
 
+c
