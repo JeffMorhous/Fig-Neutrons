@@ -48,6 +48,12 @@ body {
   margin: auto;
 }
 
+#timer {
+  display: none;
+  text-align: center;
+  margin: auto;
+}
+
 a:hover {
   background-color: #111;
 }
@@ -123,4 +129,9 @@ a:hover {
 
 .menu-content h1{
   text-align: center;
+}
+
+#time-content {
+  text-align: center;
+  min-height: 100px;
 }

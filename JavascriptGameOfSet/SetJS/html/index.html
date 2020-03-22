@@ -40,7 +40,7 @@
 
   <div id="pop-up-menu">
 
-    <!--Modal window to display rules -->
+    <!--Modal window to display new game menu -->
     <div id="menu-background" class="modal-background" onclick="closeNewGameMenu()"></div>
     <div id="menu-content" class="modal-content">
       <div id="close-menu">
@@ -64,6 +64,16 @@
 
   </div>
 
+  <div id="pop-up-time">
+
+    <!--Modal window to tell you, you ran out of time -->
+    <div id="time-background" class="modal-background"></div>
+    <div id="time-content" class="modal-content">
+      <h3>You Ran Out of Time!</h3>
+      <button class="topNavButton" id="exitTimePopUpButton" onclick="closeTimePopUp()">Okay</button>
+    </div>
+  </div>
+
   <div class="board">
     <div id="gameRules">
       <h3>Rules</h3>
@@ -82,6 +92,9 @@
     <div id="board">
       <table id="setBoard"></table>
     </div>
+    <div id="timer">
+      <h1>Time Left: <span id="time"></span></h1>
+    </div>  
   </div>
   <script src="..\script\logic.js" async></script>
 </body>

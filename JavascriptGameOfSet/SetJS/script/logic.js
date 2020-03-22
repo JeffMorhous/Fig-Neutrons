@@ -9,6 +9,7 @@ var multiplayer = false; //false = singleplayer, true = multiplayer
 var multiplayerTemp = false;
 var difficulty = 1; //1 = easy, 2 = medium, 3 = hard
 var difficultyTemp = 1;
+var timer;
 
 
 function getDeck() {
@@ -218,6 +219,9 @@ function userClickEvent(clickedCard) {
           document.getElementById('player').innerHTML = "1";
         }
       }
+      clearInterval(timer);
+      timer = null;
+      timerStart();
     }, 100);
   }
 };
@@ -239,6 +243,10 @@ function shuffleBoard() {
  * Start a new game of SET by filling the deck and dealing the board
  */
 function newGame() {
+  if(timer != null){
+    clearInterval(timer);
+  }
+  timer = null;
   difficulty = difficultyTemp;
   multiplayer = multiplayerTemp;
   document.getElementById("player").innerHTML = "1";
@@ -250,6 +258,7 @@ function newGame() {
   cards = ["", "", ""];
   setUINewGame();
   displayBoard();
+  timerStart();
 }
 
 /**
@@ -361,15 +370,32 @@ function closeRules() {
   document.getElementById("rules-content").style.display = "none";
 }
 
+/**
+ * Open the game menu modal
+ */
 function openNewGameMenu(){
   document.getElementById("menu-background").style.display = "block";
   document.getElementById("menu-content").style.display = "block";
 }
 
+/**
+ * Close the game menu modal
+ */
 function closeNewGameMenu(){
   document.getElementById("menu-background").style.display = "none";
   document.getElementById("menu-content").style.display = "none";
 }
+
+/**
+ * Close the out of time modal
+ */
+function closeTimePopUp(){
+  document.getElementById("time-background").style.display = "none";
+  document.getElementById("time-content").style.display = "none";
+  timer = null;
+  timerStart();
+}
+
 /**
  * Update the state of the UI to show and enable buttons
  */
@@ -379,6 +405,7 @@ function setUINewGame(){
   document.getElementsByClassName("topNavScore")[0].style.display = "unset";
   document.getElementById("score").innerHTML = score;
   document.getElementById("gameRules").style.display = "none";
+  document.getElementById("timer").style.display = "block";
   if(multiplayer){
     document.getElementById("currentPlayer").style.display = "block";
   } else {
@@ -389,6 +416,9 @@ function setUINewGame(){
   document.getElementById("topNavNumSet").disabled = false;
 }
 
+/**
+ * Set the multiplayer variable to pick the game type
+ */
 function setPlayer(players){
   if(players == "Singleplayer"){
     multiplayerTemp = false;
@@ -401,6 +431,9 @@ function setPlayer(players){
   }
 }
 
+/**
+ * Set the difficulty variable to pick the timer length
+ */
 function setDifficulty(challenge){
   if(challenge == "Easy"){
     difficultyTemp = 1;
@@ -415,4 +448,32 @@ function setDifficulty(challenge){
   }
 }
 
-c
+/**
+ * Start the timer for a length determined by the difficulty
+ */
+function timerStart(){
+  var sec;
+  if(difficulty == 1){
+    sec = 60;
+    document.getElementById('time').innerHTML = "∞";
+  } else if(difficulty == 2){
+    sec = 30;
+  } else {
+    sec = 15;
+  }
+  if(sec <= 30){
+    timer = setInterval(function(){
+      document.getElementById('time').innerHTML = sec.toString();
+      sec--;
+      if(sec<0n){
+        clearInterval(timer);
+        updateScore(-1);
+        if(multiplayer){
+          turn = !turn;
+        }
+        document.getElementById("time-background").style.display = "block";
+        document.getElementById("time-content").style.display = "block";
+      }
+    },1000)
+  }
+}
