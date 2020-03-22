@@ -67,8 +67,8 @@ function numberOfSets(hint) {
 }
         card3=board[r];
         let card1String = `${card1.number} ${card1.fill} ${card1.color} ${card1.shape}`;
-        let card2String = `${card2.number} ${card2.fill} ${card2.color} ${card2.shape}`
-        let card3String = `${card3.number} ${card3.fill} ${card3.color} ${card3.shape}`
+        let card2String = `${card2.number} ${card2.fill} ${card2.color} ${card2.shape}`;
+        let card3String = `${card3.number} ${card3.fill} ${card3.color} ${card3.shape}`;
         if (checkSet([card1String, card2String, card3String])) {
           numMatches ++;
         }
@@ -78,10 +78,15 @@ function numberOfSets(hint) {
   }
   if (hint) {
     if (numMatches === 1) {
-      alert(`There is ${numMatches} match`);
+      let message = `Unknown hint`;
+      message = `There is ${numMatches} match.`
     } else {
-      alert(`There are ${numMatches} matches`);
+      message = `There are ${numMatches} matches.`
     }
+    document.getElementById("hint-message").innerHTML = message; //Add the message to the block
+
+    document.getElementById("hint-background").style.display = "block";
+    document.getElementById("hint-content").style.display = "block";
     updateScore(-1);
   }
   return numMatches;
@@ -394,6 +399,14 @@ function closeTimePopUp(){
   document.getElementById("time-content").style.display = "none";
   timer = null;
   timerStart();
+}
+
+/**
+ * Close the out of hint modal
+ */
+function closeHintPopUp(){
+  document.getElementById("hint-background").style.display = "none";
+  document.getElementById("hint-content").style.display = "none";
 }
 
 /**

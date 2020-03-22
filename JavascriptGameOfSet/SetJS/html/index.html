@@ -65,12 +65,21 @@
   </div>
 
   <div id="pop-up-time">
-
     <!--Modal window to tell you, you ran out of time -->
     <div id="time-background" class="modal-background"></div>
     <div id="time-content" class="modal-content">
       <h3>You Ran Out of Time!</h3>
       <button class="topNavButton" id="exitTimePopUpButton" onclick="closeTimePopUp()">Okay</button>
+    </div>
+  </div>
+
+  <div id="pop-up-hint">
+    <!--Modal window to display the computed hint to the user -->
+    <div id="hint-background" class="modal-background"></div>
+    <div id="hint-content" class="modal-content">
+      <h3>Here's a hint!</h3>
+      <p id="hint-message"></p>
+      <button class="topNavButton" id="exitHintPopUpButton" onclick="closeHintPopUp()">Okay</button>
     </div>
   </div>
 
