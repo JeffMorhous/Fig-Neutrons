@@ -465,7 +465,7 @@ function timerStart(){
     timer = setInterval(function(){
       document.getElementById('time').innerHTML = sec.toString();
       sec--;
-      if(sec<0n){
+      if(sec<0){
         clearInterval(timer);
         updateScore(-1);
         if(multiplayer){
