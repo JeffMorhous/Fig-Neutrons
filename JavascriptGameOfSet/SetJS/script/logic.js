@@ -470,6 +470,11 @@ function timerStart(){
         updateScore(-1);
         if(multiplayer){
           turn = !turn;
+          if(turn){
+          document.getElementById('player').innerHTML = "2";
+          } else {
+            document.getElementById('player').innerHTML = "1";
+          }
         }
         document.getElementById("time-background").style.display = "block";
         document.getElementById("time-content").style.display = "block";
