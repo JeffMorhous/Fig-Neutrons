@@ -337,6 +337,13 @@ function addThree(){
   newBoard.push(draw(deck));
   newBoard.push(draw(deck));
   board = newBoard;
+
+  // Ensure there is a set with the three new cards added
+  let numSets = numberOfSets();
+  if (numSets === 0) {
+    deck = board.concat(deck)
+    board = dealBoard(); 
+  }
   displayBoard();
 }
 
@@ -354,7 +361,7 @@ function updateScore(scoreVal){
   if(multiplayer){
     score = "Player 1: " + p1Score.toString() + " Player 2: " + p2Score.toString();
   } else {
-    score = "Score: " + p1Score.toString();
+    score = p1Score.toString();
   }
   document.getElementById("score").innerHTML = score;
 }
