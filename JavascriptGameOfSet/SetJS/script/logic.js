@@ -1,3 +1,4 @@
+/* logic.js contains all javascript for The Game Of Set */
 var deck;
 var board;
 var cards = ["", "", ""];
@@ -10,7 +11,6 @@ var multiplayerTemp = false;
 var difficulty = 1; //1 = easy, 2 = medium, 3 = hard
 var difficultyTemp = 1;
 var timer;
-
 
 function getDeck() {
   const numbers = ["one", "two", "three"];
@@ -25,7 +25,7 @@ function getDeck() {
           var card = {number: numbers[i],
                       fill: fills[j],
                       color: colors[k],
-                      shape: shapes[l]}
+                      shape: shapes[l]};
           deck.push(card);
         }
       }
@@ -55,16 +55,16 @@ function numberOfSets(hint) {
     for(j=i+1;j<board.length-1;j++) {
       card2=board[j];
       for(r=j+1;r<board.length;r++) {function setPlayer(players){
-  if(players == "Singleplayer"){
-    multiplayerTemp = false;
-  } else {
-    multiplayerTemp = true;
-  }
+        if(players == "Singleplayer"){
+          multiplayerTemp = false;
+        } else {
+          multiplayerTemp = true;
+        }
 
-  if(difficulty != null){
-    document.getElementById("menuStartButton").disabled = false;
-  }
-}
+        if(difficulty != null){
+          document.getElementById("menuStartButton").disabled = false;
+        }
+      }
         card3=board[r];
         let card1String = `${card1.number} ${card1.fill} ${card1.color} ${card1.shape}`;
         let card2String = `${card2.number} ${card2.fill} ${card2.color} ${card2.shape}`;
@@ -79,14 +79,17 @@ function numberOfSets(hint) {
   if (hint) {
     if (numMatches === 1) {
       let message = `Unknown hint`;
-      message = `There is ${numMatches} match.`
+      message = `There is ${numMatches} match.`;
     } else {
-      message = `There are ${numMatches} matches.`
+      message = `There are ${numMatches} matches.`;
     }
-    document.getElementById("hint-message").innerHTML = message; //Add the message to the block
+    document.getElementById("hint-message").innerHTML = message; //Add the message to the modal
 
+    //Make the modal visable
     document.getElementById("hint-background").style.display = "block";
     document.getElementById("hint-content").style.display = "block";
+
+    //Decrease the score
     updateScore(-1);
   }
   return numMatches;
@@ -106,8 +109,9 @@ function findASet() {
       for(r=j+1;r<board.length;r++) {
         card3=board[r];
         let card1String = `${card1.number} ${card1.fill} ${card1.color} ${card1.shape}`;
-        let card2String = `${card2.number} ${card2.fill} ${card2.color} ${card2.shape}`
-        let card3String = `${card3.number} ${card3.fill} ${card3.color} ${card3.shape}`
+        let card2String = `${card2.number} ${card2.fill} ${card2.color} ${card2.shape}`;
+        let card3String = `${card3.number} ${card3.fill} ${card3.color} ${card3.shape}`;
+
         if  (checkSet([card1String, card2String, card3String])) {
           document.querySelector(`img[alt='${card1String}']`).parentElement.style.backgroundColor = "yellow";
           document.querySelector(`img[alt='${card2String}']`).parentElement.style.backgroundColor = "yellow";
@@ -119,14 +123,14 @@ function findASet() {
     }
     i+=1;
   }
-  return numMatches ++;
+  return numMatches++;
 }
 
 function dealBoard() {
   board = new Array();
 
-  //the cards in the board will be regenerated as many times as is necessary to ensure
-  //there is at least one match
+  /*The cards in the board will be regenerated as many times as is necessary to ensure
+  that there is at least one match*/
   do {
     for (let i = 0; i < 12; i++) {
       board.push(draw(deck));
@@ -172,8 +176,8 @@ function userClickEvent(clickedCard) {
   clickedCard.parentElement.style.border = "3px solid red";
   clickedCard.classList.add("selectedCard");
 
-  // Deselect the card if it was previously selected by removing its border
-  // and deleting the information saved in the cards array
+  /* Deselect the card if it was previously selected by removing its border
+  and deleting the information saved in the cards array */
   if(cards[0] == cardInfo || cards[1] == cardInfo || cards[2] == cardInfo){
     clickedCard.parentElement.style.border = "3px solid #bfbfbf";
     for(let i = 0; i < cards.length; i++){
@@ -184,7 +188,8 @@ function userClickEvent(clickedCard) {
     return;
   }
 
-  // Store the three cards that were selected into the cards array and then check for a set once the third card has been selected
+  /* Store the three cards that were selected into the cards array and then
+  check for a set once the third card has been selected. */
   if(cards[0] == ""){
     cards[0] = cardInfo;
   } else if (cards[1] == "") {
@@ -198,7 +203,7 @@ function userClickEvent(clickedCard) {
       const isMatch = checkSet(cards);
       if(isMatch) {
         
-        // Match found - update score and update the board
+        // Match found - update score and the board
         updateScore(3);
         document.getElementById('score').innerHTML = score;
         removeThree(cardOne, cardTwo, cardThree);
@@ -427,11 +432,14 @@ function setUINewGame(){
   document.getElementById("score").innerHTML = score;
   document.getElementById("gameRules").style.display = "none";
   document.getElementById("timer").style.display = "block";
+
   if(multiplayer){
     document.getElementById("currentPlayer").style.display = "block";
   } else {
     document.getElementById("currentPlayer").style.display = "none";
   }
+
+  //Enable relevant menu buttons
   document.getElementById("topNavShuffle").disabled = false;
   document.getElementById("topNavFindSet").disabled = false;
   document.getElementById("topNavNumSet").disabled = false;
@@ -470,7 +478,10 @@ function setDifficulty(challenge){
 }
 
 /**
- * Start the timer for a length determined by the difficulty
+ * Start the timer for a length determined by the difficulty.
+ * Easy -> 60 second turn.
+ * Medium -> 30 second turn.
+ * Hard -> 15 second turn.
  */
 function timerStart(){
   var sec;
