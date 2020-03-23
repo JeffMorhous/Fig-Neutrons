@@ -1,5 +1,5 @@
-var deck = getDeck();
-var board = dealBoard();
+var deck;
+var board;
 var cards = ["", "", ""];
 var score;
 var p1Score;
@@ -251,6 +251,7 @@ function newGame() {
   if(timer != null){
     clearInterval(timer);
   }
+  turn = false;
   timer = null;
   difficulty = difficultyTemp;
   multiplayer = multiplayerTemp;
