@@ -81,8 +81,8 @@ function numberOfSets (hint) {
     i += 1;
   }
   if (hint) {
+    let message;
     if (numMatches === 1) {
-      let message = 'Unknown hint';
       message = `There is ${numMatches} match.`;
     } else {
       message = `There are ${numMatches} matches.`;
@@ -213,6 +213,7 @@ function userClickEvent (clickedCard) {
         document.getElementById('score').innerHTML = score;
         removeThree(cardOne, cardTwo, cardThree);
         addThree();
+        updateRemainingCards();
         alert('You got a set!');
       } else {
         // Match not found - decrement score and deselect cards by changing the border back to black
@@ -266,10 +267,10 @@ function newGame () {
   document.getElementById('player').innerHTML = '1';
   p1Score = 0;
   p2Score = 0;
-  updateScore(0);
   deck = getDeck();
   board = dealBoard();
   cards = ['', '', ''];
+  updateScore(0);
   setUINewGame();
   displayBoard();
   timerStart();
@@ -375,6 +376,13 @@ function updateScore (scoreVal) {
 }
 
 /**
+ * Update the UI to show the remaining cards left in the deck
+ */
+function updateRemainingCards() {
+  document.getElementById('remainingCards').innerHTML = deck.length;
+}
+
+/**
  * Open the rules modal
  */
 function openRules () {
@@ -429,8 +437,10 @@ function closeHintPopUp () {
  */
 function setUINewGame () {
   closeNewGameMenu();
+  updateRemainingCards();
   document.getElementById('topNavRules').style.display= 'unset';
-  document.getElementsByClassName('topNavScore')[0].style.display = 'unset';
+  document.getElementsByClassName('topNavInfo')[0].style.display = 'unset';
+  document.getElementsByClassName('topNavInfo')[1].style.display = 'unset';
   document.getElementById('score').innerHTML = score;
   document.getElementById('gameRules').style.display = 'none';
   document.getElementById('timer').style.display = 'block';
