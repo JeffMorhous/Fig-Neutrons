@@ -76,7 +76,7 @@ function numberOfSets (hint) {
         if (checkSet([card1String, card2String, card3String])) {
           numMatches++;
         }
-      } 
+      }
     }
     i += 1;
   }
@@ -89,7 +89,7 @@ function numberOfSets (hint) {
     }
     document.getElementById('hint-message').innerHTML = message; // Add the message to the modal
 
-    // Make the modal visable
+    // Make the modal visible
     document.getElementById('hint-background').style.display = 'block';
     document.getElementById('hint-content').style.display = 'block';
 
@@ -134,7 +134,6 @@ function findASet () {
 
 function dealBoard () {
   board = [];
-
   /* The cards in the board will be regenerated as many times as is necessary to ensure
   that there is at least one match */
   do {
@@ -147,7 +146,16 @@ function dealBoard () {
 }
 
 /**
- * Display the cards by creating a 3x4 table for all the cards in the board
+ * Secret function: will six of the remaining cards in the deck to shorten the game.
+ * Included for development purposes, would be disabled before (real-life) deployment.
+ */
+function dumpSix () {
+  deck = deck.slice(0, deck.length - 6);
+  document.getElementById('remainingCards').innerHTML = deck.length;
+}
+
+/**
+ * Display the cards by creating a 2x6 table for all the cards in the board
  */
 function displayBoard () {
   document.getElementById('setBoard').innerHTML = '';
@@ -165,12 +173,13 @@ function displayBoard () {
     cardTableEntry.appendChild(cardPic);
     cardTableRow.appendChild(cardTableEntry);
 
-    // Start a new row after 4 cards have been placed
+    // Start a new row after 6 cards have been placed
     if ((j + 1) % 6 === 0) {
       document.getElementById('setBoard').appendChild(cardTableRow);
       cardTableRow = document.createElement('TR');
     }
   }
+  document.getElementById('setBoard').appendChild(cardTableRow);
 }
 
 /**
@@ -212,9 +221,8 @@ function userClickEvent (clickedCard) {
         updateScore(3);
         document.getElementById('score').innerHTML = score;
         removeThree(cardOne, cardTwo, cardThree);
-        addThree();
-        updateRemainingCards();
         alert('You got a set!');
+        addThree();
       } else {
         // Match not found - decrement score and deselect cards by changing the border back to black
         updateScore(-1);
@@ -267,10 +275,10 @@ function newGame () {
   document.getElementById('player').innerHTML = '1';
   p1Score = 0;
   p2Score = 0;
+  updateScore(0);
   deck = getDeck();
   board = dealBoard();
   cards = ['', '', ''];
-  updateScore(0);
   setUINewGame();
   displayBoard();
   timerStart();
@@ -286,9 +294,9 @@ function checkSet (cardSet) {
   const cardThree = cardSet[2].split(' ');
   cards = ['', '', ''];
   if ((allSame(cardOne[0], cardTwo[0], cardThree[0]) || allDifferent(cardOne[0], cardTwo[0], cardThree[0])) &&
-     (allSame(cardOne[1], cardTwo[1], cardThree[1]) || allDifferent(cardOne[1], cardTwo[1], cardThree[1])) &&
-     (allSame(cardOne[2], cardTwo[2], cardThree[2]) || allDifferent(cardOne[2], cardTwo[2], cardThree[2])) &&
-     (allSame(cardOne[3], cardTwo[3], cardThree[3]) || allDifferent(cardOne[3], cardTwo[3], cardThree[3]))) {
+      (allSame(cardOne[1], cardTwo[1], cardThree[1]) || allDifferent(cardOne[1], cardTwo[1], cardThree[1])) &&
+      (allSame(cardOne[2], cardTwo[2], cardThree[2]) || allDifferent(cardOne[2], cardTwo[2], cardThree[2])) &&
+      (allSame(cardOne[3], cardTwo[3], cardThree[3]) || allDifferent(cardOne[3], cardTwo[3], cardThree[3]))) {
     // If in here then a match was found hooray
     return true;
   } else {
@@ -324,11 +332,11 @@ function allDifferent (one, two, three) {
  */
 function removeThree (cardOne, cardTwo, cardThree) {
   let newBoard = [];
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < board.length; i++) {
     if ((board[i].number === cardOne[0] && board[i].fill === cardOne[1] && board[i].color === cardOne[2] && board[i].shape === cardOne[3]) ||
-      (board[i].number === cardTwo[0] && board[i].fill === cardTwo[1] && board[i].color === cardTwo[2] && board[i].shape === cardTwo[3]) ||
-      (board[i].number === cardThree[0] && board[i].fill === cardThree[1] && board[i].color === cardThree[2] && board[i].shape === cardThree[3])){}
-        // alert(board[i].number);
+        (board[i].number === cardTwo[0] && board[i].fill === cardTwo[1] && board[i].color === cardTwo[2] && board[i].shape === cardTwo[3]) ||
+        (board[i].number === cardThree[0] && board[i].fill === cardThree[1] && board[i].color === cardThree[2] && board[i].shape === cardThree[3])){}
+    // alert(board[i].number);
     else {
       newBoard.push(board[i]);
     }
@@ -340,20 +348,43 @@ function removeThree (cardOne, cardTwo, cardThree) {
  * Add three cards to the board
  */
 function addThree () {
-  let newBoard = [];
-  newBoard = board;
-  newBoard.push(draw(deck));
-  newBoard.push(draw(deck));
-  newBoard.push(draw(deck));
-  board = newBoard;
-
-  // Ensure there is a set with the three new cards added
-  const numSets = numberOfSets();
-  if (numSets === 0) {
-    deck = board.concat(deck);
-    board = dealBoard();
+  if (deck.length > 0) {
+    board.push(draw(deck));
+    board.push(draw(deck));
+    board.push(draw(deck));
   }
+  // Ensure there is a set with the three new cards added
+  const numSets = numberOfSets(false);
+  if (numSets === 0) {
+    if (deck.length == 0) {
+      endGame();
+    } else {
+      deck = board.concat(deck);
+      board = dealBoard();
+    }
+  }
+
+  document.getElementById('remainingCards').innerHTML = deck.length;
   displayBoard();
+}
+
+/**
+ * Function that finishes the game
+ */
+function endGame () {
+  let winner = 'YOU FINISHED!!';
+  if (multiplayer) {
+    if (p1Score > p2Score) {
+      winner = 'PLAYER 1 WON!!';
+    } else if (p2Score > p1Score) {
+      winner = 'PLAYER 2 WON!!';
+    } else {
+      winner = 'YOU TIED!!';
+    }
+  }
+  document.getElementById('winner-message').innerHTML = winner;
+  document.getElementById('end-background').style.display = 'block';
+  document.getElementById('end-content').style.display = 'block';
 }
 
 /**
@@ -373,13 +404,6 @@ function updateScore (scoreVal) {
     score = p1Score.toString();
   }
   document.getElementById('score').innerHTML = score;
-}
-
-/**
- * Update the UI to show the remaining cards left in the deck
- */
-function updateRemainingCards() {
-  document.getElementById('remainingCards').innerHTML = deck.length;
 }
 
 /**
@@ -433,11 +457,18 @@ function closeHintPopUp () {
 }
 
 /**
+ * Close the out of end game modal
+ */
+function closeEndGameMenu () {
+  document.getElementById('end-background').style.display = 'none';
+  document.getElementById('end-content').style.display = 'none';
+}
+
+/**
  * Update the state of the UI to show and enable buttons
  */
 function setUINewGame () {
   closeNewGameMenu();
-  updateRemainingCards();
   document.getElementById('topNavRules').style.display= 'unset';
   document.getElementsByClassName('topNavInfo')[0].style.display = 'unset';
   document.getElementsByClassName('topNavInfo')[1].style.display = 'unset';
@@ -455,6 +486,7 @@ function setUINewGame () {
   document.getElementById('topNavShuffle').disabled = false;
   document.getElementById('topNavFindSet').disabled = false;
   document.getElementById('topNavNumSet').disabled = false;
+  document.getElementById('remainingCards').innerHTML = deck.length;
 }
 
 /**
