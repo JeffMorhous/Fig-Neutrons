@@ -23,7 +23,7 @@
   <div id="rules-background" class="modal-background" onclick="closeRules()"></div>
   <div id="rules-content" class="modal-content">
     <div id="close-rules">
-      <img id="close" src = "../pictures/close_icon.svg" alt = "Close" height= "20" width = "20" onclick="closeRules()">
+      <img class="close" src = "../pictures/close_icon.svg" alt = "Close" height= "20" width = "20" onclick="closeRules()">
     </div>
     <h3>Rules</h3>
     <p>Pick three cards to make a set. Click on a card to mark it as part of a set.
@@ -37,7 +37,7 @@
       a timer. The length of the timer is dependent on the difficulty with easy having
       infinite time, medium having 30 seconds and hard having 15 seconds to pick three
       cards. If the player runs out of time they will lose a point. The timer resets
-      after the player selects three cards or the time runs out. If playing multiplayer
+      after the player selects three cards or the time runs out. If playing multiplayer,
       a players turn is ended after they either select three cards for a possible set
       or after their time runs out. There will always be at least one Set on the board.
       Click on New Game to begin. Have fun!</p>
@@ -51,7 +51,7 @@
   <div id="menu-background" class="modal-background" onclick="closeNewGameMenu()"></div>
   <div id="menu-content" class="modal-content">
     <div id="close-menu">
-      <img id="close" src = "../pictures/close_icon.svg" alt = "Close" height= "20" width = "20" onclick="closeNewGameMenu()">
+      <img class="close" src = "../pictures/close_icon.svg" alt = "Close" height= "20" width = "20" onclick="closeNewGameMenu()">
     </div>
     <h3>Player(s)</h3>
     <input type="radio" id="Singleplayer" name="Players" value="Singleplayer" onclick="setPlayer(this.value)">
@@ -73,7 +73,7 @@
 
 <div id="pop-up-time">
   <!--Modal window to tell you, you ran out of time -->
-  <div id="time-background" class="modal-background"></div>
+  <div id="time-background" class="modal-background" onclick="closeTimePopUp()"></div>
   <div id="time-content" class="modal-content">
     <h3>You Ran Out of Time!</h3>
     <button class="topNavButton" id="exitTimePopUpButton" onclick="closeTimePopUp()">Okay</button>
@@ -82,7 +82,7 @@
 
 <div id="pop-up-hint">
   <!--Modal window to display the computed hint to the user -->
-  <div id="hint-background" class="modal-background"></div>
+  <div id="hint-background" class="modal-background" onclick="closeHintPopUp()"></div>
   <div id="hint-content" class="modal-content">
     <h3>Here's a hint!</h3>
     <p id="hint-message"></p>
@@ -92,10 +92,10 @@
 
 <div id="end-game">
   <!--Modal window to display the end game message -->
-  <div id="end-background" class="modal-background"></div>
+  <div id="end-background" class="modal-background" onclick="closeEndGameMenu();"></div>
   <div id="end-content" class="modal-content">
     <div id="close-end-game">
-      <img id="close-end" src = "../pictures/close_icon.svg" alt = "Close" height= "20" width = "20" onclick="closeEndGameMenu()">
+      <img class="close" src = "../pictures/close_icon.svg" alt = "Close" height= "20" width = "20" onclick="closeEndGameMenu();">
     </div>
     <h1>Congratulations!!!</h1>
     <h3 id="winner-message"></h3>
@@ -118,7 +118,7 @@
       a timer. The length of the timer is dependent on the difficulty with easy having
       infinite time, medium having 30 seconds and hard having 15 seconds to pick three
       cards. If the player runs out of time they will lose a point. The timer resets
-      after the player selects three cards or the time runs out. If playing multiplayer
+      after the player selects three cards or the time runs out. If playing multiplayer,
       a players turn is ended after they either select three cards for a possible set
       or after their time runs out. There will always be at least one Set on the board.
       <br>

@@ -1,4 +1,5 @@
 /* logic.js contains all javascript for The Game Of Set */
+
 var deck;
 var board;
 var cards = ['', '', ''];
@@ -132,6 +133,9 @@ function findASet () {
   return numMatches++;
 }
 
+/**
+ * Set the board to contain 12 cards from the deck that form at least one set
+ */
 function dealBoard () {
   board = [];
   /* The cards in the board will be regenerated as many times as is necessary to ensure
