@@ -1,0 +1,9 @@
+Correctness: Nice job scraping course name/number, section number, component, time, location, and instructor! Good job preventing duplication of data on multiple runs of application. Seems like scraper would be fairly easy to change if site format changes. No meaningful test cases.
+
+Functionality/Features: Good OSU-styling of output page! However, this isn't a meaningful improvement over the original site. Consider adding more complex view, way to filter data (maybe sort by professor, time, etc.), or some sort of data analysis in order to make this application a clear improvement over the original site. There is no real way for the user to interact with the output other than scrolling and finding the appropriate class/section. Nice job highlighting current course that user scrolls over!
+
+Design: By having seeds.rb delete all courses before scraping, you lose the purpose of storing all data in a database. Scraper contents should probably be held in controllers folder instead of seeds.rb. Good model-view-controller paradigm and simple design! Some use of literals instead of constants in scraper.
+
+Documentation: Nice job including necessary commands in README. Nice file-level documentation (technically not needed for migrations, but okay)! Good job documenting what each step of the scraper accomplishes. Good commit messages.
+
+Style: Consider citing style guide or at least loose style rules that are followed. Good use of standard ruby features (like a hash)!
