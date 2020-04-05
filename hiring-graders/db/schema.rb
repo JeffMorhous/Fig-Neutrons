@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_05_210241) do
+ActiveRecord::Schema.define(version: 2020_04_05_211045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "courses", force: :cascade do |t|
-    t.string "department"
-    t.integer "course"
-    t.boolean "is_lab"
+    t.string "department", null: false
+    t.integer "course", null: false
+    t.boolean "is_lab", null: false
     t.string "days"
     t.time "start_time"
     t.time "end_time"
