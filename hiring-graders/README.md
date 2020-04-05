@@ -1,24 +1,16 @@
-# README
+# Lab 6 - Hiring Graders
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### To install necessary gems, run
 
-Things you may want to cover:
+``bundle install``
 
-* Ruby version
+### To serve the site locally, run
+``rake db:setup`` which will set up the database and populate it with
 
-* System dependencies
+``rails server`` which actually runs the site.
 
-* Configuration
 
-* Database creation
+After running this command, open up localhost:3000 in a browser to display the information.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### To execute tests, run
+``rails test``
