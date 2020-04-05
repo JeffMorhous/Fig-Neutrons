@@ -2,7 +2,7 @@ class CreateCourses < ActiveRecord::Migration[6.0]
   def change
     create_table :courses do |t|
       t.string :department
-      t.int :course
+      t.integer :course
       t.boolean :is_lab
       t.string :days
       t.time :start_time
