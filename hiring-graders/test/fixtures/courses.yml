@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  department: MyString
+  course: 
+  is_lab: false
+  days: MyString
+  start_time: 2020-04-05 16:46:07
+  end_time: 2020-04-05 16:46:07
+  location: MyString
+  need_grader: false
+  have_grader: false
+
+two:
+  department: MyString
+  course: 
+  is_lab: false
+  days: MyString
+  start_time: 2020-04-05 16:46:07
+  end_time: 2020-04-05 16:46:07
+  location: MyString
+  need_grader: false
+  have_grader: false
