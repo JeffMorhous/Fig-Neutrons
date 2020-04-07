@@ -1,0 +1,9 @@
+Correctness: Shuffle board, find set, and hint buttons should not be visible before the game has started. Clicking on "cards left in deck" decreases the number of cards left (while not adding them to the game board). Game is pretty intuitive to play!
+
+Functionality/Features: Nice job including rules of the game on the main page and in a modal screen! Great job providing single-player and multi-player modes and easy/medium/hard game modes! Good job providing timer, shuffle board, find set, and hint features. Consider adding a computer player, advanced statistics, or a more interactive multi-player mode to take the game to the next level.
+
+Design: There is no real object-oriented design here. Classes should be made for Card, Deck, Player, etc. All of the javascript code should not be placed in just one file. Large use of literals and keeping track of state information would make it complicated to expand gameplay functionality.
+
+Documentation: README could be a little more complete (should provide more info about features added, basics of your application, etc.). Great thorough function-level documentation and documentation for nuances of your code! Nice commit messages.
+
+Style: Nice job citing style guide and reasoning behind using semicolons! Good consistent styling and great use of standard javascript features!
