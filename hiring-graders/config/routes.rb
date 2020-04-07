@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+  root 'welcome#index'
   get 'user/signup'
   get 'user/login'
   post 'student/login'
