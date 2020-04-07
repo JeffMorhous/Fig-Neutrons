@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+ @import "bootstrap";
+
+ body {
+  color: #fff;
+  background: #344a71;
+  font-family: 'Roboto', sans-serif;
+}

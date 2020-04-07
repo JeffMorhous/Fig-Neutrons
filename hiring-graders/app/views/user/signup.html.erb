@@ -1,0 +1,40 @@
+
+<div class="account-form">
+  <form action="/student/create" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <h2>Sign Up</h2>
+    <hr>
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" name="fName" required="required">
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" name="lName" required="required">
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" class="form-control" name="email" required="required">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" name="password" required="required">
+    </div>
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input type="password" class="form-control" name="confirmPassword" required="required">
+    </div>
+    <div class="form-group">
+      <label>Select Role:</label>
+      <br />
+      <input type="radio" value="student" name="roleRegister" required="required">
+      <label>Student</label>
+      <input type="radio" value="instructor" name="roleRegister" required="required">
+      <label>Instructor</label>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+    </div>
+  </form>
+  <div class="text-center">Already have an account? <a href="/user/login">Login here</a></div>
+</div>
