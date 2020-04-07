@@ -1,3 +1,23 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.landing-page-buttons {
+  border-radius:8px;
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  transition-duration: 0.4s;
+}
+
+.landing-page-buttons:hover {
+  background-color: black;
+  color: white;
+}
+
+.landing-page-title{
+  color: black;
+  font-weight: bold;
+  margin: 20px;
+  text-align: center;
+}

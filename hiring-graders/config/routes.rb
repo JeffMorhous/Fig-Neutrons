@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
+  # get 'images/osu_engineering_logo'
   get 'user/signup'
   get 'user/login'
   post 'student/login'
