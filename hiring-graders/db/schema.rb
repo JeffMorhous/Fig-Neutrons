@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_08_172221) do
+ActiveRecord::Schema.define(version: 2020_04_08_172908) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -71,6 +71,16 @@ ActiveRecord::Schema.define(version: 2020_04_08_172221) do
     t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transcripts", force: :cascade do |t|
+    t.integer "grade", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "student_id"
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_transcript_course_id"
+    t.index ["student_id"], name: "index_transcript_student_id"
   end
 
 end
