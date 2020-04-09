@@ -1,4 +1,6 @@
-
+<% flash.each do |message_type, message| %>
+<div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
 <div class="account-form">
   <form action="/student/create" method="post">
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -17,6 +19,10 @@
       <input type="email" class="form-control" name="email" required="required">
     </div>
     <div class="form-group">
+      <label>Phone Number</label>
+      <input type="tel" class="form-control" name="phone" required="required">
+    </div>
+    <div class="form-group">
       <label>Password</label>
       <input type="password" class="form-control" name="password" required="required">
     </div>
@@ -27,9 +33,9 @@
     <div class="form-group">
       <label>Select Role:</label>
       <br />
-      <input type="radio" value="student" name="roleRegister" required="required">
+      <input type="radio" value="student" name="roleRegister" required="required" onclick="setAccountFormAction(this)">
       <label>Student</label>
-      <input type="radio" value="instructor" name="roleRegister" required="required">
+      <input type="radio" value="instructor" name="roleRegister" required="required" onclick="setAccountFormAction(this)">
       <label>Instructor</label>
     </div>
     <div class="form-group">

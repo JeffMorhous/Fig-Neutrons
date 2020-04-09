@@ -9,7 +9,11 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class=" <%= 'account' if @account_page %>">
+  <%if is_logged_in?%>
+    <a href="/user/logout" class="btn btn-primary">Log out</a>
+  <%end%>
+
+  <%= yield %>
   </body>
 </html>

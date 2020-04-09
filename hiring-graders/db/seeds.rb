@@ -29,7 +29,23 @@ tables.each do |item|
 
   # Use the course id to find the title of the section's course
   course_title = hash_map["#" + item.parent.parent.parent.attribute('id')]
+  course_title_array = course_title.split(" ")
   section_data = item.text.split("\n")
+  time = section_data[4].split(" ")
+  if(time.length() > 1) 
+    puts time[0]
+    puts time[1]
+    puts time[3]
+    # Course.new(department: course_title_array[0],
+    #                 course: course_title_array[1],
+    #                 component: section_data[2],
+    #                 location: section_data[3],
+    #                 days: time[0],
+    #                 start_time: time[1],
+    #                 end_time: time[3]
+    #                 instructor: section_data[5])
+    end
+
   # Course.create(number: section_data[1],
   #               title: course_title,
   #               component: section_data[2],
