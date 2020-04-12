@@ -3,7 +3,7 @@ class InstructorController < ApplicationController
     @instructor = Instructor.new(first_name: params[:fName], last_name: params[:lName], email: params[:email],
                                   password: params[:password], password_confirmation: params[:confirmPassword])
     if @instructor.save
-      log_in @instructor
+      log_in @instructor, 'instructor'
       redirect_to :action => 'profile'
     else
       flash[:danger] = @instructor.errors.full_messages
