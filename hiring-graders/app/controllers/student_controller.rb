@@ -3,7 +3,7 @@ class StudentController < ApplicationController
     @student = Student.new(first_name: params[:fName], last_name: params[:lName], email: params[:email], phone: params[:phone],
                            password: params[:password], password_confirmation: params[:confirmPassword])
     if @student.save
-      log_in @student
+      log_in @student, 'student'
       redirect_to :action => 'profile'
     else
       flash[:danger] = @student.errors.full_messages

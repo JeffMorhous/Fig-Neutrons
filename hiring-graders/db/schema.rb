@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_08_180128) do
+ActiveRecord::Schema.define(version: 2020_04_12_062755) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -21,18 +21,18 @@ ActiveRecord::Schema.define(version: 2020_04_08_180128) do
 
   create_table "courses", force: :cascade do |t|
     t.string "department", null: false
-    t.integer "course", null: false
+    t.string "section_number", null: false
     t.boolean "is_lab", null: false
     t.string "days"
-    t.time "start_time"
-    t.time "end_time"
+    t.string "start_time"
+    t.string "end_time"
     t.string "location"
     t.boolean "need_grader", default: false
     t.boolean "have_grader", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "instructor_id"
-    t.index ["instructor_id"], name: "index_instructor_id"
+    t.string "instructor"
+    t.string "course_number"
   end
 
   create_table "graders", force: :cascade do |t|

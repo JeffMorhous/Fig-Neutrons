@@ -14,3 +14,9 @@ After running this command, open up localhost:3000 in a browser to display the i
 
 ### To execute tests, run
 ``rails test``
+
+### Features/Notes
+- ADMIN ACCOUNT CREATION: run ```rails server``` and then ``` rails console ```. In the console, enter ```Admin.create(email: "admin@admin.com", password: "admin", password_confirmation: "admin")```. 
+
+### Styling
+
