@@ -7,9 +7,9 @@
 		<div class = "course-table">
 			<table>
 		  		<tr>
-		    		<th>Course Number and Name</th>
-		    		<th>Section Number</th>
-		    		<th>Component</th>
+		    		<th>Department</th>
+		    		<th>Course Number</th>
+		    		<th>Days</th>
 		    		<th>Time</th>
 		    		<th>Location</th>
 		    		<th>Instructor</th>
@@ -23,7 +23,7 @@
 			      		<td>Test</td>
 			      		<td>Test</td>
 			      		<td class = "hidden">
-			      			<form action = "/admin/class">
+			      			<form action = "/admin/findclass?:id=2221">
 			      				<input type="submit" value="Add Grader" />
 			      			</form>
 			      		</td>
@@ -31,10 +31,10 @@
 		   		<% end %>
 		  		<% @courses.each do |course| %>
 		    		<tr>
-		     	 		<td><%= course.title %></td>
-		      			<td><%= course.number %></td>
-		      			<td><%= course.component %></td>
-		      			<td><%= course.time %></td>
+		     	 		<td><%= course.department %></td>
+		      			<td><%= course.course %></td>
+		      			<td><%= course.days %></td>
+		      			<td><%= course.start_time %> - <%= course.end_time %></td>
 		      			<td>
 		      				<% if course.location.strip.empty? %>
 		            			N/A
@@ -44,7 +44,7 @@
 		           		</td>
 		  				<td><%= course.instructor %></td>
 		  				<td class = "hidden">
-			      			<form action = "https://google.com">
+			      			<form action = "/admin/findclass?:id="<%=course.course%>>
 			      				<input type="submit" value="Add Grader" />
 			      			</form>
 			      		</td>
