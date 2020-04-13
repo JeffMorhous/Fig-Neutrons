@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   get 'instructor/recommendation'
   get 'student/profile'
   get 'student/application'
-  get 'student/application/edit'
+  # get 'student/application/edit'
   get 'admin/dashboard'
   post 'instructor/create'
   post 'student/create'
+  post 'application/create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

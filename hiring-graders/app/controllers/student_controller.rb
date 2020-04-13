@@ -1,7 +1,11 @@
 class StudentController < ApplicationController
   def create
-    @student = Student.new(first_name: params[:fName], last_name: params[:lName], email: params[:email], phone: params[:phone],
-                           password: params[:password], password_confirmation: params[:confirmPassword])
+    @student = Student.new(first_name: params[:fName],
+                           last_name: params[:lName],
+                           email: params[:email],
+                           phone: params[:phone],
+                           password: params[:password],
+                           password_confirmation: params[:confirmPassword])
     if @student.save
       log_in @student, 'student'
       redirect_to :action => 'profile'
@@ -25,6 +29,8 @@ class StudentController < ApplicationController
   end
 
   def application
+    @student = Student.find_by id: session[:user_id]
+    @studentName = "#{@student.first_name} #{@student.last_name}"
   end
 
   def availability
@@ -34,6 +40,12 @@ class StudentController < ApplicationController
   def profile
     @student = Student.find_by id: session[:user_id]
     @studentName = "#{@student.first_name} #{@student.last_name}"
+    @studentGrades = Transcript.find_by student_id: @student.id
+    unless @studentGrades.nil?
+      @grade = @studentGrades.grade
+      @course = @studentGrades.course_id
+    end
+
   end
 
 
