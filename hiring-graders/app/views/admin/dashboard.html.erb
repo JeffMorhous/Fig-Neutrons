@@ -1,1 +1,56 @@
-<p>Admin Dashboard</p>
+<div class = "admin">
+	<div class = "topnav"> 
+	</div>
+	<div class = "admin-dashboard">
+		<h3> Grader-less Courses </h3>
+		<p> Select a course from the table to begin and you will be taken to the grader selection screen </p>
+		<div class = "course-table">
+			<table>
+		  		<tr>
+		    		<th>Course Number and Name</th>
+		    		<th>Section Number</th>
+		    		<th>Component</th>
+		    		<th>Time</th>
+		    		<th>Location</th>
+		    		<th>Instructor</th>
+		  		</tr>
+		  		<% 5.times do %>
+			  		<tr>
+			     	 	<td>Test</td>
+			      		<td>Test</td>
+			      		<td>Test</td>
+			      		<td>Test</td>
+			      		<td>Test</td>
+			      		<td>Test</td>
+			      		<td class = "hidden">
+			      			<form action = "/admin/class">
+			      				<input type="submit" value="Add Grader" />
+			      			</form>
+			      		</td>
+			   		</tr>
+		   		<% end %>
+		  		<% @courses.each do |course| %>
+		    		<tr>
+		     	 		<td><%= course.title %></td>
+		      			<td><%= course.number %></td>
+		      			<td><%= course.component %></td>
+		      			<td><%= course.time %></td>
+		      			<td>
+		      				<% if course.location.strip.empty? %>
+		            			N/A
+		          			<% else %>
+		            			<%= course.location %>
+		           			<% end %>	
+		           		</td>
+		  				<td><%= course.instructor %></td>
+		  				<td class = "hidden">
+			      			<form action = "https://google.com">
+			      				<input type="submit" value="Add Grader" />
+			      			</form>
+			      		</td>
+		   			</tr>
+				<% end %>
+			</table>
+		</div>	
+	</div>
+</div>

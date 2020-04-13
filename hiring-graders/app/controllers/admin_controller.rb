@@ -11,6 +11,17 @@ class AdminController < ApplicationController
   end
 
   def dashboard
+    @courses = Course.all
   end
 
+  def findclass
+        course = Course.find_by(section: params[:email].downcase)
+    if student && student.authenticate(params[:password])
+      session[:user_id] = student.id
+      redirect_to '/student/profile'
+  end
+
+  def class
+    @name = 
+  end
 end
