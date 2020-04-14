@@ -2,9 +2,16 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def convert_letter_grades_to_gpa(grade)
-    if grade == 'A' then return 4.0 end
-    if grade == 'A-' then return 3.7 end
-    return 0
+    if grade == 'A' then return 93 end
+    if grade == 'A-' then return 90 end
+    if grade == 'B+' then return 87 end
+    if grade == 'B' then return 83 end
+    if grade == 'B-' then return 80 end
+    if grade == 'C+' then return 77 end
+    if grade == 'C' then return 73 end
+    if grade == 'C-' then return 70 end
+    if grade == 'D+' then return 67 end
+    return 60
   end
 
   def create

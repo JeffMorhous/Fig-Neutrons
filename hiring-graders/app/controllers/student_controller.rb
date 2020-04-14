@@ -40,12 +40,7 @@ class StudentController < ApplicationController
   def profile
     @student = Student.find_by id: session[:user_id]
     @studentName = "#{@student.first_name} #{@student.last_name}"
-    @studentGrades = Transcript.find_by student_id: @student.id
-    unless @studentGrades.nil?
-      @grade = @studentGrades.grade
-      @course = @studentGrades.course_id
-    end
-
+    @studentGrades = Transcript.where student_id: @student.id
   end
 
 
