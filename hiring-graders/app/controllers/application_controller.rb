@@ -11,22 +11,29 @@ class ApplicationController < ActionController::Base
     @student = Student.find_by id: session[:user_id]
     @student_name = "#{@student.first_name} #{@student.last_name}"
 
-    @num = params.size
-    transcript = Transcript.find_by(student_id: @student.id, course_id: params[:courseNum1])
-    if transcript != nil
-      transcript.grade = convert_letter_grades_to_gpa(params[:grade1])
-      transcript.updated_at = Time.new
-    else
-      transcript = Transcript.new(
-          grade: convert_letter_grades_to_gpa(params[:grade1]),
-          created_at: Time.new,
-          updated_at: Time.new,
-          student_id: @student.id,
-          course_id: params[:courseNum1])
+    index = 1
+    gradeString = "grade" + index.to_s
+    courseString = "courseNum" + index.to_s
+    while params[gradeString] != nil
+      transcript = Transcript.find_by(student_id: @student.id, course_id: params[courseString])
+      if transcript != nil
+        transcript.grade = convert_letter_grades_to_gpa(params[gradeString])
+        transcript.updated_at = Time.new
+      else
+        transcript = Transcript.new(
+            grade: convert_letter_grades_to_gpa(params[gradeString]),
+            created_at: Time.new,
+            updated_at: Time.new,
+            student_id: @student.id,
+            course_id: params[courseString])
+      end
+      transcript.save
+      index = index + 1
+      gradeString = "grade" + index.to_s
+      courseString = "courseNum" + index.to_s
     end
-    if transcript.save
-      session[:user_id] = @student.id
-      redirect_to '/student/profile'
-    end
+    session[:user_id] = @student.id
+    redirect_to '/student/profile'
+
   end
 end
