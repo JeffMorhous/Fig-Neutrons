@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   get 'student/application'
   get 'student/application/edit'
   get 'admin/dashboard'
-  get 'admin/class'
-  post 'admin/findclass'
+  get 'admin/section'
+  get ':controller/:action/:id'
   post 'instructor/create'
   post 'student/create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

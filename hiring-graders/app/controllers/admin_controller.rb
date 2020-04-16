@@ -10,18 +10,13 @@ class AdminController < ApplicationController
     end
   end
 
+  def section
+    course = Course.find_by(id: params[:id])
+    @class = course.department+ " " +course.class_number
+
+  end
+
   def dashboard
     @courses = Course.all
-  end
-
-  def findclass
-        course = Course.find_by(course: params[:id]
-      session[:course] = course
-      redirect_to '/admin/class'
-  end
-
-  def class
-    course = session[:course]
-    @name = course.department + "" + course.course
   end
 end

@@ -7,34 +7,21 @@
 		<div class = "course-table">
 			<table>
 		  		<tr>
-		    		<th>Department</th>
-		    		<th>Course Number</th>
+		    		<th>Department and Course Number</th>
+		    		<th>Section</th>
 		    		<th>Days</th>
 		    		<th>Time</th>
 		    		<th>Location</th>
 		    		<th>Instructor</th>
 		  		</tr>
-		  		<% 5.times do %>
-			  		<tr>
-			     	 	<td>Test</td>
-			      		<td>Test</td>
-			      		<td>Test</td>
-			      		<td>Test</td>
-			      		<td>Test</td>
-			      		<td>Test</td>
-			      		<td class = "hidden">
-			      			<form action = "/admin/findclass?:id=2221">
-			      				<input type="submit" value="Add Grader" />
-			      			</form>
-			      		</td>
-			   		</tr>
-		   		<% end %>
 		  		<% @courses.each do |course| %>
 		    		<tr>
-		     	 		<td><%= course.department %></td>
-		      			<td><%= course.course %></td>
+		     	 		<td><%= course.department %> <%= course.course_number %></td>
+		      			<td><%= course.section_number%></td>
 		      			<td><%= course.days %></td>
-		      			<td><%= course.start_time %> - <%= course.end_time %></td>
+		      			<td>
+		      				<%= course.start_time %> - <%=course.end_time%>
+		      			</td>
 		      			<td>
 		      				<% if course.location.strip.empty? %>
 		            			N/A
@@ -44,9 +31,7 @@
 		           		</td>
 		  				<td><%= course.instructor %></td>
 		  				<td class = "hidden">
-			      			<form action = "/admin/findclass?:id="<%=course.course%>>
-			      				<input type="submit" value="Add Grader" />
-			      			</form>
+			      			<%= button_to "Add Grader", '/admin/section/', params: {id: course.id}, :method => :get %>
 			      		</td>
 		   			</tr>
 				<% end %>

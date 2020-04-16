@@ -21,3 +21,7 @@ setAccountFormAction = function(element) {
   }
   console.log(element.parentElement.parentElement);
 }
+
+redirect_to_section = function(course, element){
+  element.parentElement.action = '/admin/section/' + course.id;
+}
