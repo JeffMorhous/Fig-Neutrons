@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_12_062755) do
+ActiveRecord::Schema.define(version: 2020_04_16_042852) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "availabilities", force: :cascade do |t|
+    t.string "hour"
+    t.integer "student_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_availabilities_on_student_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -96,4 +104,5 @@ ActiveRecord::Schema.define(version: 2020_04_12_062755) do
     t.index ["student_id"], name: "index_transcript_student_id"
   end
 
+  add_foreign_key "availabilities", "students"
 end
