@@ -1,5 +1,5 @@
 <h2><%=@studentName%>'s Profile</h2>
-<a href="/student/application"  class="btn btn-primary">Create & Submit New Application</a>
+<a href="/student/application"  class="btn btn-primary">Create & Submit Your Grader Application</a>
 <table>
   <tr>
     <th>Course Number</th>
@@ -7,12 +7,8 @@
   </tr>
   <%  @studentGrades.each do |transcript| %>
   <tr>
+    <td>CSE <%= transcript.course_id %></td>
     <td><%= transcript.grade %></td>
-    <td><%= transcript.course_id %></td>
   </tr>
   <% end %>
 </table>
-
-<!--a href="/student/application/edit" class="btn btn-primary">Edit Previous Application</a-->
-
-
