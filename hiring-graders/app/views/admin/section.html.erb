@@ -1,1 +1,32 @@
 <h1><%= @class %></h1>
+<table class = "info">
+	<tr>
+		<td> Section #: </td>
+		<td><%= @section %></td>
+	</tr>
+	<tr>
+		<td> Lecturer: </td>
+		<td><%= @teacher %></td>
+	</tr>
+	<tr>
+		<td> Location: </td>
+		<td><%= @location %></td>
+	</tr>
+	<tr>
+		<td> Time: </td>
+		<td><%= @time %></td>
+	</tr>
+<table>
+
+<h1>Available Students</h1>
+<table>
+	<% if(@students.empty?) %>
+		<tr>None Available</tr>
+	<% else %>
+		<% @students.each do |grader| %>
+			<tr onclick="openGraderSidebar(grader)">
+				grader.first_name grader.last_name
+			</tr>
+		<% end %>
+	<% end %>
+</table>	
