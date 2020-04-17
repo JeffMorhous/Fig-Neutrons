@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'admin/login'
   get 'instructor/profile'
   get 'instructor/recommendation'
+  post 'instructor/create_recommendation', to: 'instructor#create_recommendation'
   get 'student/profile'
   get 'student/application'
   get 'student/application/edit'

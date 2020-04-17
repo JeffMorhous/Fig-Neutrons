@@ -26,11 +26,23 @@ class InstructorController < ApplicationController
   def recommendation
   end
 
+  def create_recommendation
+    @recommend = Recommendation.new(request: false, recommendation: "Replace with real", student_id: 99,
+                                    course_id: 100, instructor_id: 100)
+
+    if @recommend.save
+      redirect_to '/instructor/profile'
+    else
+      flash[:danger] = @recommend.errors.full_messages
+      redirect_to '/instructor/profile'
+    end
+  end
+
   def profile
     @instructor = Instructor.find_by id: session[:user_id]
     @instructorName = "#{@instructor.first_name} #{@instructor.last_name}"
   end
 
-  
+
 
 end

@@ -1,6 +1,6 @@
 <!--Following format of student/application.html.erb-->
 <div class="reccomendation-form">
-  <form action="" method="post">
+  <form action="/instructor/create_recommendation" method="post">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     <h2>Instructor's Recommendation</h2>
     <hr>
@@ -12,7 +12,7 @@
       <input class="form-control" type="text" name="recCourse" />
     </div>
     <div class="form-group">
-      <a href="/instructor/profile" onclick="saveRecommendation()" class="btn btn-primary btn-block btn-lg">Save</a>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Save</button>
     </div>
 
   </form>
