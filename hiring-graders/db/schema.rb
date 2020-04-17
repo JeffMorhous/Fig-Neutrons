@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_042852) do
+ActiveRecord::Schema.define(version: 2020_04_17_201639) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_042852) do
     t.integer "student_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "day"
     t.index ["student_id"], name: "index_availabilities_on_student_id"
   end
 

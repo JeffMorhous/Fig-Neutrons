@@ -19,8 +19,41 @@ addGradeRow = function () {
 }
 /**
  * Generate the availability calendar
+ * SOURCE FOR WEEKLY SCHEDULE LOGIC: 
+ * https://github.com/shonihei/weekly-scheduler-component
  */
 displayWeeklyCalendar = function () {
-    $("remove").remove();
-    $('#targetCalendar').weekly_schedule();
+  const settings = {
+    days: [ "mon", "tue", "wed", "thu", "fri"], // Days displayed
+    hours: "8:00AM-8:00PM", // Hours displyed
+    fontFamily: "sans-serif", // Font used in the component
+    fontColor: "#212529", // Font colot used in the component
+    fontWeight: "80", // Font weight used in the component
+    fontSize: "1.3em", // Font size used in the component
+    headerBackgroundColor: "transparent", // Background color of headers
+}
+    $(".saveAvailabilityButton").css('display','block');
+    $('#targetCalendar').weekly_schedule(settings);
+}
+
+saveAvailability = function () {
+  let allAvailableHours = {}
+    
+  const selectedHours = $('#targetCalendar').weekly_schedule("getSelectedHour");
+  for(column in selectedHours) {
+  let hoursAvailable = [];
+    if(selectedHours[column].length > 0) {
+      for(hour of selectedHours[column]) {
+        hoursAvailable.push(hour.classList[1])
+      }
+    }
+    allAvailableHours[column] = hoursAvailable;
+  }
+  $.ajax({ 
+    type: 'POST', 
+    url: '/student/availability', 
+    data: allAvailableHours, 
+    success: function(data){
+    } 
+  });
 }
