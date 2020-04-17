@@ -27,7 +27,7 @@ class InstructorController < ApplicationController
   end
 
   def create_recommendation
-    @recommend = Recommendation.new(request: false, recommendation: "Replace with real", student_id: 99,
+    @recommend = Recommendation.new(request: false, recommendation: params[:recText], student_id: 99,
                                     course_id: 100, instructor_id: 100)
 
     if @recommend.save
