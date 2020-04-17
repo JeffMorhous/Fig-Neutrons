@@ -9,11 +9,18 @@ addGradeRow = function () {
   gradeRow.find(".courseNum")[0].name = `courseNum${(numClasses)}`;
   gradeRow.find(".grade")[0].name = `grade${(numClasses)}`;
   gradeRow.appendTo(graderAppForm);
-  $('.form-group .gradeRow .classAddIcon').each(function(){
-    $(this).css("display","none");
+  $('.form-group .gradeRow .classAddIcon').each(function () {
+    $(this).css("display", "none");
   })
-  $('.form-group .gradeRow .classAddIcon:last').each(function(){
-    $(this).css("display","block");
+  $('.form-group .gradeRow .classAddIcon:last').each(function () {
+    $(this).css("display", "block");
   })
 
+}
+/**
+ * Generate the availability calendar
+ */
+displayWeeklyCalendar = function () {
+    $("remove").remove();
+    $('#targetCalendar').weekly_schedule();
 }
