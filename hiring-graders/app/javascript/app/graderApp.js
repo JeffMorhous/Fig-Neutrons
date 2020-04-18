@@ -1,3 +1,7 @@
+let calendarOpened = false;
+$( document ).on('turbolinks:load', function() {
+  calendarOpened = false;
+});
 /**
  * Add a new row to the form to fill out grades
  */
@@ -17,6 +21,11 @@ addGradeRow = function () {
   })
 
 }
+
+showGradeForm = function () {
+  $('.studentGradeForm').css('display', 'block');
+  $('.studentAvailabilityForm').css('display', 'none');
+}
 /**
  * Generate the availability calendar
  * SOURCE FOR WEEKLY SCHEDULE LOGIC: 
@@ -31,9 +40,15 @@ displayWeeklyCalendar = function () {
     fontWeight: "80", // Font weight used in the component
     fontSize: "1.3em", // Font size used in the component
     headerBackgroundColor: "transparent", // Background color of headers
-}
-    $(".saveAvailabilityButton").css('display','block');
+  }
+  $(".studentGradeForm").css('display', 'none');
+  $('.studentAvailabilityForm').css('display', 'block');
+
+  if(!calendarOpened) {
     $('#targetCalendar').weekly_schedule(settings);
+
+  } 
+  calendarOpened = true;
 }
 
 saveAvailability = function () {
@@ -56,4 +71,8 @@ saveAvailability = function () {
     success: function(data){
     } 
   });
+}
+
+backToStudentProfile = function () {
+  window.history.back();
 }

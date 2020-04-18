@@ -43,7 +43,10 @@ class StudentController < ApplicationController
 
   def application
     @student = Student.find_by id: session[:user_id]
-    @studentName = "#{@student.first_name} #{@student.last_name}"
+    if !@student.nil?
+      @studentName = "#{@student.first_name} #{@student.last_name}"
+      @studentGrades = Transcript.where student_id: @student.id
+    end
     if request.post? 
       index = 1
       gradeString = "grade" + index.to_s
@@ -66,17 +69,43 @@ class StudentController < ApplicationController
         gradeString = "grade" + index.to_s
         courseString = "courseNum" + index.to_s
       end
-      redirect_to '/student/profile'
+      render '/student/application'
     end
 
   end
 
   def availability
-    puts params[:"0"] # M
-    puts params[:"1"] # T
-    puts params[:"2"] # W
-    puts params[:"3"] # R
-    puts params[:"4"] # F
+    if params[:"0"]
+      params[:"0"].each do |item|
+        Availability.create(student_id: session[:user_id], day: "M", hour: item )
+      end
+    end
+    if params[:"1"]
+      params[:"1"].each do |item|
+        Availability.create(student_id: session[:user_id], day: "T", hour: item )
+      end
+    end
+    if params[:"2"]
+      params[:"2"].each do |item|
+        Availability.create(student_id: session[:user_id], day: "W", hour: item )
+      end
+    end
+    if params[:"3"]
+      params[:"3"].each do |item|
+        Availability.create(student_id: session[:user_id], day: "R", hour: item )
+      end
+    end
+    if params[:"4"]
+      params[:"4"].each do |item|
+        Availability.create(student_id: session[:user_id], day: "F", hour: item )
+      end
+    end
+    
+
+    # puts params[:"1"] # T
+    # puts params[:"2"] # W
+    # puts params[:"3"] # R
+    # puts params[:"4"] # F
     redirect_to '/student/profile'
   end
   
