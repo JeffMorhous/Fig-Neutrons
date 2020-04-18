@@ -27,8 +27,8 @@ class InstructorController < ApplicationController
   end
 
   def create_recommendation
-    @recommend = Recommendation.new(request: false, recommendation: params[:recText], student_id: 99,
-                                    course_id: 100, instructor_id: 100)
+    @recommend = Recommendation.new(request: false, recommendation: params[:recText], student_id: Student.find_by(email: params[:email]).id,
+                                    course_id: Course.find_by_course_number(params[:recCourse]), instructor_id: Instructor.find_by(id: session[:user_id]))
 
     if @recommend.save
       redirect_to '/instructor/profile'
