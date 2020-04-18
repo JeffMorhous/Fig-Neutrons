@@ -1,1 +1,34 @@
-<p>Rec form here</p>
+<!--Following format of student/application.html.erb-->
+<div class="reccomendation-form">
+  <form action="/instructor/create_recommendation" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <h2>Instructor's Recommendation</h2>
+    <hr>
+    <p>First, enter the student's first and last name</p>
+    <div class="form-group">
+      <label>Student First Name</label>
+      <input class="form-control" type="text" name="firstName" required />
+
+      <label>Student Last Name</label>
+      <input class="form-control" type="text" name="lastName" required />
+
+      <label>Student Email</label>
+      <input class="form-control" type="text" name="email" required />
+
+      <label>Recommended Course to Grade (Enter Course Number)</label>
+      <input class="form-control" type="text" name="recCourse" required />
+
+      <label>Tell us about the student</label>
+      <textarea class="form-control" type="text" name="recText" rows="3"></textarea>
+
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Save</button>
+    </div>
+
+  </form>
+  <div class="targetCalendar container" style="margin: auto; width: 50%; height: 100%; display: flex; flex-direction: row; justify-content: center;">
+    <div id="targetCalendar">
+    </div>
+  </div>
+</div>
