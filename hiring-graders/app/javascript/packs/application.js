@@ -9,6 +9,7 @@ require("channels")
 require("jquery")
 require("app/account")
 require("app/graderApp")
+require("app/jquery.weekly-schedule-plugin")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

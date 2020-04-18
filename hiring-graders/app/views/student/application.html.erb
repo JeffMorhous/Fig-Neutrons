@@ -1,44 +1,75 @@
-<div class="grade-form">
-  <form action="" method="post">
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <h2>Grader Application</h2>
-    <hr>
-    <p>First, enter your grades for CSE courses you have taken</p>
-    <small>Example:</small>
-    <div class="form-group">
-      <div class="row">
-        <div class="col-md-5">
-          <label>Course Number</label>
-          <input class="form-control" type="text" name="courseNum" value="2221" disabled />
-        </div>
-        <div class="col-md-5">
-          <label >Grade</label>
-          <input class="form-control" type="text" name="grade" value="A" disabled />
+<h2 class="text-center">Grader Application</h2>
+<p class="text-center">To be considered for a grader position, please enter your grades and availability</p>
+<div class="row grade-form">
+
+  <div class="col-md-4">
+    <div class="row">
+      <button class="btn btn-primary btn-lg graderAppButton" onclick="showGradeForm()">Enter Grades</button>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary btn-lg graderAppButton" onclick="displayWeeklyCalendar()">Enter Availability</button>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary btn-lg graderAppButton" onclick="backToStudentProfile()">Back to Profile</button>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <form action="/student/application" class="studentGradeForm" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <p class="gradeTextInfo">Enter the grades for <%=@num %> CSE courses you have taken</p>
+      <small class="gradeTextInfo">Example:</small>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-5">
+            <label>Course Number</label>
+            <input class="form-control" type="text" name="courseNum" value="2221" disabled />
+          </div>
+          <div class="col-md-5">
+            <label>Grade</label>
+            <input class="form-control" type="text" name="grade" value="A" disabled />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group">
-      <div class="row gradeRow">
-        <div class="col-md-5">
-          <label>Course Number</label>
-          <input class="form-control courseNum" type="text" name="courseNum1" />
+      <%  @studentGrades.each_with_index do |transcript, index| %>
+        <div class="form-group">
+          <div class="row gradeRow">
+            <div class="col-md-5">
+              <label>Course Number</label>
+              <%=text_field_tag :"courseNum#{index + 1}", transcript.course_id, class: "form-control courseNum"%>
+            </div>
+            <div class="col-md-5">
+              <label>Grade</label>
+              <%=text_field_tag :"grade#{index + 1}", transcript.grade, class: "form-control grade"%>
+            </div>
+          </div>
         </div>
-        <div class="col-md-5">
-          <label>Grade</label>
-          <input class="form-control grade" type="text" name="grade1" />
-        </div>
-        <div class="col-md-2">
-          <i class="fa fa-plus-circle fa-2x classAddIcon" onclick="addGradeRow()"></i>
+      <% end %>
+      <div class="form-group">
+        <div class="row gradeRow">
+          <div class="col-md-5">
+            <label>Course Number</label>
+            <input class="form-control courseNum" type="text" name=<%="courseNum" + (@studentGrades.length + 1).to_s%> required="required" />
+          </div>
+          <div class="col-md-5">
+            <label>Grade</label>
+            <input class="form-control grade" type="text" name=<%="grade" + (@studentGrades.length + 1).to_s%> required="required" />
+          </div>
+          <div class="col-md-2">
+            <i class="fa fa-plus-circle fa-2x classAddIcon" onclick="addGradeRow()"></i>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group">
-      <a href="/student/profile" onclick="saveAvailibility()" class="btn btn-primary btn-block btn-lg">Save</a>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg saveGradesButton">Save</button>
+      </div>
+    </form>
+    <div class="studentAvailabilityForm" style="display: none;">
+      <div id="targetCalendar"></div>
+      <button class="btn btn-primary saveAvailabilityButton" onclick="saveAvailability()">Save Availability</button>
+      
     </div>
 
-  </form>
-  <div class="targetCalendar container" style="margin: auto; width: 50%; height: 100%; display: flex; flex-direction: row; justify-content: center;">
-    <div id="targetCalendar">
-    </div>
+
   </div>
 </div>

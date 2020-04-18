@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_04_18_162434) do
     t.integer "student_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "day"
     t.index ["student_id"], name: "index_availabilities_on_student_id"
   end
 
