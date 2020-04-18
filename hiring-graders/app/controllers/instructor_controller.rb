@@ -15,7 +15,7 @@ class InstructorController < ApplicationController
   def login
     instructor = Instructor.find_by(email: params[:email].downcase)
     if instructor && instructor.authenticate(params[:password])
-      session[:user_id] = instructor.id
+      log_in instructor, 'instructor'
       redirect_to '/instructor/profile'
     else
       flash[:danger] = "Invalid email/password combination"
@@ -40,7 +40,9 @@ class InstructorController < ApplicationController
 
   def profile
     @instructor = Instructor.find_by id: session[:user_id]
-    @instructorName = "#{@instructor.first_name} #{@instructor.last_name}"
+    if !@instructor.nil?
+      @instructorName = "#{@instructor.first_name} #{@instructor.last_name}"
+    end
   end
 
 
