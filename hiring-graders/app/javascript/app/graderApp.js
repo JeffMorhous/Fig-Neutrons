@@ -12,6 +12,8 @@ addGradeRow = function () {
   let gradeRow = $('.form-group .gradeRow:last').clone();
   gradeRow.find(".courseNum")[0].name = `courseNum${(numClasses)}`;
   gradeRow.find(".grade")[0].name = `grade${(numClasses)}`;
+  gradeRow.find(".gradeInterest")[0].name = `grade${(numClasses)}`;
+
   gradeRow.appendTo(graderAppForm);
   $('.form-group .gradeRow .classAddIcon').each(function () {
     $(this).css("display", "none");

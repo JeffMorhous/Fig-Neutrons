@@ -56,6 +56,7 @@ class StudentController < ApplicationController
   def application
     @student = Student.find_by id: session[:user_id]
     @grades = Array.new()
+    @foundInterestedEntry = false;
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
       @studentGrades = Transcript.where student_id: @student.id
@@ -63,12 +64,26 @@ class StudentController < ApplicationController
         @grades[index] = convert_number_to_letter_grade(transcript.grade)
       end
     end
+    @interestedCourses = Interested.where student_id: @student.id
+
+
     if request.post? 
       index = 1
       gradeString = "grade" + index.to_s
       courseString = "courseNum" + index.to_s
-      while params[gradeString] != nil
+      interestedString = "gradeInterest" + index.to_s
+      while params[gradeString] != nil && params[gradeString].length > 0
+        if params[interestedString]
+        end
+        gradeInterest = Interested.find_by(student_id: @student.id, course: params[courseString])
         transcript = Transcript.find_by(student_id: @student.id, course_id: params[courseString])
+        if gradeInterest != nil && !params[interestedString]
+          gradeInterest.destroy
+        elsif !gradeInterest && params[interestedString]
+          gradeInterest = Interested.new(student_id: @student.id, department: "CSE", course: params[courseString])
+          gradeInterest.save
+        end
+
         if transcript != nil
           transcript.grade = convert_letter_grades_to_gpa(params[gradeString])
           transcript.updated_at = Time.new
@@ -84,8 +99,9 @@ class StudentController < ApplicationController
         index = index + 1
         gradeString = "grade" + index.to_s
         courseString = "courseNum" + index.to_s
+        interestedString = "gradeInterest" + index.to_s
       end
-      render '/student/application'
+      redirect_to '/student/application'
     end
 
   end
@@ -124,6 +140,7 @@ class StudentController < ApplicationController
   def profile
     @student = Student.find_by id: session[:user_id]
     @grades = Array.new()
+
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
       @studentGrades = Transcript.where student_id: @student.id
