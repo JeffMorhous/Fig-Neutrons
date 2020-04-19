@@ -91,6 +91,7 @@ class StudentController < ApplicationController
   end
 
   def availability
+    Availability.where(student_id: session[:user_id]).destroy_all
     if params[:"0"]
       params[:"0"].each do |item|
         Availability.create(student_id: session[:user_id], day: "M", hour: item )
@@ -116,12 +117,6 @@ class StudentController < ApplicationController
         Availability.create(student_id: session[:user_id], day: "F", hour: item )
       end
     end
-    
-
-    # puts params[:"1"] # T
-    # puts params[:"2"] # W
-    # puts params[:"3"] # R
-    # puts params[:"4"] # F
     redirect_to '/student/profile'
   end
   
