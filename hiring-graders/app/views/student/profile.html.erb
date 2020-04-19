@@ -1,14 +1,10 @@
-<h2><%=@studentName%>'s Profile</h2>
-<a href="/student/application"  class="btn btn-primary">Create & Submit Your Grader Application</a>
-<table>
-  <tr>
-    <th>Course Number</th>
-    <th>Grade</th>
-  </tr>
-  <%  @studentGrades.each_with_index do |transcript, index| %>
-  <tr>
-    <td>CSE <%= transcript.course_id %></td>
-    <td><%= @grades[index] %></td>
-  </tr>
+<h2 class="text-center"><%=@studentName%>'s Profile</h2>
+<div class="center">
+  <a href="/student/application"  class="btn btn-primary applicationButton">Create or Update Your Grader Application</a>
+</div>
+<div>
+  <%= week_calendar do |date| %>
+    <%= date %>
   <% end %>
-</table>
+</div>
+<p class="text-center">To view your existing transcripts, click <a href="/student/application">here</a></p>
