@@ -56,6 +56,7 @@ class StudentController < ApplicationController
   def application
     @student = Student.find_by id: session[:user_id]
     @grades = Array.new()
+    @foundInterestedEntry = false;
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
       @studentGrades = Transcript.where student_id: @student.id
@@ -78,8 +79,9 @@ class StudentController < ApplicationController
         transcript = Transcript.find_by(student_id: @student.id, course_id: params[courseString])
         if gradeInterest != nil && !params[interestedString]
           gradeInterest.destroy
-        elsif !gradeInterest
+        elsif !gradeInterest && params[interestedString]
           gradeInterest = Interested.new(student_id: @student.id, department: "CSE", course: params[courseString])
+          gradeInterest.save
         end
 
         if transcript != nil
@@ -94,7 +96,6 @@ class StudentController < ApplicationController
               course_id: params[courseString])
         end
         transcript.save
-        gradeInterest.save
         index = index + 1
         gradeString = "grade" + index.to_s
         courseString = "courseNum" + index.to_s
