@@ -5,10 +5,10 @@
     <th>Course Number</th>
     <th>Grade</th>
   </tr>
-  <%  @studentGrades.each do |transcript| %>
+  <%  @studentGrades.each_with_index do |transcript, index| %>
   <tr>
     <td>CSE <%= transcript.course_id %></td>
-    <td><%= transcript.grade %></td>
+    <td><%= @grades[index] %></td>
   </tr>
   <% end %>
 </table>

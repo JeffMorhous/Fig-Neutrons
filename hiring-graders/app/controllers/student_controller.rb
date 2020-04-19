@@ -41,11 +41,27 @@ class StudentController < ApplicationController
     return 60
   end
 
+  def convert_number_to_letter_grade(grade)
+    if grade == 93 then return 'A' end
+    if grade == 90 then return 'A-' end
+    if grade == 87 then return 'B+' end
+    if grade == 83 then return 'B' end
+    if grade == 80 then return 'B-' end
+    if grade == 77 then return 'C+' end
+    if grade == 73 then return 'C' end
+    if grade == 70 then return 'C-' end
+    if grade == 67 then return 'D' end
+  end
+
   def application
     @student = Student.find_by id: session[:user_id]
+    @grades = Array.new()
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
       @studentGrades = Transcript.where student_id: @student.id
+      @studentGrades.each_with_index do |transcript, index|
+        @grades[index] = convert_number_to_letter_grade(transcript.grade)
+      end
     end
     if request.post? 
       index = 1
@@ -112,9 +128,13 @@ class StudentController < ApplicationController
 
   def profile
     @student = Student.find_by id: session[:user_id]
+    @grades = Array.new()
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
       @studentGrades = Transcript.where student_id: @student.id
+      @studentGrades.each_with_index do |transcript, index|
+        @grades[index] = convert_number_to_letter_grade(transcript.grade)
+      end
     end
   end
 

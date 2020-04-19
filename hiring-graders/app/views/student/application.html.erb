@@ -40,7 +40,7 @@
             </div>
             <div class="col-md-5">
               <label>Grade</label>
-              <%=text_field_tag :"grade#{index + 1}", transcript.grade, class: "form-control grade"%>
+              <%=text_field_tag :"grade#{index + 1}", @grades[index], class: "form-control grade"%>
             </div>
           </div>
         </div>
