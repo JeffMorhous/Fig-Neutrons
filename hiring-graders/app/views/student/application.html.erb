@@ -2,7 +2,7 @@
 <p class="text-center">To be considered for a grader position, please enter your grades and availability</p>
 <div class="row grade-form">
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="row">
       <button class="btn btn-primary btn-lg graderAppButton" onclick="showGradeForm()">Enter Grades</button>
     </div>
@@ -14,48 +14,72 @@
     </div>
   </div>
 
-  <div class="col-md-8">
+  <div class="col-md-9">
     <form action="/student/application" class="studentGradeForm" method="post">
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <p class="gradeTextInfo">Enter the grades for <%=@num %> CSE courses you have taken</p>
       <small class="gradeTextInfo">Example:</small>
       <div class="form-group">
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-4">
             <label>Course Number</label>
             <input class="form-control" type="text" name="courseNum" value="2221" disabled />
           </div>
-          <div class="col-md-5">
+          <div class="col-md-4">
             <label>Grade</label>
             <input class="form-control" type="text" name="grade" value="A" disabled />
+          </div>
+          <div class="col-md-3">
+            <label>Request to Grade</label>
+            <input class="form-control" type="checkbox" name="gradeInterest" checked disabled />
           </div>
         </div>
       </div>
       <%  @studentGrades.each_with_index do |transcript, index| %>
         <div class="form-group">
           <div class="row gradeRow">
-            <div class="col-md-5">
+            <div class="col-md-4">
               <label>Course Number</label>
-              <%=text_field_tag :"courseNum#{index + 1}", transcript.course_id, class: "form-control courseNum"%>
+              <%=text_field_tag :"courseNum#{index + 1}", transcript.course_id, class: "form-control courseNum", required: true%>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
               <label>Grade</label>
-              <%=text_field_tag :"grade#{index + 1}", @grades[index], class: "form-control grade"%>
+              <%=text_field_tag :"grade#{index + 1}", @grades[index], class: "form-control grade,", required: true%>
+            </div>
+            <div class="col-md-3">
+              <label>Request to Grade</label>
+              <% if @interestedCourses.length > 0 %>
+                <% @interestedCourses.each do |item|%>
+                  <% if item.course.to_i == transcript.course_id %>
+                      <%=check_box_tag :"gradeInterest#{index + 1}", true, true, class: "form-control gradeInterest", title:"Select if you would like to grade for this class"%>
+                  <% else %>
+                    <%=check_box_tag :"gradeInterest#{index + 1}", false, false, class: "form-control gradeInterest", title:"Select if you would like to grade for this class"%>
+
+                  <% end %>
+              <%end%>
+              <% else %>
+                <%=check_box_tag :"gradeInterest#{index + 1}", false, false, class: "form-control gradeInterest", title:"Select if you would like to grade for this class"%>
+              <% end %>
+              
             </div>
           </div>
         </div>
       <% end %>
       <div class="form-group">
         <div class="row gradeRow">
-          <div class="col-md-5">
+          <div class="col-md-4">
             <label>Course Number</label>
-            <input class="form-control courseNum" type="text" name=<%="courseNum" + (@studentGrades.length + 1).to_s%> required="required" />
+            <input class="form-control courseNum" type="text" name=<%="courseNum" + (@studentGrades.length + 1).to_s%>  />
           </div>
-          <div class="col-md-5">
+          <div class="col-md-4">
             <label>Grade</label>
-            <input class="form-control grade" type="text" name=<%="grade" + (@studentGrades.length + 1).to_s%> required="required" />
+            <input class="form-control grade" type="text" name=<%="grade" + (@studentGrades.length + 1).to_s%> />
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
+            <label>Request to Grade</label>
+            <input class="form-control gradeInterest" type="checkbox" name=<%="gradeInterest" + (@studentGrades.length + 1).to_s%> title="Select if you would like to grade for this class" />
+          </div>
+          <div class="col-md-1">
             <i class="fa fa-plus-circle fa-2x classAddIcon" onclick="addGradeRow()"></i>
           </div>
         </div>
