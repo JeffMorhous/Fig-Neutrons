@@ -37,10 +37,10 @@
 }
 
 .center {
-  position: absolute;
-  left: 50%;
+  margin-left: 50%;
   margin-right: -50%;
   margin-top: 50px;
-  margin-bottom: 50px;
+  maring-bottom: 50px;
+  position: absolute;
   transform: translate(-50%, -50%);
 }

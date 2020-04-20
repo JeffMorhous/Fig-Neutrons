@@ -1,10 +1,33 @@
 <h2 class="text-center"><%=@studentName%>'s Profile</h2>
-<div class="center">
-  <a href="/student/application"  class="btn btn-primary applicationButton">Create or Update Your Grader Application</a>
-</div>
+<a href="/student/application"  class="btn btn-primary center">Create or Update Your Grader Application</a>
 <div>
-  <%= week_calendar do |date| %>
-    <%= date %>
+  <%= calendar number_of_days: 5, :start_day => :monday do |date| %>
+    <p>Current Available Hours</p>
+    <% if date.monday? %>
+      <%@monday.each do |day| %>
+        <p><%= day.hour %></p>
+      <% end %>
+    <% end %>
+    <% if date.tuesday? %>
+      <%@tuesday.each do |day| %>
+        <p><%= day.hour %></p>
+      <% end %>
+    <% end %>
+    <% if date.wednesday? %>
+      <%@wednesday.each do |day| %>
+        <p><%= day.hour %></p>
+      <% end %>
+    <% end %>
+    <% if date.thursday? %>
+      <%@thursday.each do |day| %>
+        <p><%= day.hour %></p>
+      <% end %>
+    <% end %>
+    <% if date.friday? %>
+      <%@friday.each do |day| %>
+        <p><%= day.hour %></p>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 <p class="text-center">To view your existing transcripts, click <a href="/student/application">here</a></p>
