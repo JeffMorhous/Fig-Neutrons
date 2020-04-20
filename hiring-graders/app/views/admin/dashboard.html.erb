@@ -5,48 +5,52 @@
 		<h3> Grader-less Courses </h3>
 		<p> Select a course from the table to begin and you will be taken to the grader selection screen </p>
 		<div class = "course-table">
-			<table>
-		  		<tr>
-		    		<th>Department and Course Number</th>
-		    		<th>Section</th>
-		    		<th>Days</th>
-		    		<th>Time</th>
-		    		<th>Location</th>
-		    		<th>Instructor</th>
-		  		</tr>
-		  		<% @courses.each do |course| %>
-		    		<tr>
-		     	 		<td>CSE <%= course.course_number %></td>
-		      			<td><%= course.section_number%></td>
-		      			<td>
-		      				<% if course.days%>
-		            			<%= course.days %>
-		          			<% else %>
-		            			N/A
-		           			<% end %>
-		      			<td>
-		      				<% if course.start_time && course.end_time %>
-		            			<%= course.start_time %> - <%=course.end_time%>
-		          			<% else %>
-		            			N/A
-		           			<% end %>
-		      			</td>
-		      			<td>
-		      				<% if course.location.strip.empty? %>
-		            			N/A
-		          			<% else %>
-		            			<%= course.location %>
-		           			<% end %>	
-		           		</td>
-		  				<td><%= course.instructor %></td>
-		  				<% if ((@courses.find_by(section_number: course.section_number)).id == course. id) %>
-			  				<td class = "hidden">
-				      			<%= button_to "Add Grader", '/admin/section/', params: {section_id: course.id} %>
+			<% if !@courses.empty? %>
+				<table>
+			  		<tr>
+			    		<th>Department and Course Number</th>
+			    		<th>Section</th>
+			    		<th>Days</th>
+			    		<th>Time</th>
+			    		<th>Location</th>
+			    		<th>Instructor</th>
+			  		</tr>
+				  	<% @courses.each do |course| %>
+				    	<tr>
+				     		<td>CSE <%= course.course_number %></td>
+				      		<td><%= course.section_number%></td>
+				      		<td>
+				      			<% if course.days%>
+				           			<%= course.days %>
+				        		<% else %>
+				           			N/A
+				          		<% end %>
+				      		<td>
+				      			<% if course.start_time && course.end_time %>
+				           			<%= course.start_time %> - <%=course.end_time%>
+				          		<% else %>
+				           			N/A
+				          		<% end %>
 				      		</td>
-			      		<% end %>
-		   			</tr>
-				<% end %>
-			</table>
+				      		<td>
+				      			<% if course.location.strip.empty? %>
+				           			N/A
+				        		<% else %>
+				          			<%= course.location %>
+				          		<% end %>	
+				          	</td>
+				  			<td><%= course.instructor %></td>
+				  			<% if ((@courses.find_by(section_number: course.section_number)).id == course. id) %>
+					  			<td class = "hidden">
+						      		<%= button_to "Add Grader", '/admin/section/', params: {section_id: course.id}%>
+					      		</td>
+				     		<% end %>
+				   		</tr>
+					<% end %>
+				</table>
+			<% else %>
+				<h3>No courses currently need graders</h3>
+			<% end %>
 		</div>	
 	</div>
 </div>
