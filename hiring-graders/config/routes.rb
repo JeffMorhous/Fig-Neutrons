@@ -16,17 +16,16 @@ Rails.application.routes.draw do
   get 'instructor/recommendation'
   get 'instructor/edit_recommendation'
   post 'instructor/create_recommendation', to: 'instructor#create_recommendation'
-  get 'student/profile'
-  get 'student/application'
-  get 'student/application/edit'
-  get 'admin/dashboard'
-
+  post 'instructor/create'
 
   #Admin Routes
   get 'admin/dashboard'
+  post 'admin/section'
+  post 'admin/select'
 
   # Student Routes
   get 'student/application'
+  get 'student/application/edit'
   get 'student/profile'
   post 'student/create' # Routes to retrieve the student grader application
   post 'student/application' # Routes to save the grades
