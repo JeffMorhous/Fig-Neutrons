@@ -16,7 +16,7 @@
 		  		</tr>
 		  		<% @courses.each do |course| %>
 		    		<tr>
-		     	 		<td><%= course.department %> <%= course.course_number %></td>
+		     	 		<td>CSE <%= course.course_number %></td>
 		      			<td><%= course.section_number%></td>
 		      			<td><%= course.days %></td>
 		      			<td>
@@ -30,9 +30,11 @@
 		           			<% end %>	
 		           		</td>
 		  				<td><%= course.instructor %></td>
-		  				<td class = "hidden">
-			      			<%= button_to "Add Grader", '/admin/section/', params: {id: course.id}, :method => :get %>
-			      		</td>
+		  				<% if ((@courses.find_by(section_number: course.section_number)).id == course. id) %>
+			  				<td class = "hidden">
+				      			<%= button_to "Add Grader", '/admin/section/', params: {section_id: course.id} %>
+				      		</td>
+			      		<% end %>
 		   			</tr>
 				<% end %>
 			</table>

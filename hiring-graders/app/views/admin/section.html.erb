@@ -1,5 +1,6 @@
+<div class = "info">
 <h1><%= @class %></h1>
-<table class = "info">
+<table>
 	<tr>
 		<td> Section #: </td>
 		<td><%= @section %></td>
@@ -16,17 +17,55 @@
 		<td> Time: </td>
 		<td><%= @time %></td>
 	</tr>
-<table>
-
-<h1>Available Students</h1>
-<table>
-	<% if(@students.empty?) %>
-		<tr>None Available</tr>
-	<% else %>
-		<% @students.each do |grader| %>
-			<tr onclick="openGraderSidebar(grader)">
-				grader.first_name grader.last_name
+</table>
+</div>
+<div class = "graders">
+	<h1>Available Students</h1>
+	<table>
+		<% if(@students.empty?) %>
+			<tr>
+				<td>No Applicants Available</td>
 			</tr>
+		<% else %>
+			<% @students.each do |grader| %>
+				<tr>
+					<td><%= button_to grader.first_name + " " + grader.last_name, '/admin/section/', params: {grader_id: grader.id, section_id: @course.id} %></td>
+				</tr>
+			<% end %>
+		<% end %>	
+	</table>
+</div>
+<div class = "test">
+	<% if(@grader) %>
+		<h1>Contact Information</h1>
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td>@grader.first_name @grader.last_name</td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td>@grader.email</td>
+			</tr>
+			<tr>
+				<td>Phone Number:</td>
+				<td>@grader.phone</td>
+			</tr>
+		</table>
+		<h1>Recommendations</h1>
+		<% if @recommendations %>
+			<% @recommendations.each do |review| %>
+				<div class="recommendation">
+					<h3><%= review[:teacher] %></h3>
+					<h3><%= review[:course] %></h3>
+					<p><%= review[:recommendation] %></p>
+				</div>
+			<% end %>
+		<% else %>
+			<h3>No Recommendations</h3>
 		<% end %>
+		<%= button_to 'Select Grader', '/admin/select/', params: {grader_id: @grader.id, section_id: @course.id} %>
+	<% else %>
+		<h3>Please select a grader to see more info</h3>
 	<% end %>
-</table>	
+</div>
