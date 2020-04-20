@@ -86,12 +86,16 @@
             <input class="form-control gradeInterest" type="checkbox" name=<%="gradeInterest" + (@studentGrades.length + 1).to_s%> title="Select if you would like to grade for this class" />
           </div>
           <div class="col-md-1">
-            <i class="fa fa-plus-circle fa-2x classAddIcon" onclick="addGradeRow()"></i>
+            <i class="fa fa-plus-circle fa-2x classAddIcon" onclick="addGradeRow()" title="Add Course"></i>
           </div>
         </div>
       </div>
       <div class="form-group">
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
         <button type="submit" class="btn btn-primary btn-lg saveGradesButton">Save</button>
+
       </div>
     </form>
     <div class="studentAvailabilityForm" style="display: none;">

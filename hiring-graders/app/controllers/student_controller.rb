@@ -38,7 +38,9 @@ class StudentController < ApplicationController
     if grade == 'C' then return 73 end
     if grade == 'C-' then return 70 end
     if grade == 'D+' then return 67 end
-    return 60
+    if grade == 'D' then return 60 end
+    if grade == 'E' then return 0 end
+    return nil
   end
 
   def convert_number_to_letter_grade(grade)
@@ -66,41 +68,77 @@ class StudentController < ApplicationController
     end
     @interestedCourses = Interested.where student_id: @student.id
 
-
+    error = false;
     if request.post? 
       index = 1
       gradeString = "grade" + index.to_s
       courseString = "courseNum" + index.to_s
       interestedString = "gradeInterest" + index.to_s
-      while params[gradeString] != nil && params[gradeString].length > 0
-        if params[interestedString]
+      while params[gradeString] != nil
+
+        # Check for errors on input form:
+        # incorrect course number entered
+        error = true if !params[courseString].match(/^\d{4}/)
+
+        # incorrect grade entered
+        error = true if convert_letter_grades_to_gpa(params[gradeString].upcase) == nil
+
+        # missing values for course num or grade
+        if params[gradeString].length == 0 || params[courseString].length == 0
+          error = true; 
+
+          # if it's the last row of input fields then empty fields are okay
+          index = index + 1
+          gradeString = "grade" + index.to_s
+          if !params[gradeString]
+            error = false;
+            index = index - 1
+            gradeString = "grade" + index.to_s
+          end
         end
+        break if error
+
+        # Look up interest and transcript information of student
         gradeInterest = Interested.find_by(student_id: @student.id, course: params[courseString])
         transcript = Transcript.find_by(student_id: @student.id, course_id: params[courseString])
+
+        # If the request to grade box is no longer checked and was previously checked, destroy the record 
         if gradeInterest != nil && !params[interestedString]
           gradeInterest.destroy
         elsif !gradeInterest && params[interestedString]
+          # Create a new record for interest if there is not an existing record and the student has selected the checkbox
           gradeInterest = Interested.new(student_id: @student.id, department: "CSE", course: params[courseString])
           gradeInterest.save
         end
 
+        # If the student had an existing grade entered for that course, update the grade
         if transcript != nil
-          transcript.grade = convert_letter_grades_to_gpa(params[gradeString])
+          transcript.grade = convert_letter_grades_to_gpa(params[gradeString].upcase)
           transcript.updated_at = Time.new
         else
+          # Otherwise create a new record
           transcript = Transcript.new(
-              grade: convert_letter_grades_to_gpa(params[gradeString]),
+              grade: convert_letter_grades_to_gpa(params[gradeString].upcase),
               created_at: Time.new,
               updated_at: Time.new,
               student_id: @student.id,
               course_id: params[courseString])
         end
-        transcript.save
+
+        # Only save if there is information entered in the course num and grade fields
+        transcript.save unless params[courseString].length == 0 || params[gradeString].length == 0
+
+        # Update the name of the input row to check
         index = index + 1
         gradeString = "grade" + index.to_s
         courseString = "courseNum" + index.to_s
         interestedString = "gradeInterest" + index.to_s
       end
+
+      if error 
+        flash[:danger] = "Please enter a valid course number/grade"
+      end
+
       redirect_to '/student/application'
     end
 
