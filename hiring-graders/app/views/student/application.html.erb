@@ -2,17 +2,18 @@
 
 <h2 class="text-center">Grader Application</h2>
 <p class="text-center">To be considered for a grader position, please enter your grades and availability</p>
-<div class="row grade-form">
+<hr>
 
+<div class="row grade-form">
   <div class="col-md-3">
     <div class="row">
-      <button class="btn btn-primary btn-lg graderAppButton" onclick="showGradeForm()">Enter Grades</button>
+      <button class="btn btn-outline-primary btn-lg graderAppButton" onclick="showGradeForm()">Enter Grades</button>
     </div>
     <div class="row">
-      <button class="btn btn-primary btn-lg graderAppButton" onclick="displayWeeklyCalendar()">Enter Availability</button>
+      <button class="btn btn-outline-primary btn-lg graderAppButton" onclick="displayWeeklyCalendar()">Enter Availability</button>
     </div>
     <div class="row">
-      <a href="/student/profile" class="btn btn-primary btn-lg graderAppButton">Back to Profile</a>
+      <a href="/student/profile" class="btn btn-outline-warning btn-lg graderAppButton">Back to Profile</a>
     </div>
   </div>
 
@@ -94,14 +95,14 @@
         <% flash.each do |message_type, message| %>
           <div class="alert alert-<%= message_type %>"><%= message %></div>
         <% end %>
-        <button type="submit" class="btn btn-primary btn-lg saveGradesButton">Save</button>
-
+        <button type="submit" class="btn btn-outline-success btn-block btn-lg saveGradesButton">Save</button>
       </div>
     </form>
     <div class="studentAvailabilityForm" style="display: none;">
       <div id="targetCalendar"></div>
-      <button class="btn btn-primary saveAvailabilityButton" onclick="saveAvailability()">Save Availability</button>
-      <p>If you click this button, all of your previously saved availability schedule will be deleted.</p>
+      <br>
+      <p><em>Clicking save overwrites previously saved availability schedule!</em></p>
+      <button class="btn btn-outline-success btn-block saveAvailabilityButton" onclick="saveAvailability()">Save Availability</button>
     </div>
 
 
