@@ -40,11 +40,9 @@
 				          		<% end %>	
 				          	</td>
 				  			<td><%= course.instructor %></td>
-				  			<% if ((@courses.find_by(section_number: course.section_number)).id == course. id) %>
-					  			<td class = "hidden">
-						      		<%= button_to "Add Grader", '/admin/section/', params: {section_id: course.id}%>
-					      		</td>
-				     		<% end %>
+					  		<td class = "hidden">
+						      	<%= button_to "Add Grader", '/admin/section/', params: {section_id: course.id}%>
+					      	</td>
 				   		</tr>
 					<% end %>
 				</table>

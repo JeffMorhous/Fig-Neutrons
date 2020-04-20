@@ -11,11 +11,18 @@
 
   <body class=" <%= 'account' if @account_page %>">
   <%if is_logged_in?%>
-    <div class="logout">
-      <form action = "/user/logout">
-        <input type="submit" value="Logout" />
-      </form>
-    </div>  
+    <div class="navbar">
+      <div class="logout">
+        <form action = "/user/logout">
+          <input type="submit" value="Logout" />
+        </form>
+      </div>  
+      <div class="dashboard">
+        <form action = "/admin/dashboard">
+          <input type="submit" value="Dashboard" />
+        </form>
+      </div> 
+    </div>
   <%end%>
 
   <%= yield %>
