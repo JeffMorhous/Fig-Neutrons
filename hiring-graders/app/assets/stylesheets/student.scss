@@ -37,11 +37,10 @@
   text-align: center;
 }
 
-.center {
-  margin-left: 50%;
-  margin-right: -50%;
-  margin-top: 50px;
-  maring-bottom: 50px;
-  position: absolute;
-  transform: translate(-50%, -50%);
+.profileButton {
+  margin: 30px 0px;
+}
+
+#profileCalendar {
+  margin-top: 20px
 }

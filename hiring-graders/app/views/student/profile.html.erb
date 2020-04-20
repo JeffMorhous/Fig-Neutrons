@@ -1,33 +1,52 @@
 <h2 class="text-center"><%=@studentName%>'s Profile</h2>
-<a href="/student/application"  class="btn btn-primary center">Create or Update Your Grader Application</a>
-<div>
+<a href="/student/application"  class="btn btn-primary btn-lg profileButton"> <%= @transcript == nil ? 'Create Grader Application' : 'Update Grader Application '%></a>
+
+<div id="profileCalendar">
+  <h3>Your Current Availability</h3>
   <%= calendar number_of_days: 5, :start_day => :monday do |date| %>
-    <p>Current Available Hours</p>
+    <%# <p>Current Available Hours</p> %>
     <% if date.monday? %>
+      <% if @monday.length == 0 %>
+        <p>No Selected Hours</p>
+      <% end %>
       <%@monday.each do |day| %>
         <p><%= day.hour %></p>
       <% end %>
     <% end %>
     <% if date.tuesday? %>
+    <% if @tuesday.length == 0 %>
+        <p>No Selected Hours</p>
+      <% end %>
       <%@tuesday.each do |day| %>
         <p><%= day.hour %></p>
       <% end %>
     <% end %>
     <% if date.wednesday? %>
+    <% if @wednesday.length == 0 %>
+        <p>No Selected Hours</p>
+      <% end %>
       <%@wednesday.each do |day| %>
         <p><%= day.hour %></p>
       <% end %>
     <% end %>
     <% if date.thursday? %>
+    <% if @thursday.length == 0 %>
+        <p>No Selected Hours</p>
+      <% end %>
       <%@thursday.each do |day| %>
         <p><%= day.hour %></p>
       <% end %>
     <% end %>
     <% if date.friday? %>
+    <% if @friday.length == 0 %>
+        <p>No Selected Hours</p>
+      <% end %>
       <%@friday.each do |day| %>
         <p><%= day.hour %></p>
       <% end %>
     <% end %>
   <% end %>
 </div>
+<p class="text-center">To edit your availability, visit the grader application page </p>
+
 <p class="text-center">To view your existing transcripts, click <a href="/student/application">here</a></p>

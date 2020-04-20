@@ -10,7 +10,7 @@
   </head>
 
   <body class=" <%= 'account' if @account_page %>">
-  <%if is_logged_in?%>
+  <%if is_logged_in? && !@account_page%>
     <a href="/user/logout" class="btn btn-primary logoutButton">Log out</a>
   <%end%>
 

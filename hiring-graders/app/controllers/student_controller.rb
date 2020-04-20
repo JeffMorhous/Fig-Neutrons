@@ -181,10 +181,10 @@ class StudentController < ApplicationController
 
   def profile
     @student = Student.find_by id: session[:user_id]
-    @grades = Array.new()
 
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
+      @transcript = Transcript.find_by(student_id: @student.id)
       @monday = Availability.where(student_id: session[:user_id], day: "M")
       @tuesday = Availability.where(student_id: session[:user_id], day: "T")
       @wednesday = Availability.where(student_id: session[:user_id], day: "W")
