@@ -1,0 +1,39 @@
+<!--Following format of student/application.html.erb-->
+<div class="reccomendation-form">
+  <form action="/instructor/create_recommendation" method="put">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <h2>Edit Your Recommendation</h2>
+    <hr>
+    <p>First, enter the student's first and last name</p>
+    <div class="form-group">
+      <label>Student First Name</label>
+      <input class="form-control" type="text" name="firstName" value="<%=@recommendation.first_name%>" required />
+      <br>
+
+      <label>Student Last Name</label>
+      <input class="form-control" type="text" name="lastName" value="<%=@recommendation.last_name%>" required />
+      <br>
+
+      <label>Student Email</label>
+      <input class="form-control" type="text" name="email" value="<%=@recommendation.student_email%>" required />
+      <br>
+
+      <label>Recommended Course to Grade (Enter Course Number)</label>
+      <input class="form-control" type="text" name="recCourse" value="<%=@recommendation.course_number%>" required />
+      <br>
+
+      <label>Tell us about the student</label>
+      <textarea class="form-control" type="text" name="recText" rows="3"><%=@recommendation.recommendation%></textarea>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <a href="/instructor/edit_recommendation" class="btn-primary btn-lg text-center">Back</a>
+      </div>
+      <div class="col-md-6">
+      <button type="submit" class="btn btn-success btn-block btn-lg">Save</button>
+      </div>
+    </div>
+
+  </form>
+</div>
