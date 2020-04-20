@@ -29,16 +29,16 @@ class AdminController < ApplicationController
       @location = "N/A"
     end  
 
-    if(course.days && course.start_time && course.end_time)
-      @time = course.days+ " " +course.start_time+ "-" +course.end_time
-    else
+    if(course.days.strip.empty? || course.start_time.strip.empty? || course.end_time.strip.empty?)
       @time = "N/A"
+    else
+      @time = course.days+ " " +course.start_time+ "-" +course.end_time
     end 
 
     applicants = Array.new
     counter = 0
     (Student.all).each do |student|
-      if((Transcript.exists?(student_id: student.id, course_id: course.id)))
+      if((Transcript.exists?(student_id: student.id, course_id: course.course_number)))
         applicants[counter] = student
         counter = counter+1
       end
@@ -52,8 +52,11 @@ class AdminController < ApplicationController
       recommends = {};
       counter = 0;
       student_recommendations.each do |recommend|
-        teacher = Instructor.find(recommend.instructor_id)
-        recommends[counter] = {teacher: teacher.first_name + " " + teacher.last_name, course: recommend.course_id, recommendation: recommend.recommendation}
+        @test1 = recommend.instructor_id
+        @test2 = recommend.course_number
+        @test3 = recommend.recommendation
+        teacher = Instructor.find_by( id: recommend.instructor_id)
+        recommends[counter] = {teacher: teacher.first_name + " " + teacher.last_name, course: recommend.course_number, recommendation: recommend.recommendation}
       end
       @recommentations = recommends
     end

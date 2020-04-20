@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'instructor/profile'
   get 'instructor/recommendation'
   post 'instructor/create'
+  post 'instructor/create_recommendation'
 
   #Admin Routes
   get 'admin/dashboard'
@@ -30,6 +31,6 @@ Rails.application.routes.draw do
 
   # get 'student/application/edit'
 
-  
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
