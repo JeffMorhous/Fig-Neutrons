@@ -4,6 +4,24 @@
   <hr class="my-4">
   <div class="application-btns">
     <a href="/student/application"  class="btn btn-outline-primary btn-lg profileButton"> <%= @transcript == nil ? 'Create Grader Application' : 'Update Grader Application '%></a>
+    <button onclick="showApplicationStatus()"  id="appStatusButton" class="btn btn-outline-primary btn-lg profileButton">Application Status</button>
+    <div class="appStatus" style="display: none">
+      <% if @courses_to_grade.length == 0 %>
+          <p>You do not current have an application started! Please create a grader application above!</p>
+        
+      <% else %>
+        <p>Congratulations! You've been selected to be a grader! The details are below:</p>
+        <% @courses_to_grade.each do |course| %>
+        
+          <p><%=course.semester%></p>
+          <p><%=course.course_id%></p>
+
+        <% end %>
+        
+      <% end %>
+     
+    </div>
+
   </div>
 </div>
   <div id="profileCalendar">
@@ -50,5 +68,8 @@
           <p><%= day.hour %></p>
         <% end %>
       <% end %>
+    <% end %>
+    <% if @no_hours_selected %>
+      <p>Visit the grader application to enter the hours you are available to work!</p>
     <% end %>
   </div>

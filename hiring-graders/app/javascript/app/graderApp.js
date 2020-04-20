@@ -56,7 +56,7 @@ displayWeeklyCalendar = function () {
 saveAvailability = function () {
   let allAvailableHours = {}
     
-  const selectedHours = $('#targetCalendar').weekly_schedule("getSelectedHour");
+  const selectedHours = $('#targetCalendar').weekly_schedule('getSelectedHour');
   for(column in selectedHours) {
   let hoursAvailable = [];
     if(selectedHours[column].length > 0) {
@@ -74,7 +74,11 @@ saveAvailability = function () {
     } 
   });
 }
-
+showApplicationStatus = function () {
+  $(".appStatus").toggleClass('active');
+  const text = $("#appStatusButton").text();
+  $("#appStatusButton").text(text == "Application Status" ? "Hide Application Status": "Application Status");
+}
 backToStudentProfile = function () {
   window.history.back();
 }

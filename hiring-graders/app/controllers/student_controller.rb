@@ -194,7 +194,7 @@ class StudentController < ApplicationController
 
   def profile
     @student = Student.find_by id: session[:user_id]
-
+    @no_hours_selected = false;
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
       @transcript = Transcript.find_by(student_id: @student.id)
@@ -203,6 +203,12 @@ class StudentController < ApplicationController
       @wednesday = Availability.where(student_id: session[:user_id], day: "W")
       @thursday = Availability.where(student_id: session[:user_id], day: "R")
       @friday = Availability.where(student_id: session[:user_id], day: "F")
+
+      if @monday.length == 0 && @tuesday.length == 0 && @wednesday.length == 0 && @thursday.length == 0 && @friday.length == 0
+        @no_hours_selected = true
+      end
+
+      @courses_to_grade = Grader.where(student_id: session[:user_id])
     else
       redirect_to '/user/login'
     end
