@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/artsy/day-schedule-selector
+  revision: 96e39e3fd5dc466d19a5f0dcd53b0d5944fac07a
+  specs:
+    day_schedule_selector (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -242,6 +248,7 @@ DEPENDENCIES
   bootstrap (~> 4.4.1)
   byebug
   capybara (>= 2.15)
+  day_schedule_selector (= 0.1.0)!
   font-awesome-rails
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)

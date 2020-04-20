@@ -15,7 +15,7 @@ class InstructorController < ApplicationController
   def login
     instructor = Instructor.find_by(email: params[:email].downcase)
     if instructor && instructor.authenticate(params[:password])
-      session[:user_id] = instructor.id
+      log_in instructor, 'instructor'
       redirect_to '/instructor/profile'
     else
       flash[:danger] = "Invalid email/password combination"
@@ -26,11 +26,25 @@ class InstructorController < ApplicationController
   def recommendation
   end
 
-  def profile
-    @instructor = Instructor.find_by id: session[:user_id]
-    @instructorName = "#{@instructor.first_name} #{@instructor.last_name}"
+  def create_recommendation
+    @recommend = Recommendation.new(recommendation: params[:recText], student_id: Student.find_by(email: params[:email]).id,
+                                    course_number: params[:recCourse], instructor_id: Instructor.find_by(id: session[:user_id]))
+
+    if @recommend.save
+      redirect_to '/instructor/profile'
+    else
+      flash[:danger] = @recommend.errors.full_messages
+      redirect_to '/instructor/profile'
+    end
   end
 
-  
+  def profile
+    @instructor = Instructor.find_by id: session[:user_id]
+    if !@instructor.nil?
+      @instructorName = "#{@instructor.first_name} #{@instructor.last_name}"
+    end
+  end
+
+
 
 end

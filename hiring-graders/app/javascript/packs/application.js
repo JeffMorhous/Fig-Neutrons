@@ -9,8 +9,7 @@ require("channels")
 require("jquery")
 require("app/account")
 require("app/graderApp")
-require("app/admin")
-
+require("app/jquery.weekly-schedule-plugin")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
