@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # Instructor Routes
   get 'instructor/profile'
   get 'instructor/recommendation'
+  get 'instructor/edit_recommendation'
   post 'instructor/create_recommendation', to: 'instructor#create_recommendation'
   get 'student/profile'
   get 'student/application'
