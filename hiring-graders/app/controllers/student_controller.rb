@@ -1,18 +1,31 @@
 class StudentController < ApplicationController
   def create
-    @student = Student.new(first_name: params[:fName],
-                           last_name: params[:lName],
-                           email: params[:email],
-                           phone: params[:phone],
-                           password: params[:password],
-                           password_confirmation: params[:confirmPassword])
-    if @student.save
-      log_in @student, 'student'
-      redirect_to :action => 'profile'
-    else
-      flash[:danger] = @student.errors.full_messages
-      redirect_to '/user/signup'
+    error = false
+    @existingInstructor = Instructor.find_by(email: params[:email])
+    @existingAdmin = Admin.find_by(email: params[:email])
+    if @existingInstructor != nil || @existingAdmin != nil
+      error = true
     end
+    if !error
+      @student = Student.new(first_name: params[:fName],
+        last_name: params[:lName],
+        email: params[:email],
+        phone: params[:phone],
+        password: params[:password],
+        password_confirmation: params[:confirmPassword])
+      if @student.save
+        log_in @student, 'student'
+        redirect_to :action => 'profile'
+      else
+        flash[:danger] = @student.errors.full_messages
+        redirect_to '/user/signup'
+      end
+    else
+      flash[:danger] = "This email is tied to an existing account. Please log in below."
+      redirect_to '/user/login'
+    end
+
+    
 
   end
   
@@ -190,6 +203,8 @@ class StudentController < ApplicationController
       @wednesday = Availability.where(student_id: session[:user_id], day: "W")
       @thursday = Availability.where(student_id: session[:user_id], day: "R")
       @friday = Availability.where(student_id: session[:user_id], day: "F")
+    else
+      redirect_to '/user/login'
     end
   end
 

@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
+  # Landing page
   get 'welcome/index'
   root 'welcome#index'
-  # get 'images/osu_engineering_logo'
 
   # Register and Login Routes
-  get 'user/signup'
-  get 'user/login'
-  get 'user/logout'
-  post 'student/login'
-  post 'instructor/login'
+  get 'user/signup' # View for sign up page
+  get 'user/login' # View for login page
+  get 'user/logout' 
+  post 'student/login' # Handle login for student and redirect to student profile
+  post 'instructor/login' # Handle login for instructor and redirect to instructor profile
   post 'admin/login'
 
   # Instructor Routes
@@ -24,10 +24,10 @@ Rails.application.routes.draw do
   post 'admin/select'
 
   # Student Routes
-  get 'student/application'
+  get 'student/application' # Routes to retrieve the student grader application
   get 'student/application/edit'
   get 'student/profile'
-  post 'student/create' # Routes to retrieve the student grader application
+  post 'student/create' 
   post 'student/application' # Routes to save the grades
   post 'student/availability'
 

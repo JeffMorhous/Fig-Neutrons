@@ -60,7 +60,12 @@ class AdminController < ApplicationController
   end
 
   def dashboard
-    @courses = Course.all
+    admin = Admin.find_by id: session[:user_id]
+    if admin == nil
+      redirect_to '/user/login'
+    else
+      @courses = Course.all
+    end
   end
 
   def select
