@@ -29,33 +29,61 @@ class AdminController < ApplicationController
       @location = "N/A"
     end  
 
-    if(course.days.strip.empty? || course.start_time.strip.empty? || course.end_time.strip.empty?)
-      @time = "N/A"
-    else
+    if(course.days && course.start_time && course.end_time)
       @time = course.days+ " " +course.start_time+ "-" +course.end_time
-    end 
+    else
+      @time = "N/A"
+    end
 
     applicants = Array.new
     counter = 0
     (Student.all).each do |student|
-      if((Transcript.exists?(student_id: student.id, course_id: course.course_number)))
-        applicants[counter] = student
-        counter = counter+1
+      if(Transcript.exists?(student_id: student.id, course_id: course.course_number))
+        intime = true
+        if(course.is_lab)
+          days = (course.days).chars
+          i=0 
+          while i < days.length && intime
+            day = days[i];
+            availabilitys = Availability.where(student_id: student.id, day: day)
+            hours = Array.new
+            availabilitys.each do |available|
+              hours.push(available.hour)
+            end
+            start_time = (course.start_time.tr(':','')).to_i
+            start_time = (start_time/100);
+            end_time = (course.end_time.tr(':','')).to_i
+            end_time = ((end_time+99)/100);
+            time = start_time
+            while time <= end_time && intime
+              addon = 'PM'
+              if(time/12 == 0)
+                addon = 'AM'
+              end
+              standard_time = time
+              if standard_time > 12
+                standard_time = standard_time - 12
+              end
+              time_string = standard_time.to_s + ":00" + addon
+              if(!hours.include?(time_string))
+                intime = false
+              end
+              time = time +1
+            end
+            i = i+1
+          end
+        end 
+        if(intime)
+          applicants[counter] = student
+          counter = counter+1
+        end
       end
-      # && (!(Course.exists?(section_number: course.section_number, is_lab: true) || (Course.exists?(section_number: course.section_number, is_lab: true) && ) 
     end
     @students = applicants
 
     if(params[:grader_id])
       @grader = Student.find(params[:grader_id])
-      @recommendations = Recommendation.where(student_id: @grader.id)
-      #recommends = {};
-      #counter = 0;
-      #student_recommendations.each do |recommend|
-      #  teacher = Instructor.find_by( id: recommend.instructor_id)
-      #  recommends[counter] = {teacher: teacher.first_name + " " + teacher.last_name, course: recommend.course_number, recommendation: recommend.recommendation}
-      #end
-      #@recommentations = recommends
+      @recommendations = Recommendation.where(email: @grader.email)
     end
   end
 
@@ -64,7 +92,7 @@ class AdminController < ApplicationController
     if admin == nil
       redirect_to '/user/login'
     else
-      @courses = Course.all
+      @courses = Course.where(have_grader: false)
     end
   end
 

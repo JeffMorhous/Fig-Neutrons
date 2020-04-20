@@ -37,7 +37,21 @@ body {
 	}
 		
 }
-.logout {
+.navbar {
 	background-color: #9ba5a8;
 	padding: 2px;
+	margin-bottom: 5px;
+	height: 30px;
+}
+
+.logout {
+	float: left;
+}
+
+.dashboard {
+	float: left;
+}
+
+.admin {
+	clear: both;
 }
