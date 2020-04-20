@@ -48,17 +48,14 @@ class AdminController < ApplicationController
 
     if(params[:grader_id])
       @grader = Student.find(params[:grader_id])
-      student_recommendations = Recommendation.where(student_id: @grader.id)
-      recommends = {};
-      counter = 0;
-      student_recommendations.each do |recommend|
-        @test1 = recommend.instructor_id
-        @test2 = recommend.course_number
-        @test3 = recommend.recommendation
-        teacher = Instructor.find_by( id: recommend.instructor_id)
-        recommends[counter] = {teacher: teacher.first_name + " " + teacher.last_name, course: recommend.course_number, recommendation: recommend.recommendation}
-      end
-      @recommentations = recommends
+      @recommendations = Recommendation.where(student_id: @grader.id)
+      #recommends = {};
+      #counter = 0;
+      #student_recommendations.each do |recommend|
+      #  teacher = Instructor.find_by( id: recommend.instructor_id)
+      #  recommends[counter] = {teacher: teacher.first_name + " " + teacher.last_name, course: recommend.course_number, recommendation: recommend.recommendation}
+      #end
+      #@recommentations = recommends
     end
   end
 

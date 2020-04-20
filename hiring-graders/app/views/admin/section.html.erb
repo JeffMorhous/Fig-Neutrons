@@ -56,9 +56,9 @@
 		<% if @recommendations %>
 			<% @recommendations.each do |review| %>
 				<div class="recommendation">
-					<h3><%= review[:teacher] %></h3>
-					<h3><%= review[:course] %></h3>
-					<p><%= review[:recommendation] %></p>
+					<h3><%= (Instructor.find(review.instructor_id)).first_name %> <%= (Instructor.find(review.instructor_id)).last_name %></h3>
+					<h3><%= review.course_number %></h3>
+					<p><%= review.recommendation %></p>
 				</div>
 			<% end %>
 		<% else %>
