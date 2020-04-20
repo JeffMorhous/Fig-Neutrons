@@ -1,1 +1,18 @@
 <h1 class="display-4">Let's look at your existing recommendations</h1>
+<% if @recommendations.length == 0 %>
+  <p>You have not made any recommendations yet! <a href="/instructor/profile">Go back to your profile to submit a recommendation</a> </p>
+<% end %>
+<% @recommendations.each do |item| %>
+  <div class="card">
+  <div class="card-header">
+    Recommendation for <%= item.first_name + " " + item.last_name%>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Course Number: <%=item.course_number%></h5>
+    <p class="card-text"><%=item.recommendation%></p>
+    <a href=<%="/instructor/edit_recommendation/" + item.id.to_s%> class="btn btn-primary">Edit</a>
+  </div>
+</div>
+<% end %>
+<a href="/instructor/profile" class="btn-primary btn-block btn-lg text-center">Back</a>
+

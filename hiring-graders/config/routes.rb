@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'instructor/profile'
   get 'instructor/recommendation'
   get 'instructor/edit_recommendation'
+  get 'instructor/edit_recommendation/:id', to: 'instructor#edit'
+
   post 'instructor/create_recommendation', to: 'instructor#create_recommendation'
   post 'instructor/create'
 

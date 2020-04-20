@@ -38,8 +38,8 @@ class InstructorController < ApplicationController
   end
 
   def create_recommendation
-    @recommend = Recommendation.new(recommendation: params[:recText], student_id: Student.find_by(email: params[:email]).id,
-                                    course_number: params[:recCourse], instructor_id: session[:user_id])
+    @recommend = Recommendation.new(recommendation: params[:recText], student_email: params[:email], first_name: params[:firstName],
+                                    last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id])
 
     if @recommend.save
       flash[:success] = "Your recommendation was saved successfully!"
@@ -51,8 +51,17 @@ class InstructorController < ApplicationController
   end
 
   def edit_recommendation
-    @recommendations = Recommendation.find_by(instructor_id: session[:user_id])
+    @recommendations = Recommendation.where(instructor_id: session[:user_id])
+    if params[:id] != nil
+      puts params[:id]
+    end
+
   end
+
+  def edit
+    @recommendation = Recommendation.find_by(id: params[:id])
+  end
+
 
   def profile
     @instructor = Instructor.find_by id: session[:user_id]
