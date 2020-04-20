@@ -74,6 +74,8 @@ class StudentController < ApplicationController
       gradeString = "grade" + index.to_s
       courseString = "courseNum" + index.to_s
       interestedString = "gradeInterest" + index.to_s
+      all_transcripts = Transcript.where student_id: @student.id
+      num_of_grades = all_transcripts.size
       while params[gradeString] != nil
 
         # Check for errors on input form:
@@ -85,13 +87,13 @@ class StudentController < ApplicationController
 
         # missing values for course num or grade
         if params[gradeString].length == 0 || params[courseString].length == 0
-          error = true; 
+          error = true
 
           # if it's the last row of input fields then empty fields are okay
           index = index + 1
           gradeString = "grade" + index.to_s
           if !params[gradeString]
-            error = false;
+            error = false
             index = index - 1
             gradeString = "grade" + index.to_s
           end
@@ -99,21 +101,23 @@ class StudentController < ApplicationController
         break if error
 
         # Look up interest and transcript information of student
-        gradeInterest = Interested.find_by(student_id: @student.id, course: params[courseString])
+        grade_interest = Interested.find_by(student_id: @student.id, course: params[courseString])
         transcript = Transcript.find_by(student_id: @student.id, course_id: params[courseString])
 
         # If the request to grade box is no longer checked and was previously checked, destroy the record 
-        if gradeInterest != nil && !params[interestedString]
-          gradeInterest.destroy
-        elsif !gradeInterest && params[interestedString]
+        if grade_interest != nil && !params[interestedString]
+          grade_interest.destroy
+        elsif !grade_interest && params[interestedString]
           # Create a new record for interest if there is not an existing record and the student has selected the checkbox
-          gradeInterest = Interested.new(student_id: @student.id, department: "CSE", course: params[courseString])
-          gradeInterest.save
+          grade_interest = Interested.new(student_id: @student.id, department: "CSE", course: params[courseString])
+          grade_interest.save
         end
 
-        # If the student had an existing grade entered for that course, update the grade
-        if transcript != nil
+        # if the student had an existing entry that they're updating that needs to be changed
+        if index <= num_of_grades
+          transcript = all_transcripts[index - 1]
           transcript.grade = convert_letter_grades_to_gpa(params[gradeString].upcase)
+          transcript.course_id = params[courseString]
           transcript.updated_at = Time.new
         else
           # Otherwise create a new record
