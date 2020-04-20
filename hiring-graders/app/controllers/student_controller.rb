@@ -181,10 +181,11 @@ class StudentController < ApplicationController
 
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
-      @studentGrades = Transcript.where student_id: @student.id
-      @studentGrades.each_with_index do |transcript, index|
-        @grades[index] = convert_number_to_letter_grade(transcript.grade)
-      end
+      @monday = Availability.where(student_id: session[:user_id], day: "M")
+      @tuesday = Availability.where(student_id: session[:user_id], day: "T")
+      @wednesday = Availability.where(student_id: session[:user_id], day: "W")
+      @thursday = Availability.where(student_id: session[:user_id], day: "R")
+      @friday = Availability.where(student_id: session[:user_id], day: "F")
     end
   end
 

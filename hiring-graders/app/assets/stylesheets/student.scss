@@ -1,7 +1,9 @@
 // Place all the styles related to the student controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-
+/*
+ *= require simple_calendar
+ */
 .classAddIcon {
   margin-top: 35px;
   cursor: pointer;
@@ -33,4 +35,13 @@
 .graderAppButton {
   width: 200px;
   text-align: center;
+}
+
+.center {
+  margin-left: 50%;
+  margin-right: -50%;
+  margin-top: 50px;
+  maring-bottom: 50px;
+  position: absolute;
+  transform: translate(-50%, -50%);
 }
