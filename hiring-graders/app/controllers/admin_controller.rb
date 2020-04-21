@@ -83,7 +83,7 @@ class AdminController < ApplicationController
 
     if(params[:grader_id])
       @grader = Student.find(params[:grader_id])
-      @recommendations = Recommendation.where(email: @grader.email)
+      @recommendations = Recommendation.where(student_email: @grader.email)
     end
   end
 
@@ -98,10 +98,11 @@ class AdminController < ApplicationController
 
   def select
     student = Student.find(params[:student_id]) 
-    course = Course.find(params[:course_id])
-    grader = Grader.new(course_id: params[:course_id], student_id: params[:student_id], semester: 'Fall')
+    course = Course.find(params[:section_id])
+    grader = Grader.new(course_id: params[:section_id], student_id: params[:student_id], semester: 'Fall')
     grader.save
     course.have_grader = true
+    course.need_grader = false
     course.save
     redirect_to '/admin/dashboard'
   end

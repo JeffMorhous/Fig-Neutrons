@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_200900) do
     t.string "start_time"
     t.string "end_time"
     t.string "location"
-    t.boolean "need_grader", default: false
+    t.boolean "need_grader", default: true
     t.boolean "have_grader", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
