@@ -198,9 +198,11 @@ class StudentController < ApplicationController
 
   def profile
     @student = Student.find_by id: session[:user_id]
-    @no_hours_selected = false;
+    @no_hours_selected = false
     all_courses = Course.all
-    @graders_required = false;
+    @graders_required = false
+    @start = Time.new(2020, 4, 20)
+    @year = true
 
     all_courses.each do |course|
       if course.need_grader && !course.have_grader

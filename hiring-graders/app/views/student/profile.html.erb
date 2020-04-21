@@ -35,7 +35,7 @@
 </div>
   <div id="profileCalendar">
     <h3>Your Current Availability</h3>
-    <%= calendar number_of_days: 5, :start_day => :monday do |date| %>
+    <%= calendar number_of_days: 5, :start_day => :monday, :start_date => @start do |date| %>
       <%# <p>Current Available Hours</p> %>
       <% if date.monday? %>
         <% if @monday.length == 0 %>
