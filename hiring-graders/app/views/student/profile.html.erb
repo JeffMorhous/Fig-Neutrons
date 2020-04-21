@@ -7,18 +7,26 @@
     <button onclick="showApplicationStatus()"  id="appStatusButton" class="btn btn-outline-primary btn-lg profileButton">Application Status</button>
     <div class="appStatus" style="display: none">
       <% if @transcript == nil %>
-          <p>You do not current have an application started! Please create a grader application above!</p>
+          <p>You do not currently have an application started! Please create a grader application above!</p>
       <% elsif @transcript && @courses_to_grade.length == 0 %>
         <p>We are currently evaluating your application. Check back here to see if you are selected.</p>  
-      <% elsif transcript && @courses_to_grade.length > 0%>
+      <% elsif @transcript && @courses_to_grade.length > 0%>
         <p>Congratulations! You've been selected to be a grader! The details are below:</p>
-        <% @courses_to_grade.each do |course| %>
+        <div class="row selectedCards">
+          <% @courses_to_grade.each do |course| %>
+            <div class="card col" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">CSE <%= Course.find_by(id: course.course_id).course_number%></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Section #: <%= Course.find_by(id: course.course_id).section_number%> </h6>
+                <p class="card-text"><%= "Instructor: #{Course.find_by(id: course.course_id).instructor} "%></p>
+                <p class="card-text"><%= "Time: #{Course.find_by(id: course.course_id).days} #{Course.find_by(id: course.course_id).start_time}  - #{Course.find_by(id: course.course_id).end_time}"%></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
         
-          <p><%=course.semester%></p>
-          <p><%=course.course_id%></p>
-
-        <% end %>
-        
+      <% elsif !@graders_required %>
+        <p>Unfortunately you have not been selected to be a grader this semester. You may apply again for next semester by updating your transcript/availability  </p>
       <% end %>
      
     </div>
@@ -71,6 +79,6 @@
       <% end %>
     <% end %>
     <% if @no_hours_selected %>
-      <p>Visit the grader application to enter the hours you are available to work!</p>
+      <p>Visit the grader application to enter the hours you are available to work to be considered to grade during labs!</p>
     <% end %>
   </div>

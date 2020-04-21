@@ -41,6 +41,7 @@ class StudentController < ApplicationController
 
   end
 
+  # Convert the letter entered to a grade
   def convert_letter_grades_to_gpa(grade)
     if grade == 'A' then return 93 end
     if grade == 'A-' then return 90 end
@@ -56,6 +57,7 @@ class StudentController < ApplicationController
     return nil
   end
 
+  # Convert the stored number to a letter to display
   def convert_number_to_letter_grade(grade)
     if grade == 93 then return 'A' end
     if grade == 90 then return 'A-' end
@@ -81,6 +83,7 @@ class StudentController < ApplicationController
     end
     @interestedCourses = Interested.where student_id: @student.id
 
+    # Save the information entered in the dynamic form for collecting grades
     error = false;
     if request.post? 
       index = 1
@@ -161,6 +164,7 @@ class StudentController < ApplicationController
 
   end
 
+  # Save the hours entered from the availability table
   def availability
     Availability.where(student_id: session[:user_id]).destroy_all
     if params[:"0"]
@@ -195,6 +199,16 @@ class StudentController < ApplicationController
   def profile
     @student = Student.find_by id: session[:user_id]
     @no_hours_selected = false;
+    all_courses = Course.all
+    @graders_required = false;
+
+    all_courses.each do |course|
+      if course.need_grader && !course.have_grader
+        @graders_required = true
+      end
+      break
+    end
+
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
       @transcript = Transcript.find_by(student_id: @student.id)
