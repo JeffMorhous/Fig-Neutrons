@@ -18,7 +18,9 @@
               <div class="card-body">
                 <h5 class="card-title">CSE <%= Course.find_by(id: course.course_id).course_number%></h5>
                 <h6 class="card-subtitle mb-2 text-muted">Section #: <%= Course.find_by(id: course.course_id).section_number%> </h6>
+
                 <p class="card-text"><%= "Instructor: #{Course.find_by(id: course.course_id).instructor} "%></p>
+                <p class="card-text">Semester: <%= course.semester%> </p>
                 <p class="card-text"><%= "Time: #{Course.find_by(id: course.course_id).days} #{Course.find_by(id: course.course_id).start_time}  - #{Course.find_by(id: course.course_id).end_time}"%></p>
               </div>
             </div>
