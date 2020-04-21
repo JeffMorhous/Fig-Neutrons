@@ -1,11 +1,14 @@
 class StudentController < ApplicationController
   def create
+    # Check if account with that email already exists
     error = false
     @existingInstructor = Instructor.find_by(email: params[:email])
     @existingAdmin = Admin.find_by(email: params[:email])
     if @existingInstructor != nil || @existingAdmin != nil
       error = true
     end
+
+    # Create the account and display the appropriate message if there is an error
     if !error
       @student = Student.new(first_name: params[:fName],
         last_name: params[:lName],
@@ -24,9 +27,6 @@ class StudentController < ApplicationController
       flash[:danger] = "This email is tied to an existing account. Please log in below."
       redirect_to '/user/login'
     end
-
-    
-
   end
   
   def login
@@ -74,6 +74,8 @@ class StudentController < ApplicationController
     @student = Student.find_by id: session[:user_id]
     @grades = Array.new()
     @foundInterestedEntry = false;
+
+    # Retrieve student's existing info when loading the application
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
       @studentGrades = Transcript.where student_id: @student.id
@@ -147,7 +149,7 @@ class StudentController < ApplicationController
 
         # Only save if there is information entered in the course num and grade fields
         transcript.save unless params[courseString].length == 0 || params[gradeString].length == 0
-
+        transcriptSaveError = transcript.errors.full_messages.length > 0
         # Update the name of the input row to check
         index = index + 1
         gradeString = "grade" + index.to_s
@@ -155,8 +157,22 @@ class StudentController < ApplicationController
         interestedString = "gradeInterest" + index.to_s
       end
 
+      # Show the appropriate error/success message based on form validation and success of saving info
       if error 
         flash[:danger] = "Please enter a valid course number/grade"
+        if flash[:success]
+          flash[:success] = nil
+        end
+      elsif transcriptSaveError
+        flash[:danger] = transcript.errors.full_messages.length
+        if flash[:success]
+          flash[:success] = nil
+        end
+      else
+        flash[:success] = "Your grades have been saved successfully."
+        if flash[:danger]
+          flash[:danger] = nil
+        end
       end
 
       redirect_to '/student/application'
@@ -204,6 +220,7 @@ class StudentController < ApplicationController
     @start = Time.new(2020, 4, 20)
     @year = true
 
+    # Determine if there are courses that still needs graders to show the right application status
     all_courses.each do |course|
       if course.need_grader && !course.have_grader
         @graders_required = true
@@ -211,6 +228,7 @@ class StudentController < ApplicationController
       break
     end
 
+    # Retrieve the student's current availability and query the courses to grade for the student
     if !@student.nil?
       @studentName = "#{@student.first_name} #{@student.last_name}"
       @transcript = Transcript.find_by(student_id: @student.id)

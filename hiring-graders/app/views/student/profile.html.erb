@@ -12,9 +12,9 @@
         <p>We are currently evaluating your application. Check back here to see if you are selected.</p>  
       <% elsif @transcript && @courses_to_grade.length > 0%>
         <p>Congratulations! You've been selected to be a grader! The details are below:</p>
-        <div class="row selectedCards">
+        <div class="card-deck selectedCards">
           <% @courses_to_grade.each do |course| %>
-            <div class="card col" style="width: 18rem;">
+            <div class="card" style="width: 18rem;">
               <div class="card-body">
                 <h5 class="card-title">CSE <%= Course.find_by(id: course.course_id).course_number%></h5>
                 <h6 class="card-subtitle mb-2 text-muted">Section #: <%= Course.find_by(id: course.course_id).section_number%> </h6>

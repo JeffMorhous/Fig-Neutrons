@@ -1,11 +1,15 @@
 class InstructorController < ApplicationController
   def create
+
+    # Check if account with that email already exists
     error = false
     @existingStudent = Student.find_by(email: params[:email])
     @existingAdmin = Admin.find_by(email: params[:email])
     if @existingStudent != nil || @existingAdmin != nil
       error = true
     end
+
+    # Create the account and display the appropriate message if there is an error
     if !error
       @instructor = Instructor.new(first_name: params[:fName], last_name: params[:lName], email: params[:email],
         password: params[:password], password_confirmation: params[:confirmPassword])
