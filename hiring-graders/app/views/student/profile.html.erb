@@ -6,10 +6,11 @@
     <a href="/student/application"  class="btn btn-outline-primary btn-lg profileButton"> <%= @transcript == nil ? 'Create Grader Application' : 'Update Grader Application '%></a>
     <button onclick="showApplicationStatus()"  id="appStatusButton" class="btn btn-outline-primary btn-lg profileButton">Application Status</button>
     <div class="appStatus" style="display: none">
-      <% if @courses_to_grade.length == 0 %>
+      <% if @transcript == nil %>
           <p>You do not current have an application started! Please create a grader application above!</p>
-        
-      <% else %>
+      <% elsif @transcript && @courses_to_grade.length == 0 %>
+        <p>We are currently evaluating your application. Check back here to see if you are selected.</p>  
+      <% elsif transcript && @courses_to_grade.length > 0%>
         <p>Congratulations! You've been selected to be a grader! The details are below:</p>
         <% @courses_to_grade.each do |course| %>
         
