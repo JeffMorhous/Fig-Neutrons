@@ -1,7 +1,10 @@
 <h1 class="display-4">Let's look at your existing recommendations</h1>
 <hr>
 <% if @recommendations.length == 0 %>
-  <p>You have not made any recommendations yet! <a href="/instructor/profile">Go back to your profile to submit a recommendation</a> </p>
+  <p>You have not made any recommendations yet! Go back to your profile to submit a recommendation.</p>
+<% end %>
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
 <% @recommendations.each do |item| %>
   <div class="card">
