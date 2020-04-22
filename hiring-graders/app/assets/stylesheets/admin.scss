@@ -1,7 +1,6 @@
 // Place all the styles related to the admin controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-@import "bootstrap";
 
 .admin-dashboard {
 	border: thick solid #000;
@@ -54,6 +53,7 @@
 }
 
 .section {
+	clear: both;
 	border: thick solid #000000;
 	overflow: hidden;
 	padding: 30px;
@@ -64,15 +64,25 @@
 	float: left;
 }
 
+.recommendation {
+	border: 2px solid #ddd;
+	margin-bottom: 5px;
+	padding: 5px;
+}
+
 .grader-info {
 	background: #fff;
 	float: right;
 	border: thick solid #000000;
 	padding: 10px;
 	min-height: 300px;
-	margin-bottom: 30px
+	margin-bottom: 30px;
 }
 
 .request {
 	font-weight: bold;
+}
+
+.nav {
+	padding-bottom: 10px;
 }

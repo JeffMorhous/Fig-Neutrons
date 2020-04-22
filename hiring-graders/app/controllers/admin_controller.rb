@@ -127,6 +127,8 @@ class AdminController < ApplicationController
     grader.save
     course.have_grader = true
     course.save
+
+    flash[:success] = "Grader was successfully chosen for CSE "+ course.course_number + "(" + course.section_number.strip + ")"
     redirect_to '/admin/dashboard'
   end
 
@@ -139,6 +141,8 @@ class AdminController < ApplicationController
       course.have_grader = false
       course.save
     end
+
+    flash[:success] = "Grader was successfully removed from CSE "+ course.course_number + "(" + course.section_number.strip + ")"
     redirect_to '/admin/dashboard'
   end
 end
