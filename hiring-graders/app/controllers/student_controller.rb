@@ -67,7 +67,10 @@ class StudentController < ApplicationController
     if grade == 77 then return 'C+' end
     if grade == 73 then return 'C' end
     if grade == 70 then return 'C-' end
-    if grade == 67 then return 'D' end
+    if grade == 67 then return 'D+' end
+    if grade == 60 then return 'D' end
+    if grade == 0 then return 'E' end
+    if grade == nil then return 'E' end
   end
 
   def application
