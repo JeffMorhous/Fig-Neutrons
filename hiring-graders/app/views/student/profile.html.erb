@@ -11,7 +11,7 @@
       <% elsif @transcript && @courses_to_grade.length == 0 %>
         <p>We are currently evaluating your application. Check back here to see if you are selected.</p>  
       <% elsif @transcript && @courses_to_grade.length > 0%>
-        <p>Congratulations! You've been selected to be a grader! The details are below:</p>
+        <p>Congratulations, you've been selected to be a grader! The details are below:</p>
         <div class="card-deck selectedCards">
           <% @courses_to_grade.each do |course| %>
             <div class="card" style="width: 18rem;">
@@ -21,7 +21,11 @@
 
                 <p class="card-text"><%= "Instructor: #{Course.find_by(id: course.course_id).instructor} "%></p>
                 <p class="card-text">Semester: <%= course.semester%> </p>
-                <p class="card-text"><%= "Time: #{Course.find_by(id: course.course_id).days} #{Course.find_by(id: course.course_id).start_time}  - #{Course.find_by(id: course.course_id).end_time}"%></p>
+                <% if Course.find_by(id: course.course_id).is_lab %>
+                  <p class="card-text"><%= "Lab Time: #{Course.find_by(id: course.course_id).days} #{Course.find_by(id: course.course_id).start_time}  - #{Course.find_by(id: course.course_id).end_time}"%></p>
+                <% else %>
+                  <p class="card-text"><%= "Class Time: #{Course.find_by(id: course.course_id).days} #{Course.find_by(id: course.course_id).start_time}  - #{Course.find_by(id: course.course_id).end_time}"%></p>
+                <% end %>
               </div>
             </div>
           <% end %>
@@ -81,6 +85,9 @@
       <% end %>
     <% end %>
     <% if @no_hours_selected %>
-      <p>Visit the grader application to enter the hours you are available to work to be considered to grade during labs!</p>
+      <p class="text-center">Visit the grader application to enter the hours you are available to work to be considered to grade during labs!</p>
+    <% else %>
+      <p class="text-center">Click on Update Grader Application to change your availability</p>
+
     <% end %>
   </div>
