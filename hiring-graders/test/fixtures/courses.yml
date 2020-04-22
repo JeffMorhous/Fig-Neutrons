@@ -2,7 +2,6 @@
 
 one:
   department: MyString
-  course: 
   is_lab: false
   days: MyString
   start_time: 2020-04-05 16:46:07
@@ -10,10 +9,10 @@ one:
   location: MyString
   need_grader: false
   have_grader: false
+  section_number: "9999"
 
 two:
   department: MyString
-  course: 
   is_lab: false
   days: MyString
   start_time: 2020-04-05 16:46:07
@@ -21,3 +20,4 @@ two:
   location: MyString
   need_grader: false
   have_grader: false
+  section_number: "4000"
