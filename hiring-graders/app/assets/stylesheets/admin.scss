@@ -1,57 +1,65 @@
 // Place all the styles related to the admin controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import "bootstrap";
 
-body {
-	background-color: #344a71;
-}
 .admin-dashboard {
-	
+	border: thick solid #000;
   	background: #fff;
-  	padding: 10px;
+  	padding: 30px;
   	margin: 10px auto;
+  	text-align: center;
 }
 
 .course-table{
 
-	table, th, tr, td{
-		border: 2px solid #22343c;
+	height: 400px;
+	border: 2px solid #ddd;
+	overflow-y: scroll;
+
+	th, td{
+		border: 2px solid #ddd;
 		border-collapse: collapse;
-		padding: 2px;
 	}
 
 	table tr:nth-child(odd) {
-		background-color: #87cefa;
+		background-color: #f2f2f2;
 	}
-	th,tr {
+	th,td {
 		padding: 5px;
 	}
 
 	th {
 		background-color: #00bfff;
-		color: #fff 
+		color: #fff;
+		position: sticky; 
 	}
 
 	.hidden {
 		background-color: #fff;
+		padding: 1px, 3px, 0px, 3px;
+		border: 0px;
 	}
 		
 }
-.navbar {
-	background-color: #9ba5a8;
-	padding: 2px;
-	margin-bottom: 5px;
-	height: 30px;
+
+.section {
+	background: #fff;
+	border: thick solid #000000;
+	overflow: hidden;
+	padding: 30px;
+	margin-bottom: 30px;
 }
 
-.logout {
+.info {
 	float: left;
 }
 
-.dashboard {
-	float: left;
+.grader-info {
+	float: right;
+	border: thick solid #000000;
+	padding: 10px;
+	min-height: 300px;
+	margin-bottom: 30px
 }
 
-.admin {
-	clear: both;
-}
