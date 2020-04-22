@@ -24,15 +24,21 @@
 
       <label>Tell us about the student</label>
       <textarea class="form-control" type="text" name="recText" rows="3"></textarea>
-
+      <br>
+      
+      <label>Request Student to Grade for this Course?</label>
+      <input class="form-control" type="checkbox" name="recRequest" value="true"/>
     </div>
-    <div class="row">
+    <div class="row" style="margin-bottom: 5%;">
       <div class="col-md-6">
-        <a href="/instructor/profile" class="btn-secondary btn-lg text-center">Back</a>
+        <a href="/instructor/profile" class="btn-secondary btn-block btn-lg text-center">Back</a>
       </div>
       <div class="col-md-6">
       <button type="submit" class="btn btn-success btn-block btn-lg">Save</button>
       </div>
     </div>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
   </form>
 </div>

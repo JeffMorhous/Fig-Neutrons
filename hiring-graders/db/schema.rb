@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_015117) do
+ActiveRecord::Schema.define(version: 2020_04_22_040058) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_015117) do
     t.string "course_number"
     t.string "first_name"
     t.string "last_name"
+    t.boolean "request"
     t.index ["instructor_id"], name: "index_recommendations_instructor_id"
   end
 

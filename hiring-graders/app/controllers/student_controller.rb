@@ -24,7 +24,7 @@ class StudentController < ApplicationController
         redirect_to '/user/signup'
       end
     else
-      flash[:danger] = "This email is tied to an existing account. Please log in below."
+      flash[:danger] = "This email is tied to an existing account. Please log in above."
       redirect_to '/user/login'
     end
   end

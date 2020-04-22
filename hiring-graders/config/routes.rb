@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get 'instructor/edit_recommendation/:id', to: 'instructor#edit'
 
   post 'instructor/create_recommendation', to: 'instructor#create_recommendation'
+  post 'instructor/update_recommendation/:id', to: 'instructor#update_recommendation'
+
   post 'instructor/create'
 
   #Admin Routes
