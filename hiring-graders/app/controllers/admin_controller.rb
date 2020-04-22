@@ -49,7 +49,7 @@ class AdminController < ApplicationController
       
       #get possible graders transcript and check that they got an A- or above in this course
       transcript = Transcript.find_by(student_id: student.id, course_id: course.course_number)
-      if(transcript && transcript.grade >= 90 )
+      if(transcript && transcript.grade >= 90 && !Grader.exists?(student_id: student.id, course_id: course.id))
         
         #check if their availability is needed to be checked
         intime = true
