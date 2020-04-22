@@ -8,6 +8,11 @@
 .application-btns{
   text-align: center;
 }
+
+.calendar-heading {
+  display: none !important;
+}
+
 .classAddIcon {
   margin-top: 35px;
   cursor: pointer;
@@ -32,6 +37,7 @@
 }
 
 .saveGradesButton {
+  margin-top: 20px;
   margin-left: 30px;
 
 }
@@ -50,6 +56,9 @@
 }
 
 .simple-calendar {
+  .day {
+    background: #BEBEBE;
+  }
   .today {
     background: #BEBEBE;
   }
@@ -60,4 +69,9 @@
 
 .active {
   display: block !important;
+}
+
+.applicationAlert {
+  margin-left: 30px !important;
+
 }
