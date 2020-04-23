@@ -41,11 +41,13 @@ After running this command, open up localhost:3000 in a browser to display the a
   Then, in a separate terminal run:
 
   ``` rails console ``` 
-  
+
   and then  
   
   ``` @admin = Admin.create(email: "admin@admin.com", password: "admin123", password_confirmation: "admin123") ``` 
   - A new admin account with email: admin@admin.com and password: admin123 is created and can be used when logging in.
+  - To collect the student's availability a third party jquery plugin was used which can be found be [here](https://github.com/shonihei/weekly-scheduler-component)
+  - To display the student's availability on the profile, a ruby gem, [Simple Calendar](https://excid3.github.io/simple_calendar/) was used.
 - Other design decisions can be found in the presentation below
 
 ## Styling
