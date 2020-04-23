@@ -53,7 +53,7 @@ class InstructorController < ApplicationController
 
     # create the recommendation
     @recommend = Recommendation.new(recommendation: params[:recText], student_email: params[:email], first_name: params[:firstName],
-                                    last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id], request: recRequest)
+                                    last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id], request: rec_request)
 
     if @recommend.save
       flash[:success] = "Your recommendation was saved successfully!"

@@ -10,13 +10,49 @@
 ``rails server`` which actually runs the site.
 
 
-After running this command, open up localhost:3000 in a browser to display the information.
+After running this command, open up [http://localhost:3000] in a browser to display the application.
 
 ### To execute tests, run
 ``rails test``
 
-### Features/Notes
-- ADMIN ACCOUNT CREATION: run ```rails server``` and then ``` rails console ```. In the console, enter ```@admin = Admin.create(email: "admin1@admin.com", password: "admin123", password_confirmation: "admin123")```. 
+## Critical Features
+- Student Application
+  - Enter CSE course grades
+  - Collect interested courses
+  - Fill out availability
+  - Edit grades/availability
+- Instructor Recommendation
+  -  Adding endorsements for students
+  - Requesting a specific student grader
+- Admin Dashboard
+  - Display courses that require grader
+  - View instructor recommendations
+  - Select from student applicants
+
+
+## Notes
+- _**Creating an account for an admin is not open to the end-user as it is for the CSE department only. To create an account for an admin and access admin functionality, run:**_
+
+  ```rails server```
+
+  Then, in a separate terminal run:
+
+  ``` rails console ``` 
+
+  and then  
+  
+  ``` @admin = Admin.create(email: "admin@admin.com", password: "admin123", password_confirmation: "admin123") ``` 
+  - A new admin account with email: admin@admin.com and password: admin123 is created and can be used when logging in.
+- To collect the student's availability a third party jquery plugin was used which can be found be [here](https://github.com/shonihei/weekly-scheduler-component)
+- To display the student's availability on their profile, a ruby gem, [Simple Calendar](https://excid3.github.io/simple_calendar/) was used.
+- Utilized (Bootstrap)[https://getbootstrap.com] for layout and styling
+- More technical details about the project can be found in the final presentation below.
+
 
 ### Styling
 
+## Contributors
+- Anuj Kothari
+- Jeff Morhous
+- Sneha Srinivasan
+- Tanner Marshall
