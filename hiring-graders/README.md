@@ -48,7 +48,7 @@ After running this command, open up [http://localhost:3000] in a browser to disp
   - A new admin account with email: admin@admin.com and password: admin123 is created and can be used when logging in.
 - To collect the student's availability a third party jquery plugin was used which can be found be [here](https://github.com/shonihei/weekly-scheduler-component)
 - To display the student's availability on their profile, a ruby gem, [Simple Calendar](https://excid3.github.io/simple_calendar/) was used.
-- Utilized (Bootstrap)[https://getbootstrap.com] for layout and styling
+- Utilized [Bootstrap](https://getbootstrap.com) for layout and styling
 - More technical details about the project can be found in the final presentation below.
 
 ## Contributors
