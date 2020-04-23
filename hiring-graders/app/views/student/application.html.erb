@@ -39,8 +39,8 @@
         </div>
       </div>
       <%# Populate the transcript form with the student's current grades entered  %>
-      <%  @studentGrades.each_with_index do |transcript, index| %>
-        <% @foundInterestedEntry = false%>
+      <%  @student_grades.each_with_index do |transcript, index| %>
+        <% @found_interested_entry = false%>
 
         <div class="form-group">
           <div class="row gradeRow">
@@ -56,14 +56,14 @@
               <label>Request to Grade</label>
 
               <%# Logic for populating the input checkbox if a user has marked an interest for a course  %>
-              <% if @interestedCourses.length > 0 %>
-                <% @interestedCourses.each do |item|%>
+              <% if @interested_courses.length > 0 %>
+                <% @interested_courses.each do |item|%>
                   <% if item.course.to_i == transcript.course_id %>
-                      <% @foundInterestedEntry = true%>
+                      <% @found_interested_entry = true%>
                   <% end %>
                 <%end%>
               <% end %>
-              <% if @foundInterestedEntry%>
+              <% if @found_interested_entry%>
                   <%=check_box_tag :"gradeInterest#{index + 1}", true, true, class: "form-control gradeInterest", title:"Select if you would like to grade for this class"%>
                 <%else %>
                   <%=check_box_tag :"gradeInterest#{index + 1}", false, false, class: "form-control gradeInterest", title:"Select if you would like to grade for this class"%>
@@ -76,15 +76,15 @@
         <div class="row gradeRow">
           <div class="col-md-4">
             <label>Course Number</label>
-            <input class="form-control courseNum" type="text" name=<%="courseNum" + (@studentGrades.length + 1).to_s%>  />
+            <input class="form-control courseNum" type="text" name=<%="courseNum" + (@student_grades.length + 1).to_s%>  />
           </div>
           <div class="col-md-4">
             <label>Grade</label>
-            <input class="form-control grade" type="text" name=<%="grade" + (@studentGrades.length + 1).to_s%> />
+            <input class="form-control grade" type="text" name=<%="grade" + (@student_grades.length + 1).to_s%> />
           </div>
           <div class="col-md-3">
             <label>Request to Grade</label>
-            <input class="form-control gradeInterest" type="checkbox" name=<%="gradeInterest" + (@studentGrades.length + 1).to_s%> title="Select if you would like to grade for this class" />
+            <input class="form-control gradeInterest" type="checkbox" name=<%="gradeInterest" + (@student_grades.length + 1).to_s%> title="Select if you would like to grade for this class" />
           </div>
           <div class="col-md-1">
             <i class="fa fa-plus-circle fa-2x classAddIcon" onclick="addGradeRow()" title="Add Course"></i>

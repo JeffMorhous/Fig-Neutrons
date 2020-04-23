@@ -3,9 +3,9 @@ class InstructorController < ApplicationController
 
     # Check if account with that email already exists
     error = false
-    @existingStudent = Student.find_by(email: params[:email])
-    @existingAdmin = Admin.find_by(email: params[:email])
-    if @existingStudent != nil || @existingAdmin != nil
+    @existing_student = Student.find_by(email: params[:email])
+    @existing_admin = Admin.find_by(email: params[:email])
+    if @existing_student != nil || @existing_admin != nil
       error = true
     end
 

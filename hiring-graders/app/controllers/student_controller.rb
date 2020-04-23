@@ -75,89 +75,89 @@ class StudentController < ApplicationController
 
   def application
     @student = Student.find_by id: session[:user_id]
-    @grades = Array.new()
-    @foundInterestedEntry = false;
+    @grades = Array.new
+    @found_interested_entry = false;
 
     # Retrieve student's existing info when loading the application
     if !@student.nil?
-      @studentName = "#{@student.first_name} #{@student.last_name}"
-      @studentGrades = Transcript.where student_id: @student.id
-      @studentGrades.each_with_index do |transcript, index|
+      @student_name = "#{@student.first_name} #{@student.last_name}"
+      @student_grades = Transcript.where student_id: @student.id
+      @student_grades.each_with_index do |transcript, index|
         @grades[index] = convert_number_to_letter_grade(transcript.grade)
       end
     end
-    @interestedCourses = Interested.where student_id: @student.id
+    @interested_courses = Interested.where student_id: @student.id
 
     # Save the information entered in the dynamic form for collecting grades
     error = false;
     if request.post? 
       index = 1
-      gradeString = "grade" + index.to_s
-      courseString = "courseNum" + index.to_s
-      interestedString = "gradeInterest" + index.to_s
+      grade_string = "grade" + index.to_s
+      course_string = "courseNum" + index.to_s
+      interested_string = "gradeInterest" + index.to_s
       all_transcripts = Transcript.where student_id: @student.id
       num_of_grades = all_transcripts.size
-      while params[gradeString] != nil
+      while params[grade_string] != nil
 
         # Check for errors on input form:
         # incorrect course number entered
-        error = true if !params[courseString].match(/^\d{4}/)
+        error = true if !params[course_string].match(/^\d{4}/)
 
         # incorrect grade entered
-        error = true if convert_letter_grades_to_gpa(params[gradeString].upcase) == nil
+        error = true if convert_letter_grades_to_gpa(params[grade_string].upcase) == nil
 
         # missing values for course num or grade
-        if params[gradeString].length == 0 || params[courseString].length == 0
+        if params[grade_string].length == 0 || params[course_string].length == 0
           error = true
 
           # if it's the last row of input fields then empty fields are okay
           index = index + 1
-          gradeString = "grade" + index.to_s
-          if !params[gradeString]
+          grade_string = "grade" + index.to_s
+          if !params[grade_string]
             error = false
             index = index - 1
-            gradeString = "grade" + index.to_s
+            grade_string = "grade" + index.to_s
           end
         end
         break if error
 
         # Look up interest and transcript information of student
-        grade_interest = Interested.find_by(student_id: @student.id, course: params[courseString])
-        transcript = Transcript.find_by(student_id: @student.id, course_id: params[courseString])
+        grade_interest = Interested.find_by(student_id: @student.id, course: params[course_string])
+        transcript = Transcript.find_by(student_id: @student.id, course_id: params[course_string])
 
         # If the request to grade box is no longer checked and was previously checked, destroy the record 
-        if grade_interest != nil && !params[interestedString]
+        if grade_interest != nil && !params[interested_string]
           grade_interest.destroy
-        elsif !grade_interest && params[interestedString]
+        elsif !grade_interest && params[interested_string]
           # Create a new record for interest if there is not an existing record and the student has selected the checkbox
-          grade_interest = Interested.new(student_id: @student.id, department: "CSE", course: params[courseString])
+          grade_interest = Interested.new(student_id: @student.id, department: "CSE", course: params[course_string])
           grade_interest.save
         end
 
         # if the student had an existing entry that they're updating that needs to be changed
         if index <= num_of_grades
           transcript = all_transcripts[index - 1]
-          transcript.grade = convert_letter_grades_to_gpa(params[gradeString].upcase)
-          transcript.course_id = params[courseString]
+          transcript.grade = convert_letter_grades_to_gpa(params[grade_string].upcase)
+          transcript.course_id = params[course_string]
           transcript.updated_at = Time.new
         else
           # Otherwise create a new record
           transcript = Transcript.new(
-              grade: convert_letter_grades_to_gpa(params[gradeString].upcase),
+              grade: convert_letter_grades_to_gpa(params[grade_string].upcase),
               created_at: Time.new,
               updated_at: Time.new,
               student_id: @student.id,
-              course_id: params[courseString])
+              course_id: params[course_string])
         end
 
         # Only save if there is information entered in the course num and grade fields
-        transcript.save unless params[courseString].length == 0 || params[gradeString].length == 0
-        transcriptSaveError = transcript.errors.full_messages.length > 0
+        transcript.save unless params[course_string].length == 0 || params[grade_string].length == 0
+        transcript_save_error = transcript.errors.full_messages.length > 0
         # Update the name of the input row to check
         index = index + 1
-        gradeString = "grade" + index.to_s
-        courseString = "courseNum" + index.to_s
-        interestedString = "gradeInterest" + index.to_s
+        grade_string = "grade" + index.to_s
+        course_string = "courseNum" + index.to_s
+        interested_string = "gradeInterest" + index.to_s
       end
 
       # Show the appropriate error/success message based on form validation and success of saving info
@@ -166,7 +166,7 @@ class StudentController < ApplicationController
         if flash[:success]
           flash[:success] = nil
         end
-      elsif transcriptSaveError
+      elsif transcript_save_error
         flash[:danger] = transcript.errors.full_messages.length
         if flash[:success]
           flash[:success] = nil
@@ -233,7 +233,7 @@ class StudentController < ApplicationController
 
     # Retrieve the student's current availability and query the courses to grade for the student
     if !@student.nil?
-      @studentName = "#{@student.first_name} #{@student.last_name}"
+      @student_name = "#{@student.first_name} #{@student.last_name}"
       @transcript = Transcript.find_by(student_id: @student.id)
       @monday = Availability.where(student_id: session[:user_id], day: "M")
       @tuesday = Availability.where(student_id: session[:user_id], day: "T")

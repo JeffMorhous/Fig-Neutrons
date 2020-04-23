@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   
-  #login handeling for the admin pages
+  #login handling for the admin pages
   def login
     admin = Admin.find_by(email: params[:email].downcase)
     if admin && admin.authenticate(params[:password])
@@ -24,19 +24,19 @@ class AdminController < ApplicationController
     @graders = Grader.where(course_id: course.id)
 
     #setup the data needed for the class info
-    if(course.instructor)
+    if course.instructor
       @teacher = course.instructor
     else
-      @teacher= "N/A"
+      @teacher = "N/A"
     end  
 
-    if(!course.location.strip.empty?)
+    if !course.location.strip.empty?
       @location = course.location
     else
       @location = "N/A"
     end  
 
-    if(course.days && course.start_time && course.end_time)
+    if course.days && course.start_time && course.end_time
       @time = course.days+ " " +course.start_time+ "-" +course.end_time
     else
       @time = "N/A"
@@ -53,7 +53,7 @@ class AdminController < ApplicationController
         
         #check if their availability is needed to be checked
         intime = true
-        if(course.is_lab)
+        if course.is_lab
           
           #check the days for the course and check what time the student is available for these days
           days = (course.days).chars
@@ -84,7 +84,7 @@ class AdminController < ApplicationController
               time_string = standard_time.to_s + ":00" + addon
               
               #check if the student availability works with the current course time
-              if(!hours.include?(time_string))
+              if !hours.include?(time_string)
                 intime = false
               end
               time = time +1
@@ -94,7 +94,7 @@ class AdminController < ApplicationController
         end
 
         #add applicant to array if they are qualified for the position 
-        if(intime)
+        if intime
           applicants[counter] = student
           counter = counter+1
         end
@@ -103,7 +103,7 @@ class AdminController < ApplicationController
     @students = applicants
 
     #if a student has been selected for more information
-    if(params[:grader_id])
+    if params[:grader_id]
       @grader = Student.find(params[:grader_id])
       @recommendations = Recommendation.where(student_email: @grader.email)
     end
