@@ -1,5 +1,6 @@
+<%# Student Grader Profile Page %>
 <div class="jumbotron">
-  <h1 class="display-4">Welcome, <%=@studentName%></h1>
+  <h1 class="display-4">Welcome, <%=@student_name%></h1>
   <p class="lead">Thanks for your interest in grading.</p>
   <hr class="my-4">
   <div class="application-btns">
@@ -42,7 +43,7 @@
   <div id="profileCalendar">
     <h3>Your Current Availability</h3>
     <%= calendar number_of_days: 5, :start_day => :monday, :start_date => @start do |date| %>
-      <%# <p>Current Available Hours</p> %>
+      <%# logic to display the student's available hour according to day of the week%>
       <% if date.monday? %>
         <% if @monday.length == 0 %>
           <p>No Selected Hours</p>

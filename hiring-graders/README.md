@@ -13,7 +13,7 @@ This web application is designed for the OSU CSE department to streamline the pr
 ``rails server`` which actually runs the site.
 
 
-After running this command, open up localhost:3000 in a browser to display the application.
+After running this command, open up [http://localhost:3000] in a browser to display the application.
 
 ### To execute tests, run
 ``rails test``
@@ -47,12 +47,12 @@ After running this command, open up localhost:3000 in a browser to display the a
   ``` @admin = Admin.create(email: "admin@admin.com", password: "admin123", password_confirmation: "admin123") ``` 
   - A new admin account with email: admin@admin.com and password: admin123 is created and can be used when logging in.
 - To collect the student's availability a third party jquery plugin was used which can be found be [here](https://github.com/shonihei/weekly-scheduler-component)
-- To display the student's availability on the profile, a ruby gem, [Simple Calendar](https://excid3.github.io/simple_calendar/) was used.
-- Other design decisions can be found in the presentation below
+- To display the student's availability on their profile, a ruby gem, [Simple Calendar](https://excid3.github.io/simple_calendar/) was used.
+- Utilized (Bootstrap)[https://getbootstrap.com] for layout and styling
+- More technical details about the project can be found in the final presentation below.
 
-## Styling
-- Utilized bootstrap heavily for layout and styling
-
-## Final Project Presentation
-- View the final presentation here: 
-
+## Contributors
+- Anuj Kothari
+- Jeff Morhous
+- Sneha Srinivasan
+- Tanner Marshall

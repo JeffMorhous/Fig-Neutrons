@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+  # function to determine where the user should be brought to initially
   def index
     if is_logged_in?
       if get_role == 'student'

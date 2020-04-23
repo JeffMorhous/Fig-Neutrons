@@ -3,9 +3,9 @@ class InstructorController < ApplicationController
 
     # Check if account with that email already exists
     error = false
-    @existingStudent = Student.find_by(email: params[:email])
-    @existingAdmin = Admin.find_by(email: params[:email])
-    if @existingStudent != nil || @existingAdmin != nil
+    @existing_student = Student.find_by(email: params[:email])
+    @existing_admin = Admin.find_by(email: params[:email])
+    if @existing_student != nil || @existing_admin != nil
       error = true
     end
 
@@ -46,13 +46,14 @@ class InstructorController < ApplicationController
   # Add a new recommendation to the database
   def create_recommendation
     # Determine if the request checkbox was selected
-    recRequest = false
+    rec_request = false
     if params[:recRequest]
-      recRequest = true
+      rec_request = true
     end
 
+    # create the recommendation
     @recommend = Recommendation.new(recommendation: params[:recText], student_email: params[:email], first_name: params[:firstName],
-                                    last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id], request: recRequest)
+                                    last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id], request: rec_request)
 
     if @recommend.save
       flash[:success] = "Your recommendation was saved successfully!"
@@ -66,13 +67,13 @@ class InstructorController < ApplicationController
   def update_recommendation
 
     # Determine if the request checkbox was selected
-    recRequest = false
+    rec_request = false
     if params[:recRequest]
-      recRequest = true
+      rec_request = true
     end
     recommendation = Recommendation.find_by(id: params[:id])
     if recommendation.update(recommendation: params[:recText], student_email: params[:email], first_name: params[:firstName],
-                          last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id], request: recRequest)
+                          last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id], request: rec_request)
       flash[:success] = "Your recommendation was updated successfully!"
       redirect_to '/instructor/edit_recommendation'
 
@@ -97,7 +98,7 @@ class InstructorController < ApplicationController
   def profile
     @instructor = Instructor.find_by id: session[:user_id]
     if !@instructor.nil?
-      @instructorName = "#{@instructor.first_name} #{@instructor.last_name}"
+      @instructor_name = "#{@instructor.first_name} #{@instructor.last_name}"
     else
       redirect_to '/user/login'
     end
