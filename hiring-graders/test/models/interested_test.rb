@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class InterestedTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  #Interested does not need tests, as it does not have custom
+  #business logic, and testing the accuracy of ActiveRecord is not recommended
 end

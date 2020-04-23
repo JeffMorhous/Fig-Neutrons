@@ -15,6 +15,10 @@ This web application is designed for the OSU CSE department to streamline the pr
 
 After running this command, open up [http://localhost:3000] in a browser to display the application.
 
+##Tests
+The bulk of testing focuses on the models, and their validations.
+This is to assist in future development, and prevent against bugs when
+making improvements or changes. Controller testing was not foucsed on.
 ### To execute tests, run
 ``rails test``
 
