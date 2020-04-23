@@ -48,9 +48,6 @@ After running this command, open up [http://localhost:3000] in a browser to disp
 - Utilized (Bootstrap)[https://getbootstrap.com] for layout and styling
 - More technical details about the project can be found in the final presentation below.
 
-
-### Styling
-
 ## Contributors
 - Anuj Kothari
 - Jeff Morhous
