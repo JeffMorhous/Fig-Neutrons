@@ -46,7 +46,7 @@ class InstructorController < ApplicationController
   # Add a new recommendation to the database
   def create_recommendation
     # Determine if the request checkbox was selected
-    rec_equest = false
+    rec_request = false
     if params[:recRequest]
       rec_request = true
     end
@@ -73,7 +73,7 @@ class InstructorController < ApplicationController
     end
     recommendation = Recommendation.find_by(id: params[:id])
     if recommendation.update(recommendation: params[:recText], student_email: params[:email], first_name: params[:firstName],
-                          last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id], request: recRequest)
+                          last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id], request: rec_request)
       flash[:success] = "Your recommendation was updated successfully!"
       redirect_to '/instructor/edit_recommendation'
 
