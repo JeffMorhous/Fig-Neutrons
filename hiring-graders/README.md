@@ -15,7 +15,7 @@ This web application is designed for the OSU CSE department to streamline the pr
 
 After running this command, open up [http://localhost:3000] in a browser to display the application.
 
-##Tests
+## Tests
 The bulk of testing focuses on the models, and their validations.
 This is to assist in future development, and prevent against bugs when
 making improvements or changes. Controller testing was not foucsed on.
@@ -54,6 +54,9 @@ making improvements or changes. Controller testing was not foucsed on.
 - To display the student's availability on their profile, a ruby gem, [Simple Calendar](https://excid3.github.io/simple_calendar/) was used.
 - Utilized [Bootstrap](https://getbootstrap.com) for layout and styling
 - More technical details about the project can be found in the final presentation below.
+
+## Final Project Presentation
+View the final presentation [here](./FigNeutrons_FinalPresentation.pdf)
 
 ## Contributors
 - Anuj Kothari
