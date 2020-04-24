@@ -8,6 +8,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("jquery")
 require("app/account")
+require("app/admin")
 require("app/graderApp")
 require("app/jquery.weekly-schedule-plugin")
 
