@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post 'admin/section'
   post 'admin/select'
   post 'admin/delete'
+  get 'admin/get_courses'
 
   # Student Routes
   get 'student/application' # Routes to retrieve the student grader application
