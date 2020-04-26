@@ -159,7 +159,7 @@ class AdminController < ApplicationController
         isLab = section_data[2].include? "LAB"
         if time.length > 1
           Course.create(department: course_title_array[0],
-                        section_number: section_data[1],
+                        section_number: section_data[1].strip!,
                         course_number: course_title_array[1],
                         is_lab: isLab,
                         location: section_data[3],
@@ -170,7 +170,7 @@ class AdminController < ApplicationController
                         semester: semester.text)
         else
           Course.create(department: course_title_array[0],
-                        section_number: section_data[1],
+                        section_number: section_data[1].strip!,
                         course_number: course_title_array[1],
                         is_lab: isLab,
                         location: section_data[3],

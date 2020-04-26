@@ -1,0 +1,22 @@
+<%# Page to display an instructors existing evaluations %>
+<h1 class="display-4">Let's look at your existing evaluations</h1>
+<hr>
+<% if @evaluations.length == 0 %>
+  <p>You have evaluated any students yet! If you have had a student grader, visit your profile to fill out an evaluation for that student.</p>
+<% end %>
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
+<% @evaluations.each do |item| %>
+  <div class="card">
+  <div class="card-header">
+    Evaluation for <%= Student.find_by(id: item.student_id).first_name + " " + Student.find_by(id: item.student_id).last_name%>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Course: CSE <%=Course.find_by(id: item.course_id).course_number%></h5>
+    <p class="card-text">Section #: <%=Course.find_by(id: item.course_id).section_number%></p>
+    <a href=<%="/instructor/edit_evaluation/" + item.id.to_s%> class="btn btn-primary">Edit</a>
+  </div>
+</div>
+<% end %>
+<a href="/instructor/profile" class="btn-secondary btn-lg text-center">Back</a>

@@ -60,6 +60,7 @@ class InstructorController < ApplicationController
       redirect_to '/instructor/profile'
     else
       flash.now[:danger] = @recommend.errors.full_messages
+      render '/instructor/recommendation'
     end
   end
 
@@ -78,7 +79,8 @@ class InstructorController < ApplicationController
       redirect_to '/instructor/edit_recommendation'
 
     else
-      flash.now[:danger] = recommendation.errors.full_messages
+      flash[:danger] = recommendation.errors.full_messages
+      redirect_to "/instructor/edit/#{params[:id]}"
     end
 
   end
@@ -93,6 +95,78 @@ class InstructorController < ApplicationController
   def edit
     @recommendation = Recommendation.find_by(id: params[:id])
   end
+
+  def evaluation
+  end
+
+  def create_evaluation
+    # check that the student/section exists
+    student = Student.find_by(email: params[:email])
+    course = Course.find_by(section_number:params[:section_num])
+    if student == nil
+      flash.now[:danger] = "It looks like that student has not graded before. Please enter a valid grader's email."
+      render '/instructor/evaluation'
+    elsif course == nil
+      flash.now[:danger] = "Unable to find that section. Please enter a valid section number"
+      render '/instructor/evaluation'
+    else
+      evaluation = Evaluation.new(student_id: Student.find_by(email:params[:email]).id, 
+                                    instructor_id: session[:user_id], 
+                                    course_id: Course.find_by(section_number: params[:section_num]).id,
+                                    quality: params[:quality],
+                                    punctuality: params[:punctuality],
+                                    com_skills: params[:com_skills],
+                                    course_knowledge: params[:knowledge])
+      if evaluation.save
+        flash[:success] = "Your evaluation was sucessfully saved"
+        redirect_to '/instructor/profile'
+      else
+        flash[:danger] = evaluation.errors.full_messages
+        redirect_to '/instructor/evaluation'
+
+      end
+    end
+  end
+
+
+  def evaluation_all
+    @evaluations = Evaluation.where(instructor_id: session[:user_id])
+  end
+
+  def evaluation_edit
+    @evaluation = Evaluation.find_by(id: params[:id])
+  end
+
+  def update_evaluation
+    student = Student.find_by(email: params[:email])
+    course = Course.find_by(section_number:params[:section_num])
+    if student == nil
+      flash[:danger] = "It looks like that student has not graded before. Please enter a valid grader's email."
+      redirect_to "/instructor/edit_evaluation/#{params[:id]}"
+    elsif course == nil
+      flash[:danger] = "Unable to find that section. Please enter a valid section number"
+      redirect_to "/instructor/edit_evaluation/#{params[:id]}"
+      
+    else
+      evaluation = Evaluation.find_by(id: params[:id])
+      if evaluation.update(student_id: Student.find_by(email:params[:email]).id, 
+                          instructor_id: session[:user_id], 
+                          course_id: Course.find_by(section_number: params[:section_num]).id,
+                          quality: params[:quality],
+                          punctuality: params[:punctuality],
+                          com_skills: params[:com_skills],
+                          course_knowledge: params[:knowledge])
+        flash[:success] = "Your evaluation was updated successfully!"
+        redirect_to '/instructor/evaluation_all'
+
+      else
+        flash.now[:danger] = evaluation.errors.full_messages
+      end
+    end
+    
+  end
+
+
 
   # Instructor Profile 
   def profile

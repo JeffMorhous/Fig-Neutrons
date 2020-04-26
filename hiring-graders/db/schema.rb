@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_25_210153) do
+ActiveRecord::Schema.define(version: 2020_04_26_010140) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -43,6 +43,21 @@ ActiveRecord::Schema.define(version: 2020_04_25_210153) do
     t.string "instructor"
     t.string "course_number"
     t.string "semester"
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "student_id", null: false
+    t.integer "instructor_id", null: false
+    t.integer "quality"
+    t.integer "punctuality"
+    t.integer "com_skills"
+    t.integer "course_knowledge"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_evaluations_on_course_id"
+    t.index ["instructor_id"], name: "index_evaluations_on_instructor_id"
+    t.index ["student_id"], name: "index_evaluations_on_student_id"
   end
 
   create_table "graders", force: :cascade do |t|
@@ -107,4 +122,7 @@ ActiveRecord::Schema.define(version: 2020_04_25_210153) do
   end
 
   add_foreign_key "availabilities", "students"
+  add_foreign_key "evaluations", "courses"
+  add_foreign_key "evaluations", "instructors"
+  add_foreign_key "evaluations", "students"
 end
