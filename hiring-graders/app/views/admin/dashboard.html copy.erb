@@ -1,4 +1,32 @@
 <%# Dashboard for the administrator - Assign or Un-assign graders for specific courses %>
+<div class="container">
+	<div class="row">
+		<%# COURSE COLUMN %>
+		<div class="col-md-4">
+			<% @courses.each do |course| %>
+			<div class="card">
+				<div class="card-header">
+					Recommendation for <%= course.first_name + " " + course.last_name%>
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">CSE <%= course.course_number%></h5>
+					<p class="card-text"><%=course.section_number%></p>
+					<p class="card-text"><%=course.section_number%></p>
+					<p class="card-text"><%=course.semester%></p>
+					<p class="card-text"><%=course.is_lab ? 'Y': 'N'%></p>
+				</div>
+			</div>
+			<% end %>
+		</div>
+
+		<%# GRADER COLUMN %>
+		<div class="col-md-4"></div>
+
+		<%# INFO COLUMN %>
+		<div class="col-md-4"></div>
+	</div>
+
+</div>
 <div class="admin-dashboard">
 	<% flash.each do |message_type, message| %>
 	<div class="alert alert-<%= message_type %>"><%= message %></div>
@@ -17,9 +45,8 @@
 				</div>
 				<select class="semesterSelect" id="inputGroupSelect01">
 					<option value=""></option>
-					<% @semesters.each do |sem| %>
-						<option value=<%=sem.semester%>><%=sem.semester%></option>
-					<% end %>
+					<option value="SP20">SP20</option>
+					<option value="SU20">SU20</option>
 				</select>
 			</div>
 		</div>

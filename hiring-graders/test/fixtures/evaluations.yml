@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course: one
+  student: one
+  instructor: one
+  quality: 1
+  punctuality: 1
+  com_skills: 1
+  course_knowledge: 1
+
+two:
+  course: two
+  student: two
+  instructor: two
+  quality: 1
+  punctuality: 1
+  com_skills: 1
+  course_knowledge: 1

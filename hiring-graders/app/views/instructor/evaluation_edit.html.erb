@@ -1,0 +1,90 @@
+<%# Page for an instructor to recommend a student to grade for a course %>
+<!--Following format of student/application.html.erb-->
+<div class="evaluation-form">
+  <form action=<%="/instructor/update_evaluation/#{@evaluation.id}"%> method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <h2>Update Your Student's Evaluation</h2>
+    <hr>
+    <p>First, enter the student's email and the section number</p>
+    <div class="form-group">
+      <label>Student Email</label>
+      <input class="form-control" type="text" name="email" required value=<%=Student.find_by(id:@evaluation.student_id).email%> />
+      <br>
+
+      <label>Section #</label>
+      <input class="form-control" type="text" name="section_num" required value=<%=Course.find_by(id:@evaluation.course_id).section_number%> />
+      <br>
+
+      <label>Tell us about the student:</label>
+
+      <div class="form-group">
+        <label>Quality:</label>
+        <br />
+        <input type="radio" value="1" name="quality" required="required" <%="checked" if @evaluation.quality == 1%>>
+        <label class="evalLabel">1</label>
+        <input type="radio" value="2" name="quality" required="required" <%="checked" if @evaluation.quality == 2%>>
+        <label class="evalLabel">2</label>
+        <input type="radio" value="3" name="quality" required="required" <%="checked" if @evaluation.quality == 3%>>
+        <label class="evalLabel">3</label>
+        <input type="radio" value="4" name="quality" required="required" <%="checked" if @evaluation.quality == 4%>>
+        <label class="evalLabel">4</label>
+        <input type="radio" value="5" name="quality" required="required" <%="checked" if @evaluation.quality == 5%>>
+        <label class="evalLabel">5</label>
+      </div>
+      <div class="form-group">
+        <label>Punctuality:</label>
+        <br />
+        <input type="radio" value="1" name="punctuality" required="required" <%="checked" if @evaluation.punctuality == 1%>>
+        <label class="evalLabel">1</label>
+        <input type="radio" value="2" name="punctuality" required="required" <%="checked" if @evaluation.punctuality == 2%>>
+        <label class="evalLabel">2</label>
+        <input type="radio" value="3" name="punctuality" required="required" <%="checked" if @evaluation.punctuality == 3%>>
+        <label class="evalLabel">3</label>
+        <input type="radio" value="4" name="punctuality" required="required" <%="checked" if @evaluation.punctuality == 4%>>
+        <label class="evalLabel">4</label>
+        <input type="radio" value="5" name="punctuality" required="required" <%="checked" if @evaluation.punctuality == 5%>>
+        <label class="evalLabel">5</label>
+      </div>
+      <div class="form-group">
+        <label>Communication Skills:</label>
+        <br />
+        <input type="radio" value="1" name="com_skills" required="required" <%="checked" if @evaluation.com_skills == 1%>>
+        <label class="evalLabel">1</label>
+        <input type="radio" value="2" name="com_skills" required="required" <%="checked" if @evaluation.com_skills == 2%>>
+        <label class="evalLabel">2</label>
+        <input type="radio" value="3" name="com_skills" required="required" <%="checked" if @evaluation.com_skills == 3%>>
+        <label class="evalLabel">3</label>
+        <input type="radio" value="4" name="com_skills" required="required" <%="checked" if @evaluation.com_skills == 4%>>
+        <label class="evalLabel">4</label>
+        <input type="radio" value="5" name="com_skills" required="required" <%="checked" if @evaluation.com_skills == 5%>>
+        <label class="evalLabel">5</label>
+      </div>
+      <div class="form-group">
+        <label>Course Knowledge:</label>
+        <br />
+        <input type="radio" value="1" name="knowledge" required="required" <%="checked" if @evaluation.course_knowledge == 1%>>
+        <label class="evalLabel">1</label>
+        <input type="radio" value="2" name="knowledge" required="required" <%="checked" if @evaluation.course_knowledge == 2%>>
+        <label class="evalLabel">2</label>
+        <input type="radio" value="3" name="knowledge" required="required" <%="checked" if @evaluation.course_knowledge == 3%>>
+        <label class="evalLabel">3</label>
+        <input type="radio" value="4" name="knowledge" required="required" <%="checked" if @evaluation.course_knowledge == 4%>>
+        <label class="evalLabel">4</label>
+        <input type="radio" value="5" name="knowledge" required="required" <%="checked" if @evaluation.course_knowledge == 5%>>
+        <label class="evalLabel">5</label>
+      </div>
+      
+    </div>
+    <div class="row" style="margin-bottom: 5%;">
+      <div class="col-md-6">
+        <a href="/instructor/profile" class="btn-secondary btn-block btn-lg text-center">Back</a>
+      </div>
+      <div class="col-md-6">
+      <button type="submit" class="btn btn-success btn-block btn-lg">Save</button>
+      </div>
+    </div>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+  </form>
+</div>

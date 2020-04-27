@@ -7,6 +7,11 @@
     <a href="/instructor/recommendation" class="btn btn-outline-primary btn-lg">Recommend a Student</a>
     <a href="/instructor/edit_recommendation" class="btn btn-outline-primary btn-lg">Edit an Existing Recommendation</a>
   </div>
+   <div class="recommend-btns">
+    <a href="/instructor/evaluation" class="btn btn-outline-primary btn-lg">Evaluate a Student</a>
+    <a href="/instructor/evaluation_all" class="btn btn-outline-primary btn-lg">Edit an Existing Evaluation</a>
+
+  </div>
   <% flash.each do |message_type, message| %>
       <div class="alert alert-<%= message_type %>"><%= message %></div>
   <% end %>
