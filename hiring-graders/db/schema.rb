@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_010140) do
+ActiveRecord::Schema.define(version: 2020_04_27_042814) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -99,6 +99,12 @@ ActiveRecord::Schema.define(version: 2020_04_26_010140) do
     t.string "last_name"
     t.boolean "request"
     t.index ["instructor_id"], name: "index_recommendations_instructor_id"
+  end
+
+  create_table "semesters", force: :cascade do |t|
+    t.string "semester"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "students", force: :cascade do |t|

@@ -118,6 +118,7 @@ class AdminController < ApplicationController
       redirect_to '/user/login'
     else
       @courses = Course.all
+      @semesters = Semester.all
     end
 
   end
@@ -126,6 +127,7 @@ class AdminController < ApplicationController
     # Scrape the CSE Course info page to seed the database with all the course and section information
 
     Course.delete_all
+    Semester.delete_all
     agent = Mechanize.new
 
     # Use mechanize to scrape the OSU CSE course information website
@@ -134,6 +136,7 @@ class AdminController < ApplicationController
     form.field_with(:name => 'strm').options.each do |semester|
       semester.click
       semester_page = form.submit.parser
+      Semester.create(semester: semester.text)
       hash_map = Hash.new
 
       # Retrieve all the links and for each link find its id (course number) and title (course title)
