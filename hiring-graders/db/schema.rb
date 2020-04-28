@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_193015) do
+ActiveRecord::Schema.define(version: 2020_04_28_213650) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email"
@@ -88,6 +88,15 @@ ActiveRecord::Schema.define(version: 2020_04_28_193015) do
     t.index ["student_id"], name: "index_interested_student_id"
   end
 
+  create_table "previous_graders", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "course_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_previous_graders_on_course_id"
+    t.index ["student_id"], name: "index_previous_graders_on_student_id"
+  end
+
   create_table "recommendations", force: :cascade do |t|
     t.string "recommendation"
     t.datetime "created_at", precision: 6, null: false
@@ -115,7 +124,6 @@ ActiveRecord::Schema.define(version: 2020_04_28_193015) do
     t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "has_graded_before", null: false
   end
 
   create_table "transcripts", force: :cascade do |t|

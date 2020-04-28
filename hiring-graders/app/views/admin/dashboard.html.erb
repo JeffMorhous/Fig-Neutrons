@@ -18,18 +18,23 @@
 				<select class="semesterSelect" id="inputGroupSelect01">
 					<option value=""></option>
 					<% @semesters.each do |sem| %>
-						<option value=<%=sem.semester%>><%=sem.semester%></option>
+					<option value=<%=sem.semester%>><%=sem.semester%></option>
 					<% end %>
 				</select>
 			</div>
 		</div>
 		<div class="col-md-1">
-			<i class="fa fa-refresh fa-2x" onclick="getCourses()" title="Refresh"></i>
+			<i class="fa fa-refresh fa-2x refreshButton" onclick="getCourses()" title="Refresh"></i>
 		</div>
 	</div>
 	<div class="info-table">
+		<div id="spinner" class="d-flex justify-content-center m-5" style="display: none !important">
+			<div class="spinner-border" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
 		<% if !@courses.empty? %>
-		<table>
+		<table id="cTable">
 			<thead>
 				<tr>
 					<th>Department and Course Number</th>

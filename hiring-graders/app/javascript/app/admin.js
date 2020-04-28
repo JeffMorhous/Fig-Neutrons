@@ -54,6 +54,9 @@ getCourses = function () {
     const semesterData = {
       sem: $(".semesterSelect").val()
     }
+    $("#cTable").toggle();
+    $("#spinner").toggle();
+
     $.ajax({ 
       type: 'GET', 
       url: '/admin/get_courses', 

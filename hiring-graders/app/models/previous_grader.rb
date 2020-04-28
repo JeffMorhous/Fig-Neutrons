@@ -1,0 +1,2 @@
+class PreviousGrader < ApplicationRecord
+end
