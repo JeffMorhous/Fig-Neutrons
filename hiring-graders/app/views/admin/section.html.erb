@@ -6,31 +6,38 @@
 		</button>
 	</form>
 </div>
-<div class = "section">
+<div class = "jumbotron">
 	<div class = "info">
+		<div class="class-info">
 		<h1><%= @class %></h1>
-		<table>
-			<tr>
-				<td> Section #: </td>
-				<td><%= @section %></td>
-			</tr>
-			<tr>
-				<td> Lecturer: </td>
-				<td><%= @teacher %></td>
-			</tr>
-			<tr>
-				<td> Location: </td>
-				<td><%= @location %></td>
-			</tr>
-			<tr>
-				<td> Time: </td>
-				<td><%= @time %></td>
-			</tr>
-		</table>
+			<table>
+				<tr>
+					<td> Section #: </td>
+					<td><%= @section %></td>
+				</tr>
+				<tr>
+					<td> Lecturer: </td>
+					<td><%= @teacher %></td>
+				</tr>
+				<tr>
+					<td> Location: </td>
+					<td><%= @location %></td>
+				</tr>
+				<tr>
+					<td> Time: </td>
+					<td><%= @time %></td>
+				</tr>
+				<tr>
+					<td> Semester: </td>
+					<td><%= @course.semester %></td>
+				</tr>
+			</table>
+		</div>
 		<div class="current-graders">
 			<h2>Current Graders</h2>
 			<div class="info-table">
 				<table>
+					<th>Student</th>
 					<% if(@graders.empty?) %>
 						<tr>
 							<td>No Graders Assigned</td>
@@ -56,6 +63,7 @@
 					<tr>
 						<th>Student</th>
 						<th>Requested this course</th>
+						<th>Graded Before</th>
 					</tr>
 					<% if(@students.empty?) %>
 						<tr>
@@ -77,6 +85,13 @@
 										No
 									<% end %>
 								</td>
+								<td>
+									<% if true %>
+										Yes
+									<% else %>
+										No
+									<% end %>
+								</td>
 							</tr>
 						<% end %>
 					<% end %>	
@@ -84,8 +99,10 @@
 			</div>
 		</div>
 	</div>
-	<div class = "grader-info">
-		<% if(@grader) %>
+</div>
+<div class = "grader-info">
+	<% if(@grader) %>
+		<div class="contact-info">
 			<h2>Contact Information</h2>
 			<table>
 				<tr>
@@ -101,32 +118,72 @@
 					<td><%= @grader.phone %></td>
 				</tr>
 			</table>
+			<div class="select-button">
+				<% if Grader.exists?(student_id: @grader.id, course_id: @course.id)%>
+					<%= button_to '/admin/delete/', params: {student_id: @grader.id, section_id: @course.id}, class: 'btn-outline-primary btn-lg' do%>
+						Remove Grader
+					<% end %>
+				<% else %>
+					<%= button_to '/admin/select/', params: {student_id: @grader.id, section_id: @course.id}, class: 'btn-outline-primary btn-lg' do%>
+							Select Grader
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+		<div class= recommendation-table>
 			<h2>Recommendations</h2>
-			<% if !@recommendations.empty? %>
-				<% @recommendations.each do |review| %>
-					<div class="recommendation">
-						<strong><%= (Instructor.find(review.instructor_id)).first_name %> <%= (Instructor.find(review.instructor_id)).last_name %></strong>
-						<strong>CSE <%= review.course_number %></strong>
-						<% if Recommendation.exists?(request: true, instructor_id: review.instructor_id) %>
-							<p class = "request"> Grader requested by this intructor. </p>
+			<div class= "review-table">
+				<% if !@recommendations.empty? %>
+					<table>
+						<% @recommendations.each do |review| %>
+							<tr>
+								<td>
+									<div class="recommendation">
+										<strong><%= (Instructor.find(review.instructor_id)).first_name %> <%= (Instructor.find(review.instructor_id)).last_name %></strong>
+										<strong>CSE <%= review.course_number %></strong>
+										<% if Recommendation.exists?(student_email:review.student_email, instructor_id: review.instructor_id, request: true) %>
+											<p class = "request"> Grader requested by this intructor. </p>
+										<% end %>
+										<p><%= review.recommendation %></p>
+									</div>
+								</td>
+							</tr>
 						<% end %>
-						<p><%= review.recommendation %></p>
-					</div>
+					</table>
+				<% else %>
+					<p>No Recommendations</p>
 				<% end %>
-			<% else %>
-				<p>No Recommendations</p>
-			<% end %>
-			<% if Grader.exists?(student_id: @grader.id, course_id: @course.id)%>
-				<%= button_to '/admin/delete/', params: {student_id: @grader.id, section_id: @course.id}, class: 'btn-outline-primary btn-lg' do%>
-					Remove Grader
+			</div>
+		</div>
+		<div class= "evaluation-table">
+			<h2>Evaluations</h2>
+			<div class="review-table">
+				<% if !@evaluations.empty? %>
+					<table>
+						<% @evaluations.each do |eval| %>
+							<tr>
+								<td>
+									<div class="evaluation">
+										<strong><%= (Instructor.find(eval.instructor_id)).first_name %> <%= (Instructor.find(eval.instructor_id)).last_name %></strong>
+										<strong>CSE <%= (Course.find(eval.course_id)).course_number %></strong>
+										<p>Overall Quality: <%= eval.quality %></p>
+										<p>Punctuality: <%= eval.punctuality %></p>
+										<p>Computer Skills: <%= eval.com_skills %></p>
+										<p>Course Knowledge: <%= eval.course_knowledge %></p>
+									</div>
+								</td>
+							</tr>
+						<% end %>
+					</table>
+				<% else %>
+					<p>No Evaluations</p>
 				<% end %>
-			<% else %>
-				<%= button_to '/admin/select/', params: {student_id: @grader.id, section_id: @course.id}, class: 'btn-outline-primary btn-lg' do%>
-					Select Grader
-				<% end %>
-			<% end %>
-		<% else %>
+			</div>
+		</div>
+	<% else %>
+		<div class="no-grader">
 			<h3>Please select a grader to see more info</h3>
-		<% end %>
-	</div>
+		</div>
+	<% end %>
 </div>
+

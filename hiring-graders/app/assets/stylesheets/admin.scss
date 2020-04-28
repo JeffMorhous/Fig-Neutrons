@@ -26,30 +26,59 @@
 		width: 100%;
 	}
 
-	table tr:nth-child(odd) {
-		background-color: #f2f2f2;
-	}
-
-	table tr:nth-child(even) {
-		background-color: #ffffff;
-	}
-
 	th,td {
 		padding: 5px;
 	}
 
 	th {
 		background-color: #00bfff;
-		color: #fff;
-		position: sticky; 
+		color: #fff; 
 	}
 
 	.hidden {
-		background-color: #fff;
 		padding: 1px, 3px, 0px, 3px;
 		border: 0px;
+	}	
+}
+
+.class-info{
+	grid-column-start: 2;
+}
+
+.current-graders{
+	grid-column-start: 4;
+}
+
+.possible-graders{
+	grid-column-start: 6;
+}
+
+.contact-info{
+	grid-column-start: 2;
+}
+
+.recommendation-table{
+	grid-column-start: 4;
+}
+
+.evaluation-table{
+	grid-column-start: 6;
+}
+
+.review-table{
+	padding: 5px;
+	border: 2px solid #ddd;
+	max-height: 300px;
+	overflow-y: scroll;
+	table{
+		width: 100%;
 	}
-		
+}
+
+.no-grader{
+	padding-top: auto;
+	padding-bottom: auto; 
+	grid-column-start: 4;
 }
 
 .section {
@@ -61,22 +90,28 @@
 }
 
 .info {
-	float: left;
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto;
 }
 
 .recommendation {
 	border: 2px solid #ddd;
 	margin-bottom: 5px;
-	padding: 5px;
+	padding: 5% 10%;
+	width: 100%
 }
 
 .grader-info {
+	border: 2px solid #000;
 	background: #fff;
-	float: right;
-	border: thick solid #000000;
-	padding: 10px;
-	min-height: 300px;
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	clear: both;
+	min-height: 100px;
 	margin-bottom: 30px;
+	width: 100%;
 }
 
 .request {
@@ -85,4 +120,8 @@
 
 .nav {
 	padding-bottom: 10px;
+}
+
+.select-button{
+	margin-top: 10px;
 }

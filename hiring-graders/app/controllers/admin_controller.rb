@@ -56,7 +56,24 @@ class AdminController < ApplicationController
         #check if their availability is needed to be checked
         intime = true
         if course.is_lab
-          
+          classes_grading = Grader.where(student_id: student.id)
+          i=0
+          if classes_grading
+            while i < classes_grading.length && intime
+              section = Course.find(classes_grading[i].course_id)
+              if(section.is_lab)
+                days = (section.days).chars
+                j=0
+                while j < days.length && intime
+                  if (course.days).include?(days[j]) && ((course.start_time <= section.start_time && section.start_time <= course.end_time) || (course.end_time <= section.start_time && section.end_time <= course.end_time))
+                    intime=false
+                  end
+                  j = j+1
+                end
+              end
+              i = i+1
+            end
+          end
           #check the days for the course and check what time the student is available for these days
           days = (course.days).chars
           i=0 
@@ -108,6 +125,7 @@ class AdminController < ApplicationController
     if params[:grader_id]
       @grader = Student.find(params[:grader_id])
       @recommendations = Recommendation.where(student_email: @grader.email)
+      @evaluations = Evaluation.where(student_id: @grader.id)
     end
   end
 
@@ -128,6 +146,7 @@ class AdminController < ApplicationController
 
     Course.delete_all
     Semester.delete_all
+    Grader.delete_all
     agent = Mechanize.new
 
     # Use mechanize to scrape the OSU CSE course information website
@@ -188,7 +207,7 @@ class AdminController < ApplicationController
   def select
     student = Student.find(params[:student_id]) 
     course = Course.find(params[:section_id])
-    grader = Grader.new(course_id: params[:section_id], student_id: params[:student_id], semester: 'Fall')
+    grader = Grader.new(course_id: params[:section_id], student_id: params[:student_id], semester: course.semester)
     grader.save
     course.have_grader = true
     course.save
