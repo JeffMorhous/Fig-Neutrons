@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'mechanize'
 class AdminController < ApplicationController
+  before_action :is_admin?
+  skip_before_action :is_admin?, only: [:login]
   
   #login handling for the admin pages
   def login
@@ -131,7 +133,7 @@ class AdminController < ApplicationController
 
   #basic view for the main dashboard
   def dashboard
-    admin = Admin.find_by id: session[:user_id]
+    admin = Admin.find_by email: session[:user_email]
     if admin == nil
       redirect_to '/user/login'
     else
@@ -229,4 +231,12 @@ class AdminController < ApplicationController
     flash[:success] = "Grader was successfully removed from CSE "+ course.course_number + "(" + course.section_number.strip + ")"
     redirect_to '/admin/dashboard'
   end
+
+  # Check if user has an admin account
+  def is_admin?
+    if !session[:user_email] && !Admin.find_by(email: session[:user_email])
+      redirect_to '/user/signup'
+    end
+  end
+  
 end

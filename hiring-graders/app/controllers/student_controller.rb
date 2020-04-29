@@ -1,4 +1,7 @@
 class StudentController < ApplicationController
+  before_action :is_student?
+  skip_before_action :is_student?, only: [:login, :create]
+  
   def create
     # Check if account with that email already exists
     error = false
@@ -74,7 +77,7 @@ class StudentController < ApplicationController
   end
 
   def application
-    @student = Student.find_by id: session[:user_id]
+    @student = Student.find_by email: session[:user_email]
     @grades = Array.new
     @found_interested_entry = false;
 
@@ -185,30 +188,31 @@ class StudentController < ApplicationController
 
   # Save the hours entered from the availability table
   def availability
-    Availability.where(student_id: session[:user_id]).destroy_all
+    student_id = Student.find_by(email: session[:user_email]).id
+    Availability.where(student_id: student_id).destroy_all
     if params[:"0"]
       params[:"0"].each do |item|
-        Availability.create(student_id: session[:user_id], day: "M", hour: item )
+        Availability.create(student_id: student_id, day: "M", hour: item )
       end
     end
     if params[:"1"]
       params[:"1"].each do |item|
-        Availability.create(student_id: session[:user_id], day: "T", hour: item )
+        Availability.create(student_id: student_id, day: "T", hour: item )
       end
     end
     if params[:"2"]
       params[:"2"].each do |item|
-        Availability.create(student_id: session[:user_id], day: "W", hour: item )
+        Availability.create(student_id: student_id, day: "W", hour: item )
       end
     end
     if params[:"3"]
       params[:"3"].each do |item|
-        Availability.create(student_id: session[:user_id], day: "R", hour: item )
+        Availability.create(student_id: student_id, day: "R", hour: item )
       end
     end
     if params[:"4"]
       params[:"4"].each do |item|
-        Availability.create(student_id: session[:user_id], day: "F", hour: item )
+        Availability.create(student_id: student_id, day: "F", hour: item )
       end
     end
     redirect_to '/student/profile'
@@ -216,7 +220,6 @@ class StudentController < ApplicationController
   
 
   def profile
-    @student = Student.find_by id: session[:user_id]
     @no_hours_selected = false
     all_courses = Course.all
     @graders_required = false
@@ -232,24 +235,29 @@ class StudentController < ApplicationController
     end
 
     # Retrieve the student's current availability and query the courses to grade for the student
-    if !@student.nil?
-      @student_name = "#{@student.first_name} #{@student.last_name}"
-      @transcript = Transcript.find_by(student_id: @student.id)
-      @monday = Availability.where(student_id: session[:user_id], day: "M")
-      @tuesday = Availability.where(student_id: session[:user_id], day: "T")
-      @wednesday = Availability.where(student_id: session[:user_id], day: "W")
-      @thursday = Availability.where(student_id: session[:user_id], day: "R")
-      @friday = Availability.where(student_id: session[:user_id], day: "F")
+    @student = Student.find_by(email: session[:user_email])
+    @student_name = "#{@student.first_name} #{@student.last_name}"
+    @transcript = Transcript.find_by(student_id: @student.id)
+    @monday = Availability.where(student_id: @student.id, day: "M")
+    @tuesday = Availability.where(student_id: @student.id, day: "T")
+    @wednesday = Availability.where(student_id: @student.id, day: "W")
+    @thursday = Availability.where(student_id: @student.id, day: "R")
+    @friday = Availability.where(student_id: @student.id, day: "F")
 
-      if @monday.length == 0 && @tuesday.length == 0 && @wednesday.length == 0 && @thursday.length == 0 && @friday.length == 0
-        @no_hours_selected = true
-      end
+    if @monday.length == 0 && @tuesday.length == 0 && @wednesday.length == 0 && @thursday.length == 0 && @friday.length == 0
+      @no_hours_selected = true
+    end
 
-      @courses_to_grade = Grader.where(student_id: session[:user_id])
-    else
-      redirect_to '/user/login'
+      @courses_to_grade = Grader.where(student_id: @student.id)
+  end
+
+  # Check if the user has a student account
+  def is_student?
+    if !session[:user_email] && !Student.find_by(email: session[:user_email])
+      redirect_to '/user/signup'
     end
   end
+
 
 
 end

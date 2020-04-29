@@ -1,4 +1,7 @@
 class InstructorController < ApplicationController
+  before_action :is_instructor?
+  skip_before_action :is_instructor?, only: [:login, :create]
+  
   def create
 
     # Check if account with that email already exists
@@ -45,6 +48,8 @@ class InstructorController < ApplicationController
 
   # Add a new recommendation to the database
   def create_recommendation
+    instructor_id = Instructor.find_by(email: session[:user_email]).id
+    
     # Determine if the request checkbox was selected
     rec_request = false
     if params[:recRequest]
@@ -53,7 +58,7 @@ class InstructorController < ApplicationController
 
     # create the recommendation
     @recommend = Recommendation.new(recommendation: params[:recText], student_email: params[:email], first_name: params[:firstName],
-                                    last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id], request: rec_request)
+                                    last_name: params[:lastName], course_number: params[:recCourse], instructor_id: instructor_id, request: rec_request)
 
     if @recommend.save
       flash[:success] = "Your recommendation was saved successfully!"
@@ -66,6 +71,7 @@ class InstructorController < ApplicationController
 
   # Update an existing recommendation
   def update_recommendation
+    instructor_id = Instructor.find_by(email: session[:user_email]).id
 
     # Determine if the request checkbox was selected
     rec_request = false
@@ -74,7 +80,7 @@ class InstructorController < ApplicationController
     end
     recommendation = Recommendation.find_by(id: params[:id])
     if recommendation.update(recommendation: params[:recText], student_email: params[:email], first_name: params[:firstName],
-                          last_name: params[:lastName], course_number: params[:recCourse], instructor_id: session[:user_id], request: rec_request)
+                          last_name: params[:lastName], course_number: params[:recCourse], instructor_id: instructor_id, request: rec_request)
       flash[:success] = "Your recommendation was updated successfully!"
       redirect_to '/instructor/edit_recommendation'
 
@@ -88,7 +94,8 @@ class InstructorController < ApplicationController
 
   # Retrieve all the submitted recommendations by the instructor to show in the edit recommendations view
   def edit_recommendation
-    @recommendations = Recommendation.where(instructor_id: session[:user_id])
+    instructor_id = Instructor.find_by(email: session[:user_email]).id
+    @recommendations = Recommendation.where(instructor_id: instructor_id)
   end
 
   # Retrieve the specific recommendation form that is to be edited
@@ -103,6 +110,8 @@ class InstructorController < ApplicationController
     # check that the student/section exists
     student = Student.find_by(email: params[:email])
     course = Course.find_by(section_number:params[:section_num])
+    instructor_id = Instructor.find_by(email: session[:user_email]).id
+
     if student == nil
       flash.now[:danger] = "It looks like that student has not graded before. Please enter a valid grader's email."
       render '/instructor/evaluation'
@@ -111,7 +120,7 @@ class InstructorController < ApplicationController
       render '/instructor/evaluation'
     else
       evaluation = Evaluation.new(student_id: Student.find_by(email:params[:email]).id, 
-                                    instructor_id: session[:user_id], 
+                                    instructor_id: instructor_id, 
                                     course_id: Course.find_by(section_number: params[:section_num]).id,
                                     quality: params[:quality],
                                     punctuality: params[:punctuality],
@@ -130,7 +139,8 @@ class InstructorController < ApplicationController
 
 
   def evaluation_all
-    @evaluations = Evaluation.where(instructor_id: session[:user_id])
+    instructor_id = Instructor.find_by(email: session[:user_email]).id
+    @evaluations = Evaluation.where(instructor_id: instructor_id)
   end
 
   def evaluation_edit
@@ -140,6 +150,8 @@ class InstructorController < ApplicationController
   def update_evaluation
     student = Student.find_by(email: params[:email])
     course = Course.find_by(section_number:params[:section_num])
+    instructor_id = Instructor.find_by(email: session[:user_email]).id
+    
     if student == nil
       flash[:danger] = "It looks like that student has not graded before. Please enter a valid grader's email."
       redirect_to "/instructor/edit_evaluation/#{params[:id]}"
@@ -150,7 +162,7 @@ class InstructorController < ApplicationController
     else
       evaluation = Evaluation.find_by(id: params[:id])
       if evaluation.update(student_id: Student.find_by(email:params[:email]).id, 
-                          instructor_id: session[:user_id], 
+                          instructor_id: instructor_id, 
                           course_id: Course.find_by(section_number: params[:section_num]).id,
                           quality: params[:quality],
                           punctuality: params[:punctuality],
@@ -166,18 +178,17 @@ class InstructorController < ApplicationController
     
   end
 
-
-
   # Instructor Profile 
   def profile
-    @instructor = Instructor.find_by id: session[:user_id]
-    if !@instructor.nil?
-      @instructor_name = "#{@instructor.first_name} #{@instructor.last_name}"
-    else
-      redirect_to '/user/login'
-    end
+    @instructor = Instructor.find_by email: session[:user_email]
+    @instructor_name = "#{@instructor.first_name} #{@instructor.last_name}"
   end
 
-
+  # Check if the user has an instructor account
+  def is_instructor?
+    if !session[:user_email] && !Instructor.find_by(email: session[:user_email])
+      redirect_to '/user/signup'
+    end
+  end
 
 end
