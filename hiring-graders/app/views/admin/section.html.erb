@@ -63,11 +63,12 @@
 					<tr>
 						<th>Student</th>
 						<th>Requested this course</th>
-						<th>Graded Before</th>
+						<th>Graded This Course Before</th>
 					</tr>
 					<% if(@students.empty?) %>
 						<tr>
 							<td>No Applicants Available</td>
+							<td>N/A</td>
 							<td>N/A</td>
 						</tr>
 					<% else %>
@@ -86,7 +87,7 @@
 									<% end %>
 								</td>
 								<td>
-									<% if grader.has_graded_before %>
+									<% if PreviousGrader.exists?(student_id: grader.id, course_num: @course.course_number) %>
 										Yes
 									<% else %>
 										No
