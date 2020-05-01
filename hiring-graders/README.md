@@ -1,7 +1,12 @@
 # Lab 6 - Hiring Graders
 This web application is designed for the OSU CSE department to streamline the process for hiring graders for CSE courses. Students and instructors are allowed to sign up and apply to be a grader or submit recommendations, and allows the CSE department to select qualified applicants.
 
-## Installation/Running the Application
+You can find the changes made in version 2.0 in the [RELEASE-NOTES](./RELEASE-NOTES.md)
+
+## Heroku
+This application is deployed on heroku and can be visited at: https://secret-plains-27771.herokuapp.com/
+
+## Installation/Running the Application Locally
 
 ### To install necessary gems, run
 
@@ -13,7 +18,7 @@ This web application is designed for the OSU CSE department to streamline the pr
 ``rails server`` which actually runs the site.
 
 
-After running this command, open up [http://localhost:3000] in a browser to display the application.
+After running this command, open up [http://localhost:3000](http://localhost:3000) in a browser to display the application.
 
 ## Tests
 The bulk of testing focuses on the models, and their validations.
