@@ -139,14 +139,18 @@
 						<% @recommendations.each do |review| %>
 							<tr>
 								<td>
-									<div class="recommendation">
-										<strong><%= (Instructor.find(review.instructor_id)).first_name %> <%= (Instructor.find(review.instructor_id)).last_name %></strong>
-										<strong>CSE <%= review.course_number %></strong>
-										<% if Recommendation.exists?(student_email:review.student_email, instructor_id: review.instructor_id, request: true) %>
-											<p class = "request"> Grader requested by this intructor. </p>
-										<% end %>
-										<p><%= review.recommendation %></p>
-									</div>
+									<div class="admin-card card">
+											<div class="card-header">
+												<strong>Instructor: <%= (Instructor.find(review.instructor_id)).first_name %> <%= (Instructor.find(review.instructor_id)).last_name %></strong>
+											</div>
+											<div class="card-body">
+												<strong class="card-title">Recommended Course: CSE <%= review.course_number %></strong>
+												<% if Recommendation.exists?(student_email:review.student_email, instructor_id: review.instructor_id, request: true) %>
+												<p class = "card-text request"> Grader requested by this intructor. </p>
+												<% end %>
+												<p><%= review.recommendation %></p>
+											</div>
+										</div>
 								</td>
 							</tr>
 						<% end %>
@@ -164,13 +168,17 @@
 						<% @evaluations.each do |eval| %>
 							<tr>
 								<td>
-									<div class="evaluation">
-										<strong><%= (Instructor.find(eval.instructor_id)).first_name %> <%= (Instructor.find(eval.instructor_id)).last_name %></strong>
-										<strong>CSE <%= (Course.find(eval.course_id)).course_number %></strong>
-										<p>Overall Quality: <%= eval.quality %></p>
-										<p>Punctuality: <%= eval.punctuality %></p>
-										<p>Computer Skills: <%= eval.com_skills %></p>
-										<p>Course Knowledge: <%= eval.course_knowledge %></p>
+									<div class="admin-card card">
+										<div class="card-header">
+											<strong>Instructor: <%= (Instructor.find(eval.instructor_id)).first_name %> <%= (Instructor.find(eval.instructor_id)).last_name %></strong>
+										</div>
+										<div class="card-body">
+											<p><strong class="card-title">Course: CSE  <%= (Course.find(eval.course_id)).course_number %></strong></p>
+											<p>Overall Quality: <%= eval.quality %></p>
+											<p>Punctuality: <%= eval.punctuality %></p>
+											<p>Communication Skills: <%= eval.com_skills %></p>
+											<p>Course Knowledge: <%= eval.course_knowledge %></p>
+										</div>
 									</div>
 								</td>
 							</tr>
