@@ -1,0 +1,12 @@
+Correctness: Nice job with form validation for user sign-up. Assigning graders to potential courses doesn't seem to consider their scheduling availability. Functionality works for adding and removing graders to/from courses. There doesn't seem to be any way to crash the app.
+
+Functionality/Features: Great job adding some relevant tests for models! User interface looks very nice overall (good use of Bootstrap)...especially with selecting a grader's availability! It's very cool how available graders and their evaluations pop up for courses that they are eligible for. I really like how your team kept the app very simple and usable, yet with many useful features...I could definitely see this being useful in stream-lining the grader matching process!
+
+Design: Great use of javascript to make front-end more dynamic! Nice validations and associations in your model. Schema is a little overly complex...can probably combine some tables to make schema easier to follow and add on to. Overall, your code is laid out in a manner that would make it easy to maintain and add features on to.
+
+Documentation: Great thorough README! Some files missing documentation, but nice job documenting tricky points in your code overall! Commit messages look good overall.
+
+Style: Controller code uses standard Ruby features. Good job maintaining a consistent style throughout your code!
+
+
+Have a great summer!
