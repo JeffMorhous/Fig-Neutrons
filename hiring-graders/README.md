@@ -5,6 +5,7 @@ You can find the changes made in version 2.0 in the [RELEASE-NOTES](./RELEASE-NO
 
 ## Heroku
 This application is deployed on heroku and can be visited at: https://secret-plains-27771.herokuapp.com/
+The default admin account is registered as ```email: "admin@admin.com", password: "admin123"```
 
 ## Installation/Running the Application Locally
 
@@ -23,7 +24,7 @@ After running this command, open up [http://localhost:3000](http://localhost:300
 ## Tests
 The bulk of testing focuses on the models, and their validations.
 This is to assist in future development, and prevent against bugs when
-making improvements or changes. Controller testing was not foucsed on.
+making improvements or changes. Controller testing was not focused on.
 ### To execute tests, run
 ``rails test``
 
